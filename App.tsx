@@ -22,7 +22,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-brand-dark text-brand-offwhite font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
       <Navbar scrolled={scrolled} />
       
       <main>

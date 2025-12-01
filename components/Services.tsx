@@ -35,28 +35,28 @@ const services: ServiceItem[] = [
 
 const Services: React.FC = () => {
   return (
-    <div className="py-24 bg-brand-charcoal">
+    <div className="py-24 bg-white">
       <div className="container mx-auto px-6">
         <div className="mb-16 text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-serif mb-4">How We Can Work Together</h2>
-          <div className="w-24 h-1 bg-brand-yellow mx-auto mb-6"></div>
-          <p className="text-gray-400">Guiding entrepreneurs and leaders from idea validation to investment-ready execution.</p>
+          <h2 className="text-3xl md:text-4xl font-serif mb-4 text-brand-dark">How We Can Work Together</h2>
+          <div className="w-24 h-1 bg-brand-accent mx-auto mb-6 rounded-full"></div>
+          <p className="text-brand-gray">Guiding entrepreneurs and leaders from idea validation to investment-ready execution.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service) => (
             <div 
               key={service.id} 
-              className="bg-brand-dark p-8 flex flex-col items-start border-t-2 border-transparent hover:border-brand-yellow transition-all duration-300 group hover:-translate-y-2"
+              className="bg-brand-beige p-8 flex flex-col items-start rounded-2xl hover:shadow-xl hover:shadow-brand-accent/10 transition-all duration-300 group hover:-translate-y-2 border border-transparent hover:border-brand-accent/20"
             >
-              <div className="mb-6 text-brand-yellow bg-brand-yellow/10 p-3 rounded-full">
+              <div className="mb-6 text-brand-accent bg-white p-4 rounded-full shadow-sm group-hover:bg-brand-accent group-hover:text-white transition-colors">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-serif mb-4 group-hover:text-brand-yellow transition-colors">{service.title}</h3>
-              <p className="text-sm text-gray-400 leading-relaxed mb-8 flex-grow">
+              <h3 className="text-xl font-serif mb-4 text-brand-dark">{service.title}</h3>
+              <p className="text-sm text-brand-gray leading-relaxed mb-8 flex-grow">
                 {service.description}
               </p>
-              <a href="#contact" className="text-xs font-bold uppercase tracking-widest border-b border-brand-yellow/50 pb-1 hover:text-brand-yellow hover:border-brand-yellow transition-colors">
+              <a href="#contact" className="text-xs font-bold uppercase tracking-widest border-b-2 border-brand-accent/20 pb-1 text-brand-dark group-hover:border-brand-accent transition-colors">
                 {service.cta}
               </a>
             </div>
