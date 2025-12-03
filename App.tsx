@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import SocialProof from './components/SocialProof';
 import AboutStats from './components/AboutStats';
 import Services from './components/Services';
+import CoachingOverview from './components/CoachingOverview';
 import Process from './components/Process';
 import Portfolio from './components/Portfolio';
 import PitchDemo from './components/PitchDemo';
@@ -38,6 +39,10 @@ const App: React.FC = () => {
 
         <section id="services">
           <Services />
+        </section>
+
+        <section id="coaching">
+          <CoachingOverview />
         </section>
 
         <section id="process">
