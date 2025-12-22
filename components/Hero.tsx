@@ -92,7 +92,7 @@ const Hero: React.FC = () => {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="relative w-[400px] h-[400px] md:w-[600px] md:h-[600px] overflow-hidden shadow-2xl shadow-brand-accent/20 border-4 border-white bg-white"
+            className="relative w-[350px] h-[350px] md:w-[500px] md:h-[500px] overflow-hidden shadow-2xl shadow-brand-accent/20 border-4 border-white bg-white"
             style={{
               borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
               willChange: "border-radius, transform"
@@ -101,11 +101,8 @@ const Hero: React.FC = () => {
             <img
               src="/ievaJumpSuit.png"
               alt="Ieva Sibilla Strupule"
-              className="w-full h-full object-cover"
-              style={{ 
-                willChange: "transform",
-                objectPosition: "center 28%"
-              }}
+              className="w-full h-full object-cover object-center"
+              style={{ willChange: "transform" }}
             />
           </motion.div>
         </motion.div>
