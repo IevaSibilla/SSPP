@@ -28,12 +28,11 @@ const Hero: React.FC = () => {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-serif font-medium leading-[1.1] mb-6 text-brand-dark">
-            Unlock Your <br />
-            Potential with <br />
+            Pitch with Power. <br />
             <span className="relative inline-block">
-              Proven Strategies
+              Lead with Presence.
               {/* Scribble SVG Underline */}
-              <svg className="absolute w-full h-4 -bottom-2 left-0 text-brand-accent" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className="absolute w-full h-5 -bottom-4 left-0 text-brand-accent" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2.00025 6.99997C2.00025 6.99997 34.0002 2.99998 66.5002 2.49998C99.0002 1.99998 128 4.99999 156.5 4.99999C185 4.99999 197.501 1.99998 197.501 1.99998" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
               </svg>
             </span>
@@ -67,21 +66,6 @@ const Hero: React.FC = () => {
           transition={{ duration: 1 }}
           className="order-1 lg:order-2 flex justify-center lg:justify-end relative"
         >
-          {/* Doodle Arrow */}
-          <motion.svg
-            initial={{ opacity: 0, pathLength: 0 }}
-            animate={{ opacity: 1, pathLength: 1 }}
-            transition={{ delay: 1, duration: 1 }}
-            className="absolute top-0 left-0 md:-left-12 w-24 h-24 text-brand-dark z-20 hidden md:block"
-            viewBox="0 0 100 100"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M10,90 Q50,10 90,50" />
-            <path d="M80,45 L90,50 L85,60" />
-          </motion.svg>
-
           <motion.div
             animate={{
               y: [0, -20, 0],
@@ -101,8 +85,8 @@ const Hero: React.FC = () => {
             <img
               src="/ievaJumpSuit.png"
               alt="Ieva Sibilla Strupule"
-              className="w-full h-full object-cover object-center"
-              style={{ willChange: "transform" }}
+              className="w-full h-full object-cover"
+              style={{ willChange: "transform", objectPosition: "50% 15%" }}
             />
           </motion.div>
         </motion.div>
