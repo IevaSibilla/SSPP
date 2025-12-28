@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
         <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-yellow-200/20 rounded-full blur-[100px] animate-blob animation-delay-2000 mix-blend-multiply"></div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-6 pb-32 lg:pb-0 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
         {/* Left: Text Content */}
         <motion.div
@@ -92,9 +92,9 @@ const Hero: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - hidden on mobile */}
       <motion.div
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 z-20"
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden md:flex flex-col items-center gap-2 z-20"
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
       >

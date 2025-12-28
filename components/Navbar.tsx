@@ -72,7 +72,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
             onClick={() => setIsOpen(false)}
             className="block text-center w-full bg-brand-accent text-white py-3 font-semibold uppercase tracking-wider rounded-full"
           >
-            Book Strategy
+            Contact Me
           </a>
         </div>
       )}
