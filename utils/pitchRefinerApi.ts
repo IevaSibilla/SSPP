@@ -1,63 +1,33 @@
 /**
- * Refines a pitch using Google Cloud's Gemini API
+ * Refines a pitch using the backend API proxy
+ * The API key is stored securely on the server, not exposed to the frontend
  * @param userInput The user's original pitch text
- * @param systemPrompt The system prompt/instructions for the AI
  * @returns Promise<string> The refined pitch suggestion
  */
-export const refinePitch = async (
-  userInput: string,
-  systemPrompt: string
-): Promise<string> => {
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-
-  if (!apiKey) {
-    throw new Error('Gemini API key is not configured. Please set VITE_GEMINI_API_KEY in your .env file.');
-  }
-
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent`;
-
-  const requestBody = {
-    contents: [
-      {
-        parts: [
-          {
-            text: `${systemPrompt}\n\nUser pitch to refine: "${userInput}"\n\nPlease provide your refined pitch suggestion:`
-          }
-        ]
-      }
-    ],
-    generationConfig: {
-      temperature: 0.7,
-      topK: 40,
-      topP: 0.95,
-      maxOutputTokens: 2048
-    }
-  };
+export const refinePitch = async (userInput: string): Promise<string> => {
+  const endpoint = '/api/refine-pitch';
 
   try {
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-goog-api-key': apiKey
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify({ pitch: userInput }),
     });
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       throw new Error(
-        errorData.error?.message || 
-        `API request failed with status ${response.status}: ${response.statusText}`
+        errorData.message || 
+        `Request failed with status ${response.status}: ${response.statusText}`
       );
     }
 
     const data = await response.json();
 
-    // Extract the generated text from the response
-    if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-      const generatedText = data.candidates[0].content.parts[0].text;
-      return generatedText.trim();
+    if (data.refinedPitch) {
+      return data.refinedPitch;
     }
 
     throw new Error('Unexpected API response format');
@@ -69,3 +39,11 @@ export const refinePitch = async (
   }
 };
 
+/**
+ * @deprecated System prompt is now loaded server-side
+ * This function is kept for backwards compatibility but does nothing
+ */
+export const loadSystemPrompt = async (): Promise<string> => {
+  console.warn('loadSystemPrompt is deprecated - system prompt is now loaded server-side');
+  return '';
+};

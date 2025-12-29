@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Sparkles, ArrowRight, Loader, AlertCircle, Maximize2, X } from 'lucide-react';
 import { refinePitch } from '../utils/pitchRefinerApi';
-import { loadSystemPrompt } from '../utils/loadSystemPrompt';
 
 // Simple markdown renderer component
 const MarkdownContent: React.FC<{ content: string }> = ({ content }) => {
@@ -113,7 +112,6 @@ const PitchDemo: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [systemPrompt, setSystemPrompt] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Memoize truncated result
@@ -122,16 +120,6 @@ const PitchDemo: React.FC = () => {
     const { truncated, isTruncated } = truncateWords(result, 80);
     return { truncatedResult: truncated, isTruncated };
   }, [result]);
-
-  // Load system prompt on component mount
-  useEffect(() => {
-    loadSystemPrompt()
-      .then((prompt) => setSystemPrompt(prompt))
-      .catch((err) => {
-        console.error('Failed to load system prompt:', err);
-        setSystemPrompt('');
-      });
-  }, []);
 
   const handleRefine = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -142,8 +130,8 @@ const PitchDemo: React.FC = () => {
     setResult(null);
 
     try {
-      const prompt = systemPrompt || await loadSystemPrompt();
-      const refinedPitch = await refinePitch(input.trim(), prompt);
+      // API call now goes through our secure backend proxy
+      const refinedPitch = await refinePitch(input.trim());
       setResult(refinedPitch);
     } catch (err) {
       const errorMessage = err instanceof Error 
