@@ -4,8 +4,25 @@
  * @param userInput The user's original pitch text
  * @returns Promise<string> The refined pitch suggestion
  */
+
+// Vercel backend URL - update this after deploying to Vercel
+const VERCEL_API_URL = 'https://sspp.vercel.app';
+
+// Determine the API endpoint based on environment
+const getApiEndpoint = (): string => {
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+  
+  // If running on localhost, use local API (for development with node server.js)
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return '/api/refine-pitch';
+  }
+  
+  // For production (Hostinger or other static hosts), use Vercel backend
+  return `${VERCEL_API_URL}/api/refine-pitch`;
+};
+
 export const refinePitch = async (userInput: string): Promise<string> => {
-  const endpoint = '/api/refine-pitch';
+  const endpoint = getApiEndpoint();
 
   try {
     const response = await fetch(endpoint, {

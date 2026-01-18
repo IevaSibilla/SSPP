@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
           <div className="inline-flex items-center gap-2 mb-6">
             <div className="h-px w-8 bg-brand-accent"></div>
             <span className="text-brand-accent text-xs font-bold tracking-[0.2em] uppercase">
-              Global Pitch Authority
+              Global Speaker and Entrepreneur
             </span>
           </div>
 
@@ -39,7 +39,7 @@ const Hero: React.FC = () => {
           </h1>
 
           <p className="text-lg md:text-xl text-brand-gray mb-10 font-light leading-relaxed max-w-lg">
-            Secure funding and turn ideas into investable ventures. Learn directly from an exited international entrepreneur.
+             Secure funding, grow as a leader or win trust and take decisions in high-stakes situations.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
@@ -47,7 +47,7 @@ const Hero: React.FC = () => {
               href="#contact"
               className="px-8 py-4 bg-brand-accent text-white font-bold uppercase tracking-widest hover:bg-brand-charcoal transition-all duration-300 text-center rounded-full shadow-lg shadow-brand-accent/30 hover:shadow-xl hover:-translate-y-1"
             >
-              Invite to Speak
+              Work with Me
             </a>
             <a
               href="#process"

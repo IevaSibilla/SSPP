@@ -9,9 +9,9 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Expertise', href: '#services' },
-    { name: 'Methodology', href: '#process' },
-    { name: 'About', href: '#about' },
+    { name: 'Expertise', href: '/#services' },
+    { name: 'Methodology', href: '/#process' },
+    { name: 'About', href: '/about' },
   ];
 
   return (
@@ -22,7 +22,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
-        <a href="#" className="text-2xl font-serif font-bold tracking-widest text-brand-dark flex items-center gap-1">
+        <a href="/" className="text-2xl font-serif font-bold tracking-widest text-brand-dark flex items-center gap-1">
           IEVA SIBILLA<span className="text-brand-accent text-3xl leading-none">.</span>
         </a>
 
@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
             </a>
           ))}
           <a
-            href="#contact"
+            href="/#contact"
             className="px-6 py-2 border-2 border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-white transition-all duration-300 text-sm uppercase tracking-wider font-bold flex items-center gap-2 rounded-full"
           >
             Contact Me<ArrowRight size={16} />
@@ -68,7 +68,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
             </a>
           ))}
           <a
-            href="#contact"
+            href="/#contact"
             onClick={() => setIsOpen(false)}
             className="block text-center w-full bg-brand-accent text-white py-3 font-semibold uppercase tracking-wider rounded-full"
           >

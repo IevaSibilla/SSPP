@@ -9,9 +9,11 @@ import Portfolio from './components/Portfolio';
 import PitchDemo from './components/PitchDemo';
 import ContactCTA from './components/ContactCTA';
 import Footer from './components/Footer';
+import AboutPage from './components/AboutPage';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +23,26 @@ const App: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // About Page
+  if (currentPath === '/about') {
+    return (
+      <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
+        <Navbar scrolled={scrolled} />
+        <AboutPage />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Home Page
   return (
     <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
       <Navbar scrolled={scrolled} />

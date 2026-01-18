@@ -1,11 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
 const AboutStats: React.FC = () => {
   const stats = [
-    { value: '3M€+', label: 'Non-Equity Funding Raised' },
-    { value: '4M€+', label: 'VC Funding Secured' },
-    { value: '15k', label: 'Competitors Outpitched' },
+    { value: '7M€+', label: 'Raised (grants + VC)' },
+    { value: '500+', label: 'Founders and Executives Trained' },
+    { value: '25k+', label: 'Competitors Outpitched' },
     { value: '20+', label: 'Global Awards' },
   ];
 
@@ -35,40 +36,53 @@ const AboutStats: React.FC = () => {
             </h2>
             <div className="space-y-6 text-brand-gray font-light text-lg">
               <p>
-                Founders often fail not because of a lack of funding, but a lack of clarity. 
-                They polish an idea before validating it. They fear the pitch because they don't 
-                understand the problem deep enough.
+                Most pitches fail in the first 30 seconds. Not because the idea is bad — but because it isn't clear enough. In high-stakes rooms — with investors, board members, or decision-makers — clarity and confidence are everything.  
               </p>
               <p>
-                I am an exited entrepreneur and global pitch award winner. I don't just teach theory; 
-                I teach from the trenches. I help founders and executives communicate with conviction, 
-                validate fast, and scale with a clear mindset.
+                I've been on both sides of that table. I'm an exited entrepreneur and global pitch award winner who has raised funding and led critical conversations where outcomes mattered. I don't teach theory — I teach what actually works under pressure. I help founders and executives communicate with clarity, project real conviction, and lead conversations that move decisions forward.
               </p>
               <blockquote className="border-l-4 border-brand-accent pl-6 py-2 my-8 text-xl font-serif text-brand-dark italic bg-white p-6 rounded-r-xl shadow-sm">
-                "Your first idea isn't the business — it's the test."
+                "If your message isn't sharp immediately, attention drops. Doubt creeps in. And the decision is quietly made."
               </blockquote>
             </div>
           </motion.div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-6">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
+          <div className="flex flex-col gap-6">
+            <div className="grid grid-cols-2 gap-6">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white p-8 rounded-2xl shadow-lg shadow-gray-200/50 hover:-translate-y-1 transition-transform duration-300 border border-transparent hover:border-brand-accent/30"
+                >
+                  <div className="text-4xl md:text-5xl font-serif text-brand-dark mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs uppercase tracking-widest text-brand-gray font-semibold">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            
+            {/* Secondary CTA */}
+            <div className="flex justify-center">
+              <motion.a
+                href="/about"
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white p-8 rounded-2xl shadow-lg shadow-gray-200/50 hover:-translate-y-1 transition-transform duration-300 border border-transparent hover:border-brand-accent/30"
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="group inline-flex items-center justify-center gap-3 py-4 px-12 border-2 border-brand-accent text-brand-accent rounded-full hover:bg-brand-accent hover:text-white transition-all duration-300 w-[600px] max-w-full"
               >
-                <div className="text-4xl md:text-5xl font-serif text-brand-dark mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-xs uppercase tracking-widest text-brand-gray font-semibold">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
+                <span className="text-sm uppercase tracking-widest font-semibold">Read the full story</span>
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </motion.a>
+            </div>
           </div>
         </div>
       </div>

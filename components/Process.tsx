@@ -1,22 +1,28 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
 const Process: React.FC = () => {
   const steps = [
     {
       id: '01',
-      title: 'Validation Strategy',
-      description: 'We start with a discovery deep-dive. We don\'t just look at the pitch; we stress-test the business model. Is it a real problem? Is the market big enough? We strip the idea down to its core value.'
+      title: 'Identify',
+      description: 'We start with a discovery deep-dive to find where your message breaks down and why attention drops in the first 30 seconds. Is it a real problem? Is the market big enough? We strip away noise and get to the core of what actually matters.'
     },
     {
       id: '02',
-      title: 'Craft The Narrative',
-      description: 'This is where the magic happens. We build the story arc. Investors don\'t buy facts; they buy the future. We align your communication with investor psychology, creating a hook that grabs attention in the first 2 minutes.'
+      title: 'Structure',
+      description: 'This is where the magic happens. We build a clear pitch architecture — message, narrative, and flow — aligned with investor psychology. Investors don\'t buy facts; they buy the future. We create a hook that grabs attention and holds the room.'
     },
     {
       id: '03',
-      title: 'Execution & Pitch',
-      description: 'Transformation. We work on your delivery, confidence, and Q&A defense mechanisms. You leave with an investment-ready pitch deck and the founder mindset needed to close the deal.'
+      title: 'Deliver',
+      description: 'Strengthen voice, presence, and confidence so you sound credible under pressure, not rehearsed. We work on your delivery and Q&A defense mechanisms until you can handle any question with conviction.'
+    },
+    {
+      id: '04',
+      title: 'Refine',
+      description: 'Live feedback, repetition, and stress-testing until the pitch is sharp, reliable, and ready for high-stakes moments. You leave with an investment-ready pitch and the founder mindset needed to close the deal.'
     }
   ];
 
@@ -29,8 +35,9 @@ const Process: React.FC = () => {
 
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
         <div className="text-center mb-20">
-          <p className="text-brand-accent text-xs font-bold uppercase tracking-[0.2em] mb-4">Methodology</p>
+          <p className="text-brand-accent text-xs font-bold uppercase tracking-[0.2em] mb-4">Pitch like a Founder Methodology</p>
           <h2 className="text-5xl md:text-6xl font-serif font-thin text-brand-dark">The Process</h2>
+          <p className="text-lg text-brand-gray mt-4 font-light">Simple. Focused. Results-Driven.</p>
         </div>
 
         <div className="relative">
@@ -67,6 +74,24 @@ const Process: React.FC = () => {
             ))}
           </div>
         </div>
+
+        {/* CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mt-20"
+        >
+          <p className="text-brand-gray text-lg mb-6 font-light">Ready to transform how you pitch?</p>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-brand-accent text-white text-lg font-semibold uppercase tracking-wider rounded-full hover:bg-brand-dark transition-all duration-300 group shadow-xl shadow-brand-accent/30 hover:shadow-brand-dark/30"
+          >
+            Start Your Transformation
+            <ArrowRight size={22} className="group-hover:translate-x-2 transition-transform" />
+          </a>
+        </motion.div>
       </div>
     </div>
   );

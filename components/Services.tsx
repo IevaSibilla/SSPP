@@ -1,62 +1,102 @@
 import React from 'react';
-import { Mic, TrendingUp, Users, Lightbulb } from 'lucide-react';
-import { ServiceItem } from '../types';
+import { Mic, TrendingUp, Users } from 'lucide-react';
 
-const services: ServiceItem[] = [
+interface ServiceItemExtended {
+  id: string;
+  title: string;
+  description?: string;
+  bullets?: string[];
+  subtitle?: string;
+  bestFor?: string;
+  icon: React.ReactNode;
+  cta: string;
+}
+
+const services: ServiceItemExtended[] = [
   {
     id: '1',
     title: 'Keynote Speaking',
-    description: 'Inspiring talks on "Pitch Like a Founder," Investor Psychology, and Ecosystem Leadership. Perfect for conferences and accelerators.',
+    subtitle: 'Topics I speak on',
+    bullets: [
+      'Pitch Like a Founder',
+      'What Makes an Idea Investable',
+      'Why 70% of Pitch Decks Fail in 2 Minutes',
+      'Investor Psychology 101',
+      'Founder Clarity as a Competitive Advantage'
+    ],
     icon: <Mic size={32} />,
-    cta: 'Book Keynote'
+    cta: 'Invite Me to Speak'
   },
   {
     id: '2',
-    title: 'Founder Mentoring',
-    description: '1:1 Strategy sessions to validate ideas, build investor readiness, and secure capital. From idea to investable business.',
+    title: 'Pitch Like a Founder',
+    subtitle: '1:1 & Team Training',
+    bullets: [
+      'Pitch structure investors expect',
+      'Founder psychology & confidence',
+      'Q&A domination & objection handling',
+      'Live pitch feedback & iteration'
+    ],
+    bestFor: 'Founders, startup teams, executives',
     icon: <TrendingUp size={32} />,
-    cta: 'Apply for Mentoring'
+    cta: 'Work With Me'
   },
   {
     id: '3',
-    title: 'Corporate Workshops',
-    description: 'Hands-on training for teams to communicate with clarity. Covering pitching mastery and innovation leadership.',
+    title: 'Executive Presence',
+    subtitle: '4-Module Corporate Program',
+    bullets: [
+      'Strategic Narratives — align teams around vision',
+      'Boardroom Delivery — command attention instantly',
+      'Stakeholder Influence — move decisions forward',
+      'Execution Presence — voice, stance & delivery'
+    ],
+    bestFor: 'C-suite · Senior leaders · Corporate teams',
     icon: <Users size={32} />,
-    cta: 'View Workshops'
+    cta: 'Book Corporate Training'
   },
-  {
-    id: '4',
-    title: 'Idea Validation',
-    description: 'Stop polishing ideas before validating them. Learn the frameworks I used to raise 3M+ EUR in non-equity funding.',
-    icon: <Lightbulb size={32} />,
-    cta: 'Start Validating'
-  }
 ];
 
 const Services: React.FC = () => {
   return (
     <div className="py-24 bg-white">
       <div className="container mx-auto px-6">
-        <div className="mb-16 text-center max-w-2xl mx-auto">
+        <div className="mb-10 text-center max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-serif mb-4 text-brand-dark">How We Can Work Together</h2>
           <div className="w-24 h-1 bg-brand-accent mx-auto mb-6 rounded-full"></div>
-          <p className="text-brand-gray">Guiding entrepreneurs and leaders from idea validation to investment-ready execution.</p>
+          <p className="text-brand-gray">Lead high-stakes conversations with clarity and authority. Designed for leaders who present to boards, investors, and key stakeholders.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service) => (
             <div 
               key={service.id} 
-              className="bg-brand-beige p-8 flex flex-col items-start rounded-2xl hover:shadow-xl hover:shadow-brand-accent/10 transition-all duration-300 group hover:-translate-y-2 border border-transparent hover:border-brand-accent/20"
+              className="bg-brand-beige p-6 flex flex-col items-start rounded-2xl hover:shadow-xl hover:shadow-brand-accent/10 transition-all duration-300 group hover:-translate-y-2 border border-transparent hover:border-brand-accent/20"
             >
-              <div className="mb-6 text-brand-accent bg-white p-4 rounded-full shadow-sm group-hover:bg-brand-accent group-hover:text-white transition-colors">
+              <div className="mb-4 text-brand-accent bg-white p-3 rounded-full shadow-sm group-hover:bg-brand-accent group-hover:text-white transition-colors">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-serif mb-4 text-brand-dark">{service.title}</h3>
-              <p className="text-sm text-brand-gray leading-relaxed mb-8 flex-grow">
-                {service.description}
-              </p>
-              <a href="#contact" className="text-xs font-bold uppercase tracking-widest border-b-2 border-brand-accent/20 pb-1 text-brand-dark group-hover:border-brand-accent transition-colors">
+              <h3 className="text-lg font-serif mb-1 text-brand-dark">{service.title}</h3>
+              {service.subtitle && (
+                <p className="text-xs uppercase tracking-wider text-brand-accent mb-3 font-semibold">{service.subtitle}</p>
+              )}
+              <div className="text-sm text-brand-gray leading-relaxed mb-4 flex-grow">
+                {service.description && <p className={service.bullets ? 'mb-2' : ''}>{service.description}</p>}
+                {service.bullets && (
+                  <ul className="space-y-1.5">
+                    {service.bullets.map((bullet, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-brand-accent mt-0.5">•</span>
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              {service.bestFor && (
+                <p className="text-xs text-brand-gray/70 mb-4 italic">Best for: {service.bestFor}</p>
+              )}
+              <a href="#contact" className="text-xs font-bold uppercase tracking-widest border-b-2 border-brand-accent/20 pb-1 text-brand-dark group-hover:border-brand-accent transition-colors mt-auto">
                 {service.cta}
               </a>
             </div>
