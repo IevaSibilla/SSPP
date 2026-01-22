@@ -39,7 +39,7 @@ const Hero: React.FC = () => {
           </h1>
 
           <p className="text-lg md:text-xl text-brand-gray mb-10 font-light leading-relaxed max-w-lg">
-             Secure funding, grow as a leader or win trust and take decisions in high-stakes situations.
+             Secure funding, grow as a leader, win trust and take decisions in high-stakes situations.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">

@@ -23,7 +23,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
       <div className="container mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
         <a href="/" className="text-2xl font-serif font-bold tracking-widest text-brand-dark flex items-center gap-1">
-          IEVA SIBILLA<span className="text-brand-accent text-3xl leading-none">.</span>
+          SIBILLA STRUPULE<span className="text-brand-accent text-3xl leading-none">.</span>
         </a>
 
         {/* Desktop Nav */}
