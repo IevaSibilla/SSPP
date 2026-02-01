@@ -5,8 +5,7 @@ import SocialProof from './components/SocialProof';
 import AboutStats from './components/AboutStats';
 import Services from './components/Services';
 import Process from './components/Process';
-import Portfolio from './components/Portfolio';
-import PitchDemo from './components/PitchDemo';
+import WorkPage from './components/WorkPage';
 import ContactCTA from './components/ContactCTA';
 import Footer from './components/Footer';
 import AboutPage from './components/AboutPage';
@@ -42,6 +41,17 @@ const App: React.FC = () => {
     );
   }
 
+  // Work Page
+  if (currentPath === '/work') {
+    return (
+      <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
+        <Navbar scrolled={scrolled} />
+        <WorkPage />
+        <Footer />
+      </div>
+    );
+  }
+
   // Home Page
   return (
     <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
@@ -64,15 +74,6 @@ const App: React.FC = () => {
 
         <section id="process">
           <Process />
-        </section>
-
-        <section id="portfolio">
-          <Portfolio />
-        </section>
-
-        {/* Interactive Element showing "Innovation" expertise */}
-        <section id="ai-demo">
-          <PitchDemo />
         </section>
 
         <section id="contact">

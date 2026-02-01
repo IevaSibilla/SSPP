@@ -32,6 +32,7 @@ const Footer: React.FC = () => {
           <div>
              <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-brand-accent">Resources</h4>
              <ul className="space-y-4 text-sm text-gray-400">
+                <li><a href="/work" className="hover:text-white transition-colors">Work</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">The Founder's Advantage</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Pitch Deck Template</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>

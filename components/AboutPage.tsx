@@ -42,15 +42,12 @@ const AboutPage: React.FC = () => {
             >
               <div className="relative">
                 <div className="aspect-[4/5] bg-gradient-to-br from-brand-accent/20 to-brand-beige rounded-2xl overflow-hidden shadow-2xl">
-                  {/* Image Placeholder */}
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-accent/10 to-brand-beige">
-                    <div className="text-center p-8">
-                      <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-brand-accent/20 flex items-center justify-center">
-                        <span className="text-4xl text-brand-accent">IS</span>
-                      </div>
-                      <p className="text-brand-gray text-sm">Photo of Ieva Sibilla</p>
-                    </div>
-                  </div>
+                  <img
+                    src="/OIWHost.jpeg"
+                    alt="Ieva Sibilla Strupule"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
                 {/* Decorative Elements */}
                 <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-brand-accent/10 rounded-full blur-2xl"></div>
@@ -198,12 +195,12 @@ const AboutPage: React.FC = () => {
               className="relative"
             >
               <div className="aspect-video bg-gradient-to-br from-brand-dark to-brand-gray rounded-2xl overflow-hidden shadow-xl">
-                <div className="w-full h-full flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <Mic className="w-16 h-16 mx-auto mb-4 text-white/50" />
-                    <p className="text-white/70 text-sm">Speaking Event Photo</p>
-                  </div>
-                </div>
+                <img
+                  src="/DNBnxtPitchWinner.jpeg"
+                  alt="Pitch event"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
               <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-brand-accent/20 rounded-full blur-xl"></div>
             </motion.div>
@@ -247,12 +244,21 @@ const AboutPage: React.FC = () => {
             className="text-center"
           >
             <p className="text-sm uppercase tracking-widest text-brand-gray mb-8">Featured & Trusted By</p>
-            <div className="flex flex-wrap justify-center items-center gap-12 opacity-60">
-              {/* Logo Placeholders */}
-              {['Accelerator', 'University', 'Conference', 'Media', 'VC Firm'].map((name, index) => (
-                <div key={index} className="text-brand-gray font-serif text-lg">
-                  [{name} Logo]
-                </div>
+            <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center items-center gap-10 opacity-60 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-smooth">
+              {[
+                { src: '/OiWLogo.jpeg', alt: 'Oslo Innovation Week' },
+                { src: '/Forbes-logo.avif', alt: 'Forbes' },
+                { src: '/Sifted-logo.avif', alt: 'Sifted' },
+                { src: '/GlobalHackLogo.jpeg', alt: 'Global Hack' },
+                { src: '/HabitatForHumanityLogo.jpeg', alt: 'Habitat for Humanity' },
+              ].map((logo) => (
+                <img
+                  key={logo.src}
+                  src={logo.src}
+                  alt={logo.alt}
+                  loading="lazy"
+                  className="h-[60px] sm:h-[72px] md:h-[84px] w-auto max-w-[330px] object-contain flex-shrink-0 snap-center"
+                />
               ))}
             </div>
           </motion.div>
