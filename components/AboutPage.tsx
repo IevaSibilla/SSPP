@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, Mic, Users, TrendingUp, Quote, Briefcase, GraduationCap, Globe } from 'lucide-react';
+import SocialProof from './SocialProof';
 
 const AboutPage: React.FC = () => {
   const achievements = [
@@ -235,35 +236,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Featured In / Social Proof Section */}
-      <section className="py-16 bg-brand-beige">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <p className="text-sm uppercase tracking-widest text-brand-gray mb-8">Featured & Trusted By</p>
-            <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center items-center gap-10 opacity-60 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-smooth">
-              {[
-                { src: '/OiWLogo.jpeg', alt: 'Oslo Innovation Week' },
-                { src: '/Forbes-logo.avif', alt: 'Forbes' },
-                { src: '/Sifted-logo.avif', alt: 'Sifted' },
-                { src: '/GlobalHackLogo.jpeg', alt: 'Global Hack' },
-                { src: '/HabitatForHumanityLogo.jpeg', alt: 'Habitat for Humanity' },
-              ].map((logo) => (
-                <img
-                  key={logo.src}
-                  src={logo.src}
-                  alt={logo.alt}
-                  loading="lazy"
-                  className="h-[60px] sm:h-[72px] md:h-[84px] w-auto max-w-[330px] object-contain flex-shrink-0 snap-center"
-                />
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <SocialProof />
 
       {/* CTA Section */}
       <section className="py-20 bg-brand-dark">
