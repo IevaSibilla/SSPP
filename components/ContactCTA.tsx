@@ -37,23 +37,23 @@ const ContactCTA: React.FC = () => {
 
                 {/* Right: Specific Actions */}
                 <div className="flex flex-col justify-center gap-6">
-                    <div className="bg-white p-8 rounded-2xl shadow-lg shadow-brand-gray/5 border border-transparent hover:border-brand-accent/30 transition-all group cursor-pointer hover:-translate-y-1">
+                    <a href="https://calendly.com/hola-aekora/expert-training-ai-powered-tools" target="_blank" rel="noopener noreferrer" className="bg-white p-8 rounded-2xl shadow-lg shadow-brand-gray/5 border border-transparent hover:border-brand-accent/30 transition-all group hover:-translate-y-1 block">
                         <div className="flex justify-between items-start mb-4">
                             <h3 className="text-2xl font-serif text-brand-dark group-hover:text-brand-accent transition-colors">Invite me to Speak</h3>
                             <ArrowUpRight className="text-brand-gray group-hover:text-brand-accent group-hover:rotate-45 transition-all" />
                         </div>
                         <p className="text-brand-gray mb-6 text-sm">For conferences, accelerators, and corporate events seeking high-energy expertise on pitching & innovation.</p>
                         <span className="text-xs uppercase tracking-widest font-bold text-brand-dark group-hover:text-brand-accent">Book Keynote</span>
-                    </div>
+                    </a>
 
-                    <div className="bg-white p-8 rounded-2xl shadow-lg shadow-brand-gray/5 border border-transparent hover:border-brand-accent/30 transition-all group cursor-pointer hover:-translate-y-1">
+                    <a href="https://calendly.com/hola-aekora/expert-training-ai-powered-tools" target="_blank" rel="noopener noreferrer" className="bg-white p-8 rounded-2xl shadow-lg shadow-brand-gray/5 border border-transparent hover:border-brand-accent/30 transition-all group hover:-translate-y-1 block">
                         <div className="flex justify-between items-start mb-4">
                             <h3 className="text-2xl font-serif text-brand-dark group-hover:text-brand-accent transition-colors">1:1 Founder Mentoring</h3>
                             <ArrowUpRight className="text-brand-gray group-hover:text-brand-accent group-hover:rotate-45 transition-all" />
                         </div>
                         <p className="text-brand-gray mb-6 text-sm">Intensive coaching to validate your idea and build your pitch deck. Only 3 spots available per quarter.</p>
                         <span className="text-xs uppercase tracking-widest font-bold text-brand-dark group-hover:text-brand-accent">Apply for Spot</span>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

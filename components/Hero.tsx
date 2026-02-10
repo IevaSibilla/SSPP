@@ -44,7 +44,9 @@ const Hero: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row gap-4">
             <a
-              href="#contact"
+              href="https://calendly.com/hola-aekora/expert-training-ai-powered-tools"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 py-4 bg-brand-accent text-white font-bold uppercase tracking-widest hover:bg-brand-charcoal transition-all duration-300 text-center rounded-full shadow-lg shadow-brand-accent/30 hover:shadow-xl hover:-translate-y-1"
             >
               Work with Me

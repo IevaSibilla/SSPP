@@ -225,7 +225,7 @@ const AboutPage: React.FC = () => {
                 ))}
               </ul>
               <a
-                href="#contact"
+                href="mailto:ieva@aekora.com?subject=Speaking%20Enquiry&body=Hi%20Ieva%2C%0A%0AI%20would%20love%20to%20invite%20you%20to%20speak%20at%20our%20event.%0A%0AEvent%20name%3A%0ADate%3A%0ALocation%3A%0AAudience%3A%0A%0ALooking%20forward%20to%20hearing%20from%20you!"
                 className="inline-block mt-8 px-8 py-3 bg-brand-accent text-white font-semibold uppercase tracking-wider rounded-full hover:bg-brand-dark transition-colors"
               >
                 Invite Me to Speak
@@ -251,7 +251,7 @@ const AboutPage: React.FC = () => {
               Whether you're preparing for a critical pitch, training your team, or looking for a keynote speaker — let's talk.
             </p>
             <a
-              href="/#contact"
+              href="mailto:ieva@aekora.com?subject=Let%27s%20Work%20Together&body=Hi%20Ieva%2C%0A%0AI%27d%20love%20to%20explore%20working%20together.%0A%0AHere%27s%20a%20bit%20about%20what%20I%27m%20looking%20for%3A%0A%0A"
               className="inline-block px-10 py-4 bg-brand-accent text-white font-semibold uppercase tracking-wider rounded-full hover:bg-white hover:text-brand-dark transition-colors"
             >
               Get in Touch
