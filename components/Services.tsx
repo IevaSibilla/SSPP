@@ -96,7 +96,7 @@ const Services: React.FC = () => {
               {service.bestFor && (
                 <p className="text-xs text-brand-gray/70 mb-4 italic">Best for: {service.bestFor}</p>
               )}
-              <a href="https://calendly.com/hola-aekora/expert-training-ai-powered-tools" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest border-b-2 border-brand-accent/20 pb-1 text-brand-dark group-hover:border-brand-accent transition-colors mt-auto">
+              <a href="https://calendly.com/hola-aekora/expert-investor-pitch-coaching" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest border-b-2 border-brand-accent/20 pb-1 text-brand-dark group-hover:border-brand-accent transition-colors mt-auto">
                 {service.cta}
               </a>
             </div>

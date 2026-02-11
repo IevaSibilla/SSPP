@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
             </a>
           ))}
           <a
-            href="https://calendly.com/hola-aekora/expert-training-ai-powered-tools"
+            href="https://calendly.com/hola-aekora/expert-investor-pitch-coaching"
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-2 border-2 border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-white transition-all duration-300 text-sm uppercase tracking-wider font-bold flex items-center gap-2 rounded-full"
@@ -70,7 +70,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
             </a>
           ))}
           <a
-            href="https://calendly.com/hola-aekora/expert-training-ai-powered-tools"
+            href="https://calendly.com/hola-aekora/expert-investor-pitch-coaching"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsOpen(false)}

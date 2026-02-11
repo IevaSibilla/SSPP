@@ -85,7 +85,7 @@ const Process: React.FC = () => {
         >
           <p className="text-brand-gray text-lg mb-6 font-light">Ready to transform how you pitch?</p>
           <a
-            href="https://calendly.com/hola-aekora/expert-training-ai-powered-tools"
+            href="https://calendly.com/hola-aekora/expert-investor-pitch-coaching"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-10 py-5 bg-brand-accent text-white text-lg font-semibold uppercase tracking-wider rounded-full hover:bg-brand-dark transition-all duration-300 group shadow-xl shadow-brand-accent/30 hover:shadow-brand-dark/30"
