@@ -29,20 +29,14 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          <div>
-             <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-brand-accent">Resources</h4>
-             <ul className="space-y-4 text-sm text-gray-400">
-                <li><a href="/work" className="hover:text-white transition-colors">Work</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">The Founder's Advantage</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Pitch Deck Template</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-            </ul>
-          </div>
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-xs text-gray-600">
             <p>&copy; {new Date().getFullYear()} Ieva Sibilla Strupule. All rights reserved.</p>
-            <p>Designed with <span className="text-brand-accent">♥</span> for Founders.</p>
+            <div className="flex gap-6 mt-4 md:mt-0">
+                <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="/terms-and-conditions" className="hover:text-white transition-colors">Terms & Conditions</a>
+            </div>
         </div>
       </div>
     </footer>
