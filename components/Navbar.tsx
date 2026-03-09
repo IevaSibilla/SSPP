@@ -10,6 +10,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
 
   const navLinks = [
     { name: 'Expertise', href: '/#services' },
+    { name: 'Speaking', href: '/speaking' },
     { name: 'Methodology', href: '/#process' },
     { name: 'About', href: '/about' },
   ];

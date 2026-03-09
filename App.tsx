@@ -9,6 +9,7 @@ import WorkPage from './components/WorkPage';
 import ContactCTA from './components/ContactCTA';
 import Footer from './components/Footer';
 import AboutPage from './components/AboutPage';
+import SpeakingPage from './components/SpeakingPage';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -47,6 +48,17 @@ const App: React.FC = () => {
       <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
         <Navbar scrolled={scrolled} />
         <WorkPage />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Speaking Page
+  if (currentPath === '/speaking') {
+    return (
+      <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
+        <Navbar scrolled={scrolled} />
+        <SpeakingPage />
         <Footer />
       </div>
     );
