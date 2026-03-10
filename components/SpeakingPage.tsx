@@ -5,39 +5,55 @@ import { Calendar, MapPin, Mic, Users, Trophy, BookOpen, Quote } from 'lucide-re
 const SpeakingPage: React.FC = () => {
   return (
     <div className="pt-32 pb-20">
-      
+
       {/* Hero Section */}
       <section className="container mx-auto px-6 mb-24 relative z-10">
-        <div className="max-w-4xl">
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="lg:w-1/2 max-w-2xl">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="inline-block bg-brand-accent/10 border border-brand-accent/20 text-brand-accent px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-6"
+            >
+              International Speaker
+            </motion.div>
+
+            <motion.h1
+              className="text-5xl md:text-7xl font-serif text-brand-dark mb-8 leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+            >
+              Command the Stage.<br />
+              <span className="italic text-brand-accent">Captivate the Audience.</span>
+            </motion.h1>
+
+            <motion.p
+              className="text-xl text-brand-gray font-light leading-relaxed mb-10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
+              From the United Nations World Urban Forum to Women in Tech Global Conferences,
+              I deliver high-impact keynotes and masterclasses that inspire action and transform
+              how we think about innovation, communication, and leadership.
+            </motion.p>
+          </div>
+
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="inline-block bg-brand-accent/10 border border-brand-accent/20 text-brand-accent px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-6"
+            className="lg:w-1/2 w-full relative"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
-            International Speaker
+            <div className="absolute inset-0 bg-brand-accent rounded-[2rem] translate-x-3 translate-y-3 opacity-20 md:translate-x-5 md:translate-y-5"></div>
+            <img
+              src="/material-mapper-presentation.jpg"
+              alt="Keynote Presentation on Material Mapper"
+              className="rounded-[2rem] shadow-2xl relative z-10 w-full object-cover aspect-[4/3] border border-brand-lightgray/50"
+            />
           </motion.div>
-          
-          <motion.h1 
-            className="text-5xl md:text-7xl font-serif text-brand-dark mb-8 leading-tight"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-          >
-            Command the Stage.<br />
-            <span className="italic text-brand-accent">Captivate the Audience.</span>
-          </motion.h1>
-          
-          <motion.p 
-            className="text-xl text-brand-gray font-light max-w-2xl leading-relaxed mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            From the United Nations World Urban Forum to Women in Tech Global Conferences, 
-            I deliver high-impact keynotes and masterclasses that inspire action and transform 
-            how we think about innovation, communication, and leadership.
-          </motion.p>
         </div>
       </section>
 
@@ -50,23 +66,23 @@ const SpeakingPage: React.FC = () => {
               <div className="w-12 h-1 bg-brand-accent mb-6"></div>
               <p className="text-brand-gray font-light">Catch me speaking live at these upcoming European events.</p>
             </div>
-            
+
             <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
-                 {
-                   date: "April 11, 2026",
-                   location: "Riga",
-                   title: "Investment and Technology: How to Raise Funding from European Grant Systems and VCs",
-                   event: "European Innovation Council (EIC) & Embassy of Estonia"
-                 },
-                 {
-                   date: "April 9, 2026",
-                   location: "Workshop for Government Officials",
-                   title: "Pitching and Public Speaking: How to Present Yourself and Your Idea with Conviction",
-                   event: "VAS DigiTilts"
-                 }
+                {
+                  date: "April 11, 2026",
+                  location: "Riga",
+                  title: "Investment and Technology: How to Raise Funding from European Grant Systems and VCs",
+                  event: "European Innovation Council (EIC) & Embassy of Estonia"
+                },
+                {
+                  date: "April 9, 2026",
+                  location: "Workshop for Government Officials",
+                  title: "Pitching and Public Speaking: How to Present Yourself and Your Idea with Conviction",
+                  event: "VAS DigiTilts"
+                }
               ].map((event, idx) => (
-                <motion.div 
+                <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -116,7 +132,7 @@ const SpeakingPage: React.FC = () => {
               desc: "Empowering female founders, reshaping the VC landscape, and building confidence in technical leadership roles."
             }
           ].map((topic, idx) => (
-            <motion.div 
+            <motion.div
               key={idx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -148,7 +164,7 @@ const SpeakingPage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            
+
             {/* Column 1 */}
             <div className="space-y-12">
               <div>
@@ -165,7 +181,7 @@ const SpeakingPage: React.FC = () => {
 
               <div>
                 <h3 className="text-2xl font-bold text-brand-accent mb-6 flex items-center gap-3">
-                   Innovation & Tech Events
+                  Innovation & Tech Events
                 </h3>
                 <ul className="space-y-4 text-gray-300 font-light text-sm">
                   <li className="border-b border-white/10 pb-4">Oslo Innovation Week - Nordic Climate Tech Demo Day Keynote (Sep 2021)</li>
@@ -178,7 +194,7 @@ const SpeakingPage: React.FC = () => {
 
             {/* Column 2 */}
             <div className="space-y-12">
-               <div>
+              <div>
                 <h3 className="text-2xl font-bold text-brand-accent mb-6 flex items-center gap-3">
                   Workshops & Masterclasses
                 </h3>
@@ -190,7 +206,7 @@ const SpeakingPage: React.FC = () => {
                 </ul>
               </div>
 
-               <div>
+              <div>
                 <h3 className="text-2xl font-bold text-brand-accent mb-6 flex items-center gap-3">
                   Mentorship & Competitions
                 </h3>
