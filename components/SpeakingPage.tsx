@@ -1,8 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, MapPin, Mic, Users, Trophy, BookOpen, Quote } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Calendar, MapPin, Mic, Users, Trophy, BookOpen, Quote, ChevronDown, ChevronUp } from 'lucide-react';
 
 const SpeakingPage: React.FC = () => {
+  const [showAllEngagements, setShowAllEngagements] = useState(false);
   return (
     <div className="pt-32 pb-20">
 
@@ -220,6 +221,64 @@ const SpeakingPage: React.FC = () => {
             </div>
 
           </div>
+
+          <div className="mt-16 text-center">
+            <button
+              onClick={() => setShowAllEngagements(!showAllEngagements)}
+              className="inline-flex items-center gap-2 text-brand-accent hover:text-white border border-brand-accent hover:bg-brand-accent transition-colors px-6 py-3 rounded-full uppercase tracking-wider text-sm font-bold"
+            >
+              {showAllEngagements ? (
+                <>Hide Full List <ChevronUp size={18} /></>
+              ) : (
+                <>View All Past Engagements <ChevronDown size={18} /></>
+              )}
+            </button>
+          </div>
+
+          <AnimatePresence>
+            {showAllEngagements && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className="overflow-hidden mt-12 pt-12 border-t border-white/10"
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
+
+                  <div>
+                    <h4 className="text-xl font-bold text-white mb-6">Conferences & Keynotes</h4>
+                    <ul className="space-y-4 text-gray-300 font-light text-sm list-disc list-inside">
+                      <li>The Global Hack - Opening Keynote (April 2020)</li>
+                      <li>EU Sustainable Energy Week - Panelist (Oct 2021)</li>
+                      <li>TEDxRiga - Main Stage Speaker (Sept 2019)</li>
+                      <li>PropTech Summit Scandinavia - Keynote (June 2022)</li>
+                      <li>Venture Day Nordic - Startup Pitching Judge (Nov 2023)</li>
+                      <li>European Innovation Council (EIC) & Embassy of Estonia (April 2026)</li>
+                      <li>VAS DigiTilts - Workshop for Government Officials (April 2026)</li>
+                      <li>RigaCOMM 2025 - Event Moderator, E-Mobility Stage (Oct 2025)</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xl font-bold text-white mb-6">Media, Press & Interviews</h4>
+                    <ul className="space-y-4 text-gray-300 font-light text-sm list-disc list-inside">
+                      <li>SIFTED - Interview and Publication on Sifted.eu (Dec 2025)</li>
+                      <li>Dienas Bizness - Front Page Feature (March 2025)</li>
+                      <li>LA.LV - Grantmapper Interview (September 2025)</li>
+                      <li>LabsOfLatvia - Grantmapper Interview (August 2025)</li>
+                      <li>Latvian National Television (LTV) - Morning Show Guest (May 2024)</li>
+                      <li>Shifter.no - PropTech Startup Feature (Feb 2022)</li>
+                      <li>Forbes Latvia - 30 Under 30 Mention (2020)</li>
+                      <li>Radio Naba - Tech & Environment Guest Expert (June 2023)</li>
+                    </ul>
+                  </div>
+
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
         </div>
       </section>
 
