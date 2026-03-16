@@ -102,7 +102,7 @@ const OrderPage: React.FC = () => {
       {/* ── Hero + Form ── */}
       <section className="pt-36 pb-16 relative overflow-hidden">
         <div className="absolute top-10 right-0 w-96 h-96 rounded-full bg-brand-accent/5 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-10 w-72 h-72 rounded-full bg-yellow-200/20 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-10 w-72 h-72 rounded-full bg-brand-accent/5 blur-3xl pointer-events-none" />
 
         <div className="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-start">
           {/* Left: title + description */}
@@ -111,19 +111,23 @@ const OrderPage: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="h-1 w-10 bg-brand-accent rounded-full" />
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">Professional Pitch Review</span>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="inline-block bg-brand-accent/10 border border-brand-accent/20 text-brand-accent px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-6"
+            >
+              Professional Pitch Review
+            </motion.div>
             <h1 className="font-serif text-5xl md:text-6xl font-bold text-brand-dark leading-tight mb-6">
               Get Your Pitch Deck<br />
               <span className="text-brand-accent italic">Reviewed in 24 Hours.</span>
             </h1>
             <p className="text-brand-gray text-lg font-light leading-relaxed mb-10">
-              Upload your deck. Receive a fully revised version with slide-by-slide written feedback — from a coach who has helped founders raise <strong className="text-brand-dark font-semibold">7M€+</strong> and train <strong className="text-brand-dark font-semibold">500+ founders</strong> worldwide.
+              Receive a full pitch deck review and strategy document revised personally by Sibilla — curated to specifically point out exactly what needs to be fixed in your current pitch deck to get the attention and investment of real investors.
             </p>
             <div className="flex flex-wrap gap-8 pt-6 border-t border-brand-lightgray">
-              {[['7M€+', 'Raised by clients'], ['500+', 'Founders trained'], ['24h', 'Turnaround time']].map(([num, label]) => (
+              {[['70M€+', 'Raised by clients'], ['500+', 'Founders trained'], ['24h', 'Turnaround time']].map(([num, label]) => (
                 <div key={label}>
                   <div className="font-serif text-3xl font-bold text-brand-dark">{num}</div>
                   <div className="text-xs uppercase tracking-wider text-brand-gray font-semibold mt-1">{label}</div>
@@ -234,7 +238,7 @@ const OrderPage: React.FC = () => {
 
               <button
                 type="submit"
-                className="mt-2 w-full bg-brand-accent text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-[#e0204a] transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg shadow-brand-accent/30"
+                className="mt-2 w-full bg-brand-accent text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-brand-dark transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg shadow-brand-accent/30"
               >
                 Pay & Submit My Deck
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -306,7 +310,7 @@ const OrderPage: React.FC = () => {
                 transition={{ duration: 0.45, delay: i * 0.08 }}
                 className="bg-white rounded-2xl border border-brand-lightgray p-6 flex gap-4 items-start"
               >
-                <div className="w-11 h-11 rounded-xl bg-brand-accent/10 flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-brand-beige flex items-center justify-center flex-shrink-0">
                   <item.icon size={20} className="text-brand-accent" />
                 </div>
                 <div>
@@ -319,6 +323,37 @@ const OrderPage: React.FC = () => {
         </div>
       </section>
 
+      {/* ── CTA ── */}
+      <section className="py-24 bg-brand-dark">
+        <div className="container mx-auto px-6 text-center max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="inline-block bg-brand-accent/20 border border-brand-accent/30 text-brand-accent px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-6">
+              Limited Launch Pricing
+            </div>
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+              Ready to get your pitch<br />
+              <span className="text-brand-accent italic">investor-ready?</span>
+            </h2>
+            <p className="text-white/70 text-lg font-light leading-relaxed mb-10 max-w-2xl mx-auto">
+              Submit your deck today and receive a fully reviewed, revised version with a personal strategy document from Sibilla — within 24 hours.
+            </p>
+            <a
+              href="https://calendly.com/hola-aekora/expert-investor-pitch-coaching"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-brand-accent text-white px-10 py-5 rounded-full text-sm tracking-wider uppercase font-bold hover:bg-white hover:text-brand-dark transition-all duration-300 hover:scale-105"
+            >
+              Order for €79
+              <ArrowRight size={16} />
+            </a>
+          </motion.div>
+        </div>
+      </section>
 
     </div>
   );
