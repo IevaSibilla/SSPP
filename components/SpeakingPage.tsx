@@ -244,33 +244,107 @@ const SpeakingPage: React.FC = () => {
                 transition={{ duration: 0.5 }}
                 className="overflow-hidden mt-12 pt-12 border-t border-white/10"
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 text-left">
 
                   <div>
-                    <h4 className="text-xl font-bold text-white mb-6">Conferences & Keynotes</h4>
-                    <ul className="space-y-4 text-gray-300 font-light text-sm list-disc list-inside">
-                      <li>The Global Hack - Opening Keynote (April 2020)</li>
-                      <li>EU Sustainable Energy Week - Panelist (Oct 2021)</li>
-                      <li>TEDxRiga - Main Stage Speaker (Sept 2019)</li>
-                      <li>PropTech Summit Scandinavia - Keynote (June 2022)</li>
-                      <li>Venture Day Nordic - Startup Pitching Judge (Nov 2023)</li>
-                      <li>European Innovation Council (EIC) & Embassy of Estonia (April 2026)</li>
-                      <li>VAS DigiTilts - Workshop for Government Officials (April 2026)</li>
-                      <li>RigaCOMM 2025 - Event Moderator, E-Mobility Stage (Oct 2025)</li>
+                    <h4 className="text-xl font-bold text-white mb-6">Climate Tech &amp; Sustainability</h4>
+                    <ul className="space-y-3 text-gray-300 font-light text-sm list-disc list-inside">
+                      <li>ClimateTech Founders Summit - Keynote (Nov 2023)</li>
+                      <li>Cleantech Capital Day - Panel Discussion (Oslo, Oct 2022)</li>
+                      <li>Cleantech Capital Day - Keynote (Copenhagen, Oct 2023)</li>
+                      <li>The Path to Net Zero: Can Clean Energy Power the World? - Keynote (Malmö, Sep 2022)</li>
+                      <li>Curate Tomorrow Summit - Keynote (Sep 2023)</li>
+                      <li>Climate Meetup 2025 - Seminar (Oslo, Mar 2025)</li>
+                      <li>Greentech Alliance &amp; SYSTEMIQ - Workshop (Feb 2021)</li>
                     </ul>
                   </div>
 
                   <div>
-                    <h4 className="text-xl font-bold text-white mb-6">Media, Press & Interviews</h4>
-                    <ul className="space-y-4 text-gray-300 font-light text-sm list-disc list-inside">
-                      <li>SIFTED - Interview and Publication on Sifted.eu (Dec 2025)</li>
-                      <li>Dienas Bizness - Front Page Feature (March 2025)</li>
-                      <li>LA.LV - Grantmapper Interview (September 2025)</li>
-                      <li>LabsOfLatvia - Grantmapper Interview (August 2025)</li>
-                      <li>Latvian National Television (LTV) - Morning Show Guest (May 2024)</li>
-                      <li>Shifter.no - PropTech Startup Feature (Feb 2022)</li>
-                      <li>Forbes Latvia - 30 Under 30 Mention (2020)</li>
-                      <li>Radio Naba - Tech & Environment Guest Expert (June 2023)</li>
+                    <h4 className="text-xl font-bold text-white mb-6">PropTech &amp; Innovation</h4>
+                    <ul className="space-y-3 text-gray-300 font-light text-sm list-disc list-inside">
+                      <li>Proptech Summit - Panel Discussion (Sep 2022)</li>
+                      <li>Future of AI/PropTech - Keynote (Oct 2025)</li>
+                      <li>Oslo Innovation Week - Jury Lead of 100 Pitches (Sep 2022)</li>
+                      <li>Oslo Innovation Week - Keynote at Nordic Climate Tech Demo Day (Sep 2021)</li>
+                      <li>Oslo Innovation Week - Pitch Competition Winners (Sep 2020)</li>
+                      <li>TechChill - Speaker (Apr 2024)</li>
+                      <li>Latitude 59 - Online Event (May 2021)</li>
+                      <li>Startup Extreme - Award Winners (Norway, Apr 2022)</li>
+                      <li>Startup Extreme - Panel Discussion (Apr 2023)</li>
+                      <li>Paris Venture Capital World Summit - Keynote (May 2022)</li>
+                      <li>Davos Reception - Online Panel Discussion (Jan 2023)</li>
+                      <li>Special Edition Davos Wake-Up Call - Online Conference (Jan 2022)</li>
+                      <li>Crucible Bold Horizons - Event Host &amp; Moderator (Apr 2025)</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xl font-bold text-white mb-6">Women in Tech &amp; Pitch Competitions</h4>
+                    <ul className="space-y-3 text-gray-300 font-light text-sm list-disc list-inside">
+                      <li>Women in AI Global Summit - Pitch for Material Mapper (Sep 2020)</li>
+                      <li>Women in Tech Global Conference - Keynote (Jun 2022)</li>
+                      <li>Women in Tech Global Conference - Online Keynote (May 2023)</li>
+                      <li>Women in Tech Global Conference - Speaker (Apr 2024)</li>
+                      <li>DNB Nxt - Award Winners (Sep 2021)</li>
+                      <li>The Global Hack - Pitch Winner (Apr 2020)</li>
+                      <li>Startup Network UnicornBattle - Judge (San Francisco, Feb 2020)</li>
+                      <li>The Royal Summit - Pitching Material Mapper (Dubai, Oct 2020)</li>
+                      <li>Sifted Summit - Event Pitch (Dec 2021)</li>
+                      <li>SSE Riga Mini MBA Final Pitch - Pitch Competition Judge (Nov 2025)</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xl font-bold text-white mb-6">Workshops &amp; AI Masterclasses</h4>
+                    <ul className="space-y-3 text-gray-300 font-light text-sm list-disc list-inside">
+                      <li>Building SaaS Prototypes with AI - Event Moderator/Speaker (Jul 2025)</li>
+                      <li>Scale without sacrifice: How AI Agents can help you grow faster - Moderator (Apr 2025)</li>
+                      <li>Live Training: 3 Strategies to Raise $500k-$3M+ in 2025 (Feb 2025)</li>
+                      <li>How to not mess up your cap table - Workshop Online (Jul 2024)</li>
+                      <li>IntelligentVC - How To Pitch your Idea - Seminar (Nov 2024)</li>
+                      <li>Product Strategy in B2B Context - Workshop Online (Feb 2025)</li>
+                      <li>Shiftschool TRAILBLAZER - Decision Making Executive Workshop (Oct 2024)</li>
+                      <li>VAS - Presentation Skills and Stage Presence Workshop (Feb 2026)</li>
+                      <li>ESI.LV - Mentoring for Mentors - Workshop (May &amp; Oct 2024)</li>
+                      <li>ProductTank Riga - Multiple events as Host/Moderator (2025–2026)</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xl font-bold text-white mb-6">University Lectures &amp; Mentorship</h4>
+                    <ul className="space-y-3 text-gray-300 font-light text-sm list-disc list-inside">
+                      <li>SSE Riga - Organizational Structure Guest Lecture (Oct 2025)</li>
+                      <li>University College London (UCL) - Science &amp; Innovation for Sustainability - Keynote (London, Apr 2023)</li>
+                      <li>Cambridge University - Interview on Startup Innovation (Oct 2021)</li>
+                      <li>NTNU - IDEA Day Pitch Workshop (Nov 2024)</li>
+                      <li>EIT HealthTech Hackathon - Mentor (Riga Stradins University, Nov 2025)</li>
+                      <li>University of Latvia Technology Hackathon - Lead Jury (Oct 2022)</li>
+                      <li>Latvian Chamber of Commerce (LCCI) - Keynote (May 2021)</li>
+                      <li>LCCI - "Rebuilding Cities - Ukraine" Keynote (Feb 2024)</li>
+                      <li>Building Social Entrepreneurship in Latvia - Keynote (Jun 2022)</li>
+                      <li>Embassy of Latvia in London - Keynote Presentation (Oct 2022)</li>
+                      <li>CEOs in Green Transition - Keynote (Feb 2023)</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xl font-bold text-white mb-6">Podcasts, Media &amp; Speaking Tours</h4>
+                    <ul className="space-y-3 text-gray-300 font-light text-sm list-disc list-inside">
+                      <li>PropTech Espresso - with Mark Hurst (Dec 2024)</li>
+                      <li>Futur/IO - "Future of Tech" Episode (Sep 2021)</li>
+                      <li>You've Got Mel - Interview (Feb 2021)</li>
+                      <li>Wake-Up Call for Sustainable Innovators - Podcast (Sep 2021)</li>
+                      <li>SIFTED Panel Discussion Podcast - Panelist (Oct 2021)</li>
+                      <li>FORBES Global &amp; Latvia - Interview (Apr &amp; Jul 2021)</li>
+                      <li>Labs of Latvia - Interview (May 2021)</li>
+                      <li>LabsOfLatvia - Grantmapper Interview (Aug 2025)</li>
+                      <li>LA.LV - Grantmapper Interview (Sep 2025)</li>
+                      <li>KinnerNet Online &amp; Portugal - Panel/Keynote (2021–2023)</li>
+                      <li>Antler Norway - "My Takeaways from Winning the Global Hack" (Sep 2020)</li>
+                      <li>Ålesund Future Lab - Pitching Material Mapper (Nov 2020)</li>
+                      <li>ShelterTech Masterclass: Future of Affordable Housing - Online Keynote (Apr 2022)</li>
+                      <li>#TechTalk2030 AI / Future Climate - Online Keynote (Jul 2023)</li>
+                      <li>SmartWins with Digital Twins - Online Keynote (May 2023)</li>
                     </ul>
                   </div>
 

@@ -10,6 +10,8 @@ import ContactCTA from './components/ContactCTA';
 import Footer from './components/Footer';
 import AboutPage from './components/AboutPage';
 import SpeakingPage from './components/SpeakingPage';
+import ScorecardPage from './components/ScorecardPage';
+import OrderPage from './components/OrderPage';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -30,6 +32,28 @@ const App: React.FC = () => {
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
+  // Order Page
+  if (currentPath === '/order') {
+    return (
+      <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
+        <Navbar scrolled={scrolled} />
+        <OrderPage />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Scorecard Page
+  if (currentPath === '/scorecard') {
+    return (
+      <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
+        <Navbar scrolled={scrolled} />
+        <ScorecardPage />
+        <Footer />
+      </div>
+    );
+  }
 
   // About Page
   if (currentPath === '/about') {
