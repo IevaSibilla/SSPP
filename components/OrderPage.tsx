@@ -120,8 +120,8 @@ const OrderPage: React.FC = () => {
               Professional Pitch Review
             </motion.div>
             <h1 className="font-serif text-5xl md:text-6xl font-bold text-brand-dark leading-tight mb-6">
-              Get Your Pitch Deck<br />
-              <span className="text-brand-accent italic">Reviewed in 24 Hours.</span>
+              Fix What Investors Reject<br />
+              <span className="text-brand-accent italic">in Your Pitch Deck in 24h</span>
             </h1>
             <p className="text-brand-gray text-lg font-light leading-relaxed mb-10">
               Receive a full pitch deck review and strategy document revised personally by Sibilla — curated to specifically point out exactly what needs to be fixed in your current pitch deck to get the attention and investment of real investors.
@@ -150,14 +150,14 @@ const OrderPage: React.FC = () => {
                 <div className="text-brand-dark text-sm font-light">Full review + revised deck delivered in 24h</div>
               </div>
               <div className="text-right">
-                <div className="flex items-center justify-end gap-2 mb-0.5">
-                  <span className="font-serif text-xl text-brand-gray line-through opacity-60">€299</span>
-                  <span className="text-xs font-bold uppercase tracking-wider text-white bg-brand-accent px-2.5 py-0.5 rounded-full">Launch offer</span>
+
+                <div className="flex items-center justify-end gap-3 leading-none">
+                  <span className="font-serif text-2xl text-brand-gray line-through opacity-60">€299</span>
+                  <div className="font-serif text-6xl font-bold text-white bg-brand-accent px-4 pt-1 pb-3 rounded-2xl shadow-lg shadow-brand-accent/30 flex items-center justify-center">€79</div>
                 </div>
-                <div className="font-serif text-4xl font-bold text-brand-dark leading-none">€79</div>
                 <div className="flex items-center justify-end gap-1.5 mt-1">
                   <div className="text-xs text-brand-gray font-light">one-time</div>
-                  <span className="text-xs font-bold text-brand-accent">· Save €121</span>
+                  <span className="text-xs font-bold text-brand-accent">· Save €221</span>
                 </div>
               </div>
             </div>

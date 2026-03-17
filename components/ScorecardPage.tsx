@@ -415,7 +415,7 @@ const Scorecard: React.FC<ScorecardProps> = ({ firstName, scores, onScore }) => 
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-brand-dark">
+      <section className="py-24 bg-brand-beige border-t border-brand-lightgray">
         <div className="container mx-auto px-6 text-center max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -423,19 +423,19 @@ const Scorecard: React.FC<ScorecardProps> = ({ firstName, scores, onScore }) => 
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-block bg-brand-accent/20 border border-brand-accent/30 text-brand-accent px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-6">
+            <div className="inline-block bg-brand-accent/10 border border-brand-accent/30 text-brand-accent px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-6">
               Work with Sibilla
             </div>
-            <h3 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            <h3 className="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-6 leading-tight">
               Not sure if you're judging<br />
               yourself <span className="text-brand-accent italic">correctly?</span>
             </h3>
-            <p className="text-white/70 text-lg font-light leading-relaxed mb-10 max-w-2xl mx-auto">
+            <p className="text-brand-gray text-lg font-light leading-relaxed mb-10 max-w-2xl mx-auto">
               Self-assessment has limits. Book a professional pitch review and get specific, actionable feedback on every slide — from someone who has coached founders at the UN, World Bank, EIC, and in front of 100+ investors.
             </p>
             <a
               href="/order"
-              className="inline-flex items-center gap-3 bg-brand-accent text-white px-10 py-5 rounded-full text-sm tracking-wider uppercase font-bold hover:bg-white hover:text-brand-dark transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center gap-3 bg-brand-accent text-white px-10 py-5 rounded-full text-sm tracking-wider uppercase font-bold hover:bg-brand-dark transition-all duration-300 hover:scale-105 shadow-lg shadow-brand-accent/30"
             >
               Order Pitch Review
               <ArrowRight size={16} />
