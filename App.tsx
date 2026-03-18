@@ -12,6 +12,8 @@ import AboutPage from './components/AboutPage';
 import SpeakingPage from './components/SpeakingPage';
 import ScorecardPage from './components/ScorecardPage';
 import OrderPage from './components/OrderPage';
+import PrivacyPolicyPage from './components/PrivacyPolicyPage';
+import TermsAndConditionsPage from './components/TermsAndConditionsPage';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -72,6 +74,28 @@ const App: React.FC = () => {
       <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
         <Navbar scrolled={scrolled} />
         <WorkPage />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Terms & Conditions Page
+  if (currentPath === '/terms-and-conditions') {
+    return (
+      <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
+        <Navbar scrolled={scrolled} />
+        <TermsAndConditionsPage />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Privacy Policy Page
+  if (currentPath === '/privacy-policy') {
+    return (
+      <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
+        <Navbar scrolled={scrolled} />
+        <PrivacyPolicyPage />
         <Footer />
       </div>
     );
