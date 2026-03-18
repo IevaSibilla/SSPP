@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Upload, CheckCircle, Clock, Mail, FileText, Sparkles, Shield } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 const WHAT_YOU_GET = [
   { icon: FileText,   title: 'Slide-by-Slide Written Feedback',   desc: 'Every slide scored and annotated with specific, actionable comments.' },
@@ -63,7 +64,7 @@ const OrderPage: React.FC = () => {
   const [file,      setFile]        = useState<File | null>(null);
   const [dragOver,  setDragOver]    = useState(false);
   const [error,     setError]       = useState('');
-  const [submitted, setSubmitted]   = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const inputClass =
@@ -76,7 +77,7 @@ const OrderPage: React.FC = () => {
     if (dropped) setFile(dropped);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!firstName.trim() || !lastName.trim() || !email.trim()) {
       setError('Please fill in all fields.');
@@ -91,10 +92,56 @@ const OrderPage: React.FC = () => {
       return;
     }
     setError('');
-    setSubmitted(true);
+    setSubmitting(true);
+
+    try {
+      // 1. Generate a unique order ID for the file path
+      const orderId = crypto.randomUUID();
+      const filePath = `${orderId}/${file.name}`;
+
+      // 2. Upload file to Supabase Storage
+      const { error: uploadError } = await supabase.storage
+        .from('pitch-decks')
+        .upload(filePath, file);
+      if (uploadError) throw new Error(`File upload failed: ${uploadError.message}`);
+
+      // 3. Insert order row in database
+      const { error: insertError } = await supabase
+        .from('orders')
+        .insert({
+          id: orderId,
+          first_name: firstName.trim(),
+          last_name: lastName.trim(),
+          email: email.trim(),
+          file_path: filePath,
+          file_name: file.name,
+        });
+      if (insertError) throw new Error(`Order creation failed: ${insertError.message}`);
+
+      // 4. Call Edge Function to create Stripe Checkout Session
+      const { data, error: fnError } = await supabase.functions.invoke('create-checkout-session', {
+        body: { order_id: orderId, email: email.trim() },
+      });
+      if (fnError) throw new Error(`Checkout creation failed: ${fnError.message}`);
+
+      // 5. Redirect to Stripe Checkout
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No checkout URL returned');
+      }
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again.');
+      setSubmitting(false);
+    }
   };
 
-  if (submitted) return <SuccessScreen email={email} />;
+  // Detect return from Stripe Checkout
+  const urlParams = new URLSearchParams(window.location.search);
+  const isSuccess = urlParams.get('success') === 'true';
+  const returnEmail = urlParams.get('email') || '';
+
+  if (isSuccess) return <SuccessScreen email={decodeURIComponent(returnEmail)} />;
 
   return (
     <div className="min-h-screen bg-brand-beige overflow-x-hidden">
@@ -238,10 +285,11 @@ const OrderPage: React.FC = () => {
 
               <button
                 type="submit"
-                className="mt-2 w-full bg-brand-accent text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-brand-dark transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg shadow-brand-accent/30"
+                disabled={submitting}
+                className="mt-2 w-full bg-brand-accent text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-brand-dark transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg shadow-brand-accent/30 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Pay & Submit My Deck
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                {submitting ? 'Processing…' : 'Pay & Submit My Deck'}
+                {!submitting && <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />}
               </button>
 
               <div className="flex items-center justify-center gap-5 pt-1">

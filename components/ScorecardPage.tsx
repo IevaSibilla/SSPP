@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Download, CheckCircle } from 'lucide-react';
 
+const WEB3FORMS_KEY = '6be1c8ee-033a-478a-a3cd-58985d9dfd90';
+
 const CRITERIA = [
   { num: '01', title: 'Problem Clarity',         question: 'Does your pitch open with a problem that feels urgent and real — not a feature list?',        redflag: 'If you start with your solution, you\'ve already lost them.' },
   { num: '02', title: 'Solution Fit',             question: 'Is it immediately obvious how your product solves exactly that problem?',                      redflag: 'Investors should not have to connect the dots themselves.' },
@@ -35,12 +37,13 @@ interface GateProps {
 }
 
 const GateForm: React.FC<GateProps> = ({ onSubmit }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName,  setLastName]  = useState('');
-  const [email,     setEmail]     = useState('');
-  const [error,     setError]     = useState('');
+  const [firstName,   setFirstName]   = useState('');
+  const [lastName,    setLastName]    = useState('');
+  const [email,       setEmail]       = useState('');
+  const [error,       setError]       = useState('');
+  const [submitting,  setSubmitting]  = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!firstName.trim() || !lastName.trim() || !email.trim()) {
       setError('Please fill in all fields.');
@@ -50,7 +53,26 @@ const GateForm: React.FC<GateProps> = ({ onSubmit }) => {
       setError('Please enter a valid email address.');
       return;
     }
-    onSubmit({ firstName: firstName.trim(), lastName: lastName.trim(), email: email.trim() });
+    setSubmitting(true);
+    setError('');
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: 'New Pitch Scorecard Lead',
+          name: `${firstName.trim()} ${lastName.trim()}`,
+          email: email.trim(),
+        }),
+      });
+      if (!res.ok) throw new Error('Submission failed');
+      onSubmit({ firstName: firstName.trim(), lastName: lastName.trim(), email: email.trim() });
+    } catch {
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const inputClass =
@@ -157,10 +179,11 @@ const GateForm: React.FC<GateProps> = ({ onSubmit }) => {
 
                 <button
                   type="submit"
-                  className="mt-2 w-full bg-brand-accent text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-brand-dark transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg shadow-brand-accent/30"
+                  disabled={submitting}
+                  className="mt-2 w-full bg-brand-accent text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-brand-dark transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg shadow-brand-accent/30 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Unlock My Scorecard
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  {submitting ? 'Sending…' : 'Unlock My Scorecard'}
+                  {!submitting && <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />}
                 </button>
 
                 <p className="text-center text-xs text-brand-gray/60 font-light">
