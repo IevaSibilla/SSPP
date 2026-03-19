@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, ArrowRight, ClipboardList } from 'lucide-react';
+import { Menu, X, ClipboardList } from 'lucide-react';
 
 interface NavbarProps {
   scrolled: boolean;
@@ -39,19 +39,11 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
             </a>
           ))}
           <a
-            href="/scorecard"
+            href="/order"
             className="px-6 py-2 bg-brand-accent text-white hover:bg-[#e0204a] transition-all duration-300 text-sm uppercase tracking-wider font-bold flex items-center gap-2 rounded-full shadow-md shadow-brand-accent/30"
           >
             <ClipboardList size={15} />
             Review My Pitch
-          </a>
-          <a
-            href="https://calendly.com/hola-aekora/expert-investor-pitch-coaching"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2 border-2 border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-white transition-all duration-300 text-sm uppercase tracking-wider font-bold flex items-center gap-2 rounded-full"
-          >
-            Contact Me<ArrowRight size={16} />
           </a>
         </div>
 
@@ -78,20 +70,11 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
             </a>
           ))}
           <a
-            href="/scorecard"
+            href="/order"
             onClick={() => setIsOpen(false)}
             className="block text-center w-full bg-brand-accent text-white py-3 font-semibold uppercase tracking-wider rounded-full shadow-md shadow-brand-accent/30"
           >
             Review My Pitch
-          </a>
-          <a
-            href="https://calendly.com/hola-aekora/expert-investor-pitch-coaching"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setIsOpen(false)}
-            className="block text-center w-full border-2 border-brand-accent text-brand-accent py-3 font-semibold uppercase tracking-wider rounded-full"
-          >
-            Contact Me
           </a>
         </div>
       )}

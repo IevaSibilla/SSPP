@@ -196,16 +196,76 @@ const GateForm: React.FC<GateProps> = ({ onSubmit }) => {
       </section>
 
       {/* Tagline strip */}
-      <section className="py-16 bg-white mt-16">
+      <section className="py-10 bg-brand-dark mt-16">
         <div className="container mx-auto px-6 text-center">
-          <div className="flex items-center justify-center gap-4 mb-5">
-            <div className="h-px w-16 bg-brand-lightgray" />
-            <div className="h-1 w-6 bg-brand-accent rounded-full" />
-            <div className="h-px w-16 bg-brand-lightgray" />
-          </div>
-          <p className="font-serif text-3xl md:text-4xl font-bold text-brand-dark leading-snug">
-            Access the <span className="text-brand-accent italic">FREE</span> pitch deck scorecard<br className="hidden md:block" /> and see where you're at!
+          <p className="text-white/70 font-light text-base uppercase tracking-widest">
+            Want expert eyes on your deck? <span className="text-brand-accent font-bold">Get a professional review below.</span>
           </p>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-brand-dark overflow-hidden">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-0 items-stretch">
+
+            {/* Left: image */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="relative min-h-[340px] md:min-h-0"
+            >
+              <img
+                src="/DNBnxtPitchWinner.jpeg"
+                alt="Ieva Sibilla winning DNB NXT pitch competition"
+                className="w-full h-full object-cover object-top"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-brand-dark/60" />
+              <div className="absolute bottom-6 left-6">
+                <span className="bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+                  🏆 DNB NXT Pitch Winner · NOK 200,000
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Right: copy */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              className="flex flex-col justify-center py-16 px-8 md:px-12"
+            >
+              <div className="inline-block bg-brand-accent/20 border border-brand-accent/30 text-brand-accent px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-6 self-start">
+                Limited Launch Pricing
+              </div>
+              <h2 className="font-serif text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
+                Ready to get your pitch<br />
+                <span className="text-brand-accent italic">investor-ready?</span>
+              </h2>
+              <p className="text-white/60 text-base font-light leading-relaxed mb-4">
+                Sibilla has coached founders who went on to raise millions — from VCs, grants, and global competitions.
+              </p>
+              <p className="text-white/80 text-base font-light leading-relaxed mb-8">
+                Submit your deck and receive a fully reviewed, revised version with a personal strategy document — within 24 hours.
+              </p>
+              <div className="flex flex-wrap gap-4 mb-8 text-sm text-white/60 font-light">
+                <span>✓ 70M€+ raised by clients</span>
+                <span>✓ 500+ founders trained</span>
+                <span>✓ Delivered in 24h</span>
+              </div>
+              <a
+                href="/order"
+                className="self-start inline-flex items-center gap-3 bg-brand-accent text-white px-10 py-4 rounded-full text-sm tracking-wider uppercase font-bold hover:bg-white hover:text-brand-dark transition-all duration-300 hover:scale-105 shadow-lg shadow-brand-accent/30"
+              >
+                Order for €79
+                <ArrowRight size={16} />
+              </a>
+            </motion.div>
+
+          </div>
         </div>
       </section>
     </div>

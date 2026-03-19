@@ -26,8 +26,17 @@ const Footer: React.FC = () => {
                 <li><a href="/speaking" className="hover:text-white transition-colors">Speaking</a></li>
                 <li><a href="#services" className="hover:text-white transition-colors">Services</a></li>
                 <li><a href="#process" className="hover:text-white transition-colors">Methodology</a></li>
-                <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="https://calendly.com/hola-aekora/expert-investor-pitch-coaching" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Contact</a></li>
             </ul>
+          </div>
+
+          <div className="border border-white/10 rounded-2xl p-6">
+            <span className="inline-block bg-brand-accent/20 text-brand-accent text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">Free · Limited Time</span>
+            <p className="font-serif text-white text-lg font-bold leading-snug mb-2">Is your pitch investor-ready?</p>
+            <p className="text-gray-400 text-sm font-light mb-5">Score your deck in 2 minutes. Free, instant results.</p>
+            <a href="/scorecard" className="inline-flex items-center gap-2 bg-brand-accent text-white text-xs font-bold uppercase tracking-widest px-5 py-3 rounded-full hover:bg-white hover:text-brand-dark transition-all duration-300">
+              Try the Free Scorecard →
+            </a>
           </div>
 
         </div>

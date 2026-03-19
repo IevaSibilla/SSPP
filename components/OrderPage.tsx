@@ -314,26 +314,75 @@ const OrderPage: React.FC = () => {
       {/* ── How it works ── */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
-          <div className="flex items-center gap-4 mb-10">
+          <div className="flex items-center gap-4 mb-12">
             <div className="h-1 w-8 bg-brand-accent rounded-full" />
             <h2 className="font-serif text-2xl font-bold text-brand-dark">How It Works</h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {STEPS.map((step, i) => (
+          <div className="flex flex-col gap-0">
+            {[
+              {
+                num: '01',
+                label: 'Upload Your Deck',
+                desc: 'PDF or PowerPoint — any format works.',
+                img: '/House award.jpeg',
+                imgAlt: 'European Housing Innovation Award winner',
+                badge: '🏆 European Housing Innovation Award',
+              },
+              {
+                num: '02',
+                label: 'Secure Payment',
+                desc: "Fast checkout. You're covered by our 24h delivery guarantee.",
+                img: '/DNBnxtPitchWinner.jpeg',
+                imgAlt: 'DNB NXT Pitch Winner',
+                badge: '🏆 DNB NXT Pitch Winner · NOK 200,000',
+              },
+              {
+                num: '03',
+                label: 'Get Your Review',
+                desc: 'Improved deck + written feedback land in your inbox within 24 hours.',
+                img: '/SEB Material mapper winning.jpeg',
+                imgAlt: 'SEB Material Mapper pitch winner',
+                badge: '🏆 Nordic Cleantech Open · SEB Award',
+              },
+            ].map((step, i) => (
               <motion.div
                 key={step.num}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.12 }}
-                className="flex gap-5 items-start"
+                className={`flex flex-col md:flex-row items-stretch border-b border-brand-lightgray last:border-0 ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
               >
-                <div className="w-12 h-12 rounded-full bg-brand-accent/10 flex items-center justify-center flex-shrink-0">
-                  <span className="font-mono text-sm font-bold text-brand-accent">{step.num}</span>
+                {/* Step content */}
+                <div className="flex-1 flex items-center gap-6 py-10 md:px-8">
+                  <div className="w-14 h-14 rounded-full bg-brand-accent/10 flex items-center justify-center flex-shrink-0">
+                    <span className="font-mono text-base font-bold text-brand-accent">{step.num}</span>
+                  </div>
+                  <div>
+                    <div className="font-serif text-2xl font-bold text-brand-dark mb-2">{step.label}</div>
+                    <div className="text-brand-gray text-base font-light leading-relaxed">{step.desc}</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="font-semibold text-brand-dark text-base mb-1">{step.label}</div>
-                  <div className="text-brand-gray text-sm font-light leading-relaxed">{step.desc}</div>
+
+                {/* Image — hidden on mobile */}
+                <div className="hidden md:flex flex-1 items-center justify-center py-8 px-6">
+                  <motion.div
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                    className="relative overflow-hidden rounded-2xl shadow-xl shadow-brand-dark/20 max-h-[340px] w-full"
+                  >
+                    <img
+                      src={step.img}
+                      alt={step.imgAlt}
+                      className="w-full h-full object-cover object-center max-h-[340px]"
+                    />
+                    <div className="absolute inset-0 bg-brand-dark/25 rounded-2xl" />
+                    <div className="absolute bottom-4 left-4">
+                      <span className="bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full">
+                        {step.badge}
+                      </span>
+                    </div>
+                  </motion.div>
                 </div>
               </motion.div>
             ))}
@@ -368,38 +417,6 @@ const OrderPage: React.FC = () => {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <section className="py-24 bg-brand-dark">
-        <div className="container mx-auto px-6 text-center max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-block bg-brand-accent/20 border border-brand-accent/30 text-brand-accent px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-6">
-              Limited Launch Pricing
-            </div>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-              Ready to get your pitch<br />
-              <span className="text-brand-accent italic">investor-ready?</span>
-            </h2>
-            <p className="text-white/70 text-lg font-light leading-relaxed mb-10 max-w-2xl mx-auto">
-              Submit your deck today and receive a fully reviewed, revised version with a personal strategy document from Sibilla — within 24 hours.
-            </p>
-            <a
-              href="https://calendly.com/hola-aekora/expert-investor-pitch-coaching"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-brand-accent text-white px-10 py-5 rounded-full text-sm tracking-wider uppercase font-bold hover:bg-white hover:text-brand-dark transition-all duration-300 hover:scale-105"
-            >
-              Order for €79
-              <ArrowRight size={16} />
-            </a>
-          </motion.div>
         </div>
       </section>
 

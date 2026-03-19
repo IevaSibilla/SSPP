@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Play } from 'lucide-react';
 
 const Hero: React.FC = () => {
   return (
@@ -44,19 +43,18 @@ const Hero: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row gap-4">
             <a
+              href="/order"
+              className="px-8 py-4 bg-brand-accent text-white font-bold uppercase tracking-widest hover:bg-brand-charcoal transition-all duration-300 text-center rounded-full shadow-lg shadow-brand-accent/30 hover:shadow-xl hover:-translate-y-1"
+            >
+              Review My Pitch
+            </a>
+            <a
               href="https://calendly.com/hola-aekora/expert-investor-pitch-coaching"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-brand-accent text-white font-bold uppercase tracking-widest hover:bg-brand-charcoal transition-all duration-300 text-center rounded-full shadow-lg shadow-brand-accent/30 hover:shadow-xl hover:-translate-y-1"
+              className="px-8 py-4 bg-white text-brand-dark font-semibold uppercase tracking-widest border border-brand-lightgray hover:border-brand-accent hover:text-brand-accent transition-all duration-300 text-center flex items-center justify-center gap-2 group rounded-full"
             >
               Work with Me
-            </a>
-            <a
-              href="#process"
-              className="hidden px-8 py-4 bg-white text-brand-dark font-semibold uppercase tracking-widest border border-brand-lightgray hover:border-brand-accent hover:text-brand-accent transition-all duration-300 text-center flex items-center justify-center gap-2 group rounded-full"
-            >
-              <Play size={18} className="fill-current group-hover:scale-110 transition-transform" />
-              Watch Reel
             </a>
           </div>
         </motion.div>
