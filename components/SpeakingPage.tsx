@@ -70,7 +70,7 @@ const SpeakingPage: React.FC = () => {
             <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
-                  date: "April 11, 2026",
+                  date: "April 13, 2026",
                   location: "Riga",
                   title: "Investment and Technology: How to Raise Funding from European Grant Systems and VCs",
                   event: "European Innovation Council (EIC) & Embassy of Estonia"
@@ -110,7 +110,7 @@ const SpeakingPage: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-4xl font-serif text-brand-dark mb-6">Core Speaking Topics</h2>
           <p className="text-brand-gray font-light text-lg">
-            I speak on topics intersecting at the bleeding edge of communication, sustainability, AI, and startup scaling.
+            I speak at the intersection of pitching, fundraising, and AI helping founders and executives communicate, raise, and scale.
           </p>
         </div>
 
@@ -119,17 +119,17 @@ const SpeakingPage: React.FC = () => {
             {
               icon: <Mic className="w-8 h-8 text-brand-accent" />,
               title: "Pitching & Communication",
-              desc: "Mastering the art of public speaking, storytelling, and pitching to investors effectively to raise millions."
+              desc: "Mastering the art of storytelling, public speaking and investor pitching to raise capital and command any room."
             },
             {
               icon: <Users className="w-8 h-8 text-brand-accent" />,
-              title: "PropTech & Climate Tech",
-              desc: "Insights from leading startups navigating the complex landscape of green transition, net-zero goals, and disruption."
+              title: "Startup Scaling & Fundraising",
+              desc: "How to raise from private investors, VCs, institutional partners and EU grant systems including EIC Accelerator."
             },
             {
               icon: <Trophy className="w-8 h-8 text-brand-accent" />,
-              title: "Women in Tech & Leadership",
-              desc: "Empowering female founders, reshaping the VC landscape, and building confidence in technical leadership roles."
+              title: "AI & Workflow Automation",
+              desc: "Practical AI adoption for SMEs and scale ups cutting operational costs and building competitive advantage through automation."
             }
           ].map((topic, idx) => (
             <motion.div

@@ -52,7 +52,7 @@ const Hero: React.FC = () => {
               href="https://calendly.com/hola-aekora/expert-investor-pitch-coaching"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-white text-brand-dark font-semibold uppercase tracking-widest border border-brand-lightgray hover:border-brand-accent hover:text-brand-accent transition-all duration-300 text-center flex items-center justify-center gap-2 group rounded-full"
+              className="px-8 py-4 bg-transparent text-brand-dark font-bold uppercase tracking-widest border-2 border-brand-dark hover:border-brand-accent hover:text-brand-accent transition-all duration-300 text-center flex items-center justify-center rounded-full hover:-translate-y-1"
             >
               Work with Me
             </a>

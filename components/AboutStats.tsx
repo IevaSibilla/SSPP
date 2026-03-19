@@ -36,10 +36,10 @@ const AboutStats: React.FC = () => {
             </h2>
             <div className="space-y-6 text-brand-gray font-light text-lg">
               <p>
-                Most pitches fail in the first 30 seconds. Not because the idea is bad — but because it isn't clear enough. In high-stakes rooms — with investors, board members, or decision-makers — clarity and confidence are everything.  
+                Most pitches fail in the first 30 seconds. Not because the idea is bad. But because it isn't clear enough. In high stakes rooms with investors, board members, or decision makers. Clarity and confidence are everything.
               </p>
               <p>
-                I've been on both sides of that table. I'm an exited entrepreneur and global pitch award winner who has raised funding and led critical conversations where outcomes mattered. I don't teach theory — I teach what actually works under pressure. I help founders and executives communicate with clarity, project real conviction, and lead conversations that move decisions forward.
+                I've been on both sides of that table. I'm an exited entrepreneur and global pitch award winner who has raised funding and led critical conversations where outcomes mattered. I don't teach theory. I teach what actually works under pressure. I help founders and executives communicate with clarity, project real conviction, and lead conversations that move decisions forward.
               </p>
               <blockquote className="border-l-4 border-brand-accent pl-6 py-2 my-8 text-xl font-serif text-brand-dark italic bg-white p-6 rounded-r-xl shadow-sm">
                 "If your message isn't sharp immediately, attention drops. Doubt creeps in. And the decision is quietly made."
