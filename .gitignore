@@ -22,3 +22,6 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Supabase CLI local cache (link metadata, versions)
+supabase/.temp/
