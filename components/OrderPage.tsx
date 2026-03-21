@@ -327,6 +327,8 @@ const OrderPage: React.FC = () => {
                 img: '/House award.jpeg',
                 imgAlt: 'European Housing Innovation Award winner',
                 badge: '🏆 European Housing Innovation Award',
+                /** Tailwind object-position; bias upper-center on lg+ for faces */
+                imgObjectPosition: 'object-center lg:object-[center_18%]',
               },
               {
                 num: '02',
@@ -335,6 +337,7 @@ const OrderPage: React.FC = () => {
                 img: '/DNBnxtPitchWinner.jpeg',
                 imgAlt: 'DNB NXT Pitch Winner',
                 badge: '🏆 DNB NXT Pitch Winner · NOK 200,000',
+                imgObjectPosition: 'object-center lg:object-[center_20%]',
               },
               {
                 num: '03',
@@ -343,6 +346,7 @@ const OrderPage: React.FC = () => {
                 img: '/SEB Material mapper winning.jpeg',
                 imgAlt: 'SEB Material Mapper pitch winner',
                 badge: '🏆 Nordic Cleantech Open · SEB Award',
+                imgObjectPosition: 'object-center lg:object-[center_22%]',
               },
             ].map((step, i) => (
               <motion.div
@@ -365,18 +369,18 @@ const OrderPage: React.FC = () => {
                 </div>
 
                 {/* Image — hidden on mobile */}
-                <div className="hidden md:flex flex-1 items-center justify-center py-8 px-6">
+                <div className="hidden md:flex flex-1 items-center justify-center py-8 px-6 min-h-0">
                   <motion.div
                     whileHover={{ y: -6, scale: 1.02 }}
                     transition={{ duration: 0.3, ease: 'easeOut' }}
-                    className="relative overflow-hidden rounded-2xl shadow-xl shadow-brand-dark/20 max-h-[340px] w-full"
+                    className="relative h-[260px] w-full overflow-hidden rounded-2xl shadow-xl shadow-brand-dark/20 md:h-[300px] lg:h-[340px]"
                   >
                     <img
                       src={step.img}
                       alt={step.imgAlt}
-                      className="w-full h-full object-cover object-center max-h-[340px]"
+                      className={`absolute inset-0 h-full w-full object-cover ${step.imgObjectPosition}`}
                     />
-                    <div className="absolute inset-0 bg-brand-dark/25 rounded-2xl" />
+                    <div className="pointer-events-none absolute inset-0 bg-brand-dark/25 rounded-2xl" />
                     <div className="absolute bottom-4 left-4">
                       <span className="bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full">
                         {step.badge}

@@ -11,7 +11,6 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
   const navLinks = [
     { name: 'Expertise', href: '/#services' },
     { name: 'Speaking', href: '/speaking' },
-    { name: 'Methodology', href: '/#process' },
     { name: 'About', href: '/about' },
   ];
 
@@ -27,8 +26,8 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
           SIBILLA STRUPULE<span className="text-brand-accent text-3xl leading-none">.</span>
         </a>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-8">
+        {/* Desktop Nav — large screens only; md uses menu button */}
+        <div className="hidden lg:flex items-center space-x-8">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -47,18 +46,27 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled }) => {
           </a>
         </div>
 
-        {/* Mobile Menu Toggle */}
+        {/* Menu toggle: small + medium; large screens use inline nav */}
         <button
-          className="md:hidden text-brand-dark hover:text-brand-accent transition-colors"
+          type="button"
+          className="lg:hidden text-brand-dark hover:text-brand-accent transition-colors"
           onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
+          aria-controls="navbar-mobile-panel"
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Nav Overlay */}
+      {/* Collapsible nav panel (below large breakpoint) */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-brand-lightgray p-6 flex flex-col space-y-6 animate-fade-in-down shadow-2xl">
+        <div
+          id="navbar-mobile-panel"
+          className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-brand-lightgray p-6 flex flex-col space-y-6 animate-fade-in-down shadow-2xl"
+          role="navigation"
+          aria-label="Main"
+        >
           {navLinks.map((link) => (
             <a
               key={link.name}
