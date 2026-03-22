@@ -42,7 +42,7 @@ const ContactCTA: React.FC = () => {
                             <h3 className="text-2xl font-serif text-brand-dark group-hover:text-brand-accent transition-colors">Invite me to Speak</h3>
                             <ArrowUpRight className="text-brand-gray group-hover:text-brand-accent group-hover:rotate-45 transition-all" />
                         </div>
-                        <p className="text-brand-gray mb-6 text-sm">For conferences, accelerators, and corporate events seeking high-energy expertise on pitching & innovation.</p>
+                        <p className="text-brand-gray mb-6 text-sm">For conferences, accelerators, and corporate events seeking high energy expertise on pitching & innovation.</p>
                         <span className="text-xs uppercase tracking-widest font-bold text-brand-dark group-hover:text-brand-accent">Book Keynote</span>
                     </a>
 

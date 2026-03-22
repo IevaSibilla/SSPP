@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 
 const AboutStats: React.FC = () => {
   const stats = [
-    { value: '7M€+', label: 'Raised (grants + VC)' },
+    { value: '70M€+', label: 'Raised (grants + VC)' },
     { value: '500+', label: 'Founders and Executives Trained' },
     { value: '25k+', label: 'Competitors Outpitched' },
     { value: '20+', label: 'Global Awards' },

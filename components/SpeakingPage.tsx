@@ -1,6 +1,301 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, MapPin, Mic, Users, Trophy, BookOpen, Quote } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Calendar, MapPin, Mic, Users, Trophy, BookOpen, Quote, ChevronDown } from 'lucide-react';
+
+const ENGAGEMENTS = [
+  {
+    category: 'United Nations & Global Forums',
+    items: [
+      'United Nations World Urban Forum - Opening Keynote (Katowice, June 2022)',
+      'United Nations Habitat for Humanity - European Housing Forum - ShelterTech Award Winners (Warsaw, November 2021)',
+      'United Nations/World Bank Webinar - "Drive your Sustainability Agenda through Open Innovation" Keynote (November 2022)',
+      'United Nations - The United Future Lab - Online Keynote (March 2022)',
+      'World Humanitarian Forum - Speaker (London, May 2021)',
+    ],
+  },
+  {
+    category: 'Climate Tech & Sustainability',
+    items: [
+      'ClimateTech Founders Summit - Keynote (November 2023)',
+      'Cleantech Capital Day - Panel Discussion (Oslo, October 2022)',
+      'Cleantech Capital Day - Keynote (Copenhagen, October 2023)',
+      'Cleantech Capital Day - Open Finals - Pitch Competition (November 2021)',
+      'The Path to Net Zero: Can Clean Energy Power the World? - Keynote (Malmö, September 2022)',
+      'Curate Tomorrow Summit - Keynote (September 2023)',
+      'Climate Meetup 2025 - Seminar (Oslo, March 2025)',
+      'Greentech Alliance & SYSTEMIQ - Workshop (February 2021)',
+    ],
+  },
+  {
+    category: 'PropTech & Construction Innovation',
+    items: [
+      'Proptech VC Podcast - Interview on Material Mapper (September 2020)',
+      'Proptech Summit - Panel Discussion (September 2022)',
+      'PropTech Espresso Podcast - with Mark Hurst (December 2024)',
+      'Future of AI/PropTech - Keynote (October 2025)',
+      'Cambridge University - Interview: "The Role of Startups in Disrupting the Construction Industry" (October 2021)',
+    ],
+  },
+  {
+    category: 'Women in Tech & Leadership',
+    items: [
+      'Women in AI Global Summit - Pitch for Material Mapper (September 2020)',
+      'Women in Tech Global Conference - Keynote (June 2022)',
+      'Women in Tech Global Conference - Online Keynote (May 2023)',
+      'Women in Tech Global Conference - Speaker (April 2024)',
+    ],
+  },
+  {
+    category: 'Innovation Weeks & Tech Events',
+    items: [
+      'Oslo Innovation Week - Pitch Competition Winners (September 2020)',
+      'Oslo Innovation Week - Keynote at Nordic Climate Tech Demo Day (September 2021)',
+      'Oslo Innovation Week - Jury Lead of 100 Pitches Competition (September 2022)',
+      'TechChill - "Born in Crisis" Opening Keynote (Riga, May 2021)',
+      'TechChill - Speaker (April 2024)',
+      'Latitude 59 - Online Event (May 2021)',
+      'Startup Extreme - Award Winners (Norway, April 2022)',
+      'Startup Extreme - Panel Discussion (April 2023)',
+      'RigaCOMM 2025 - Event Moderator, E-Mobility Stage (October 2025)',
+    ],
+  },
+  {
+    category: 'Pitch Competitions & Awards',
+    items: [
+      'SIFTED - Top 100 Global Sustainability Companies to Watch (2023)',
+      'SIFTED - Top 20 European Sustainability Companies to Watch (2022)',
+      'DNB Nxt - Award Winners (September 2021)',
+      'The Global Hack - Pitch Winner (April 2020)',
+      'Startup Network UnicornBattle - Judge (San Francisco, February 2020)',
+      'The Royal Summit - Pitching Material Mapper (Dubai, October 2020)',
+      'Cleantech Capital Day - Open Finals - Pitch Competition (November 2021)',
+      'Startup Extreme - Award Winners (Norway, April 2022)',
+      'European Housing Forum by UN Habitat For Humanity - ShelterTech Award Winners (Warsaw, November 2021)',
+      'Sifted Summit - Event Pitch (December 2021)',
+      'SSE Riga Mini MBA Final Pitch - Pitch Competition Judge (November 2025)',
+    ],
+  },
+  {
+    category: 'Workshops & Masterclasses — AI & Automation',
+    items: [
+      'The Corporate Wake-Up Call: How to Automate Yourself with AI - Webinar Host (September 2025)',
+      'Building SaaS Prototypes with AI - Event Moderator/Speaker (July 2025)',
+      'Scale without sacrifice: How AI Agents can help you grow faster - Event Moderator (April 2025)',
+    ],
+  },
+  {
+    category: 'Workshops & Masterclasses — Fundraising & Startups',
+    items: [
+      'Live Training: 3 Strategies to Raise $500k-$3M+ in 2025 - For Founders (February 2025)',
+      'How to not mess up your cap table - Workshop Online (July 2024)',
+      'IntelligentVC - How To Pitch your Idea - Seminar/Workshop (November 2024)',
+      'NTNU (Norwegian University of Technology) IDEA Day - Pitch Workshop (November 2024)',
+    ],
+  },
+  {
+    category: 'Workshops & Masterclasses — Product & Strategy',
+    items: [
+      'Product Strategy in B2B Context - Workshop Online (February 2025)',
+      'Building SaaS Prototypes with AI - Speaker (July 2025)',
+      'ProductTank Riga - Multiple events as Host/Moderator (2025-2026)',
+    ],
+  },
+  {
+    category: 'Workshops & Masterclasses — Leadership & Performance',
+    items: [
+      'Unlock Your Storytelling Super Power - Workshop Online (September 2024)',
+      'Shiftschool TRAILBLAZER - How to Make Decisions without Overhinking - Executive Workshop (October 2024)',
+      'VAS Viedo Risinājumu Kalve - Presentation Skills and Stage Presence Workshop (February 2026)',
+      'Seminar for Mentors (ESI.LV) - Workshop (October 2024)',
+      'ESI.LV - Mentoring for Mentors - Workshop (May 2024)',
+    ],
+  },
+  {
+    category: 'Mentorship & Hackathons',
+    items: [
+      'European Institute of Innovation & Technology (EIT) HealthTech Hackathon - Mentor (Riga Stradins University, November 2025)',
+      'Stockholm School of Economics in Riga - Mini MBA Program - Lead Jury for Pitch Finals (November 2025)',
+      'University of Latvia Technology Hackathon - Lead Jury (October 2022)',
+      'SSE Riga Pitch Competition - Mentor/Judge (May 2020)',
+    ],
+  },
+  {
+    category: 'ProductTank Riga — Event Host & Moderator',
+    items: [
+      'From a Simple Student\'s Idea to Filling Up Global Arenas - Host (January 2026)',
+      'Leading in the Age of CyberAttacks - Host/Moderator (November 2025)',
+      'Building SaaS Prototypes with AI - Host (May 2025)',
+      'How AI is changing Product Management - Host (April 2025)',
+      'Building Globally Successful Products from the Ground Up - Host (February 2025)',
+      'Building from the Ground Up - Host (February 2025)',
+    ],
+  },
+  {
+    category: 'University Guest Lectures',
+    items: [
+      'SSE Riga - Organizational Structure Guest Lecture (October 2025)',
+      'SSE Riga - Pitch Competition Mentorship - Mentor/Judge (May 2020)',
+      'University College London (UCL) - "Science and Innovation for Sustainability: A Focus on Latvia" - Keynote and Panel (London, April 2023)',
+      'Cambridge University - Interview on Startup Innovation (October 2021)',
+      'NTNU (Norwegian University of Technology) - IDEA Day Pitch Workshop (November 2024)',
+    ],
+  },
+  {
+    category: 'Business & Entrepreneurship',
+    items: [
+      'Latvian Chamber of Commerce and Industry (LCCI) - Keynote (May 2021)',
+      'Latvian Chamber of Commerce and Industry (LCCI) - "Rebuilding Cities - Ukraine" Keynote (February 2024)',
+      'Building Social Entrepreneurship in Latvia - Keynote (Riga, June 2022)',
+      'CEOs in Green Transition: How to navigate the new geopolitical context - Keynote (February 2023)',
+      'Embassy of Latvia in London - Keynote Presentation (October 2022)',
+      'Latvian Business Angels Network - Grantmapper Pitch (September 2025)',
+    ],
+  },
+  {
+    category: 'International Venture & Investment Forums',
+    items: [
+      'Paris Venture Capital World Summit - Keynote (May 2022)',
+      'Davos Reception - Online Panel Discussion (January 2023)',
+      'Special Edition Davos Wake-up Call - Online Conference (January 2022)',
+      'Future Forum: Sustainability & Innovation Conference - Speaker (December 2021)',
+      'Crucible Bold Horizons - Event Host and Moderator (April 2025)',
+    ],
+  },
+  {
+    category: 'Podcast Appearances & Interviews',
+    items: [
+      'PropTech Espresso - with Mark Hurst (December 2024)',
+      'Futur/IO - "Future of Tech" Episode (September 2021)',
+      'You\'ve Got Mel - Interview (February 2021)',
+      'Proptech VC Podcast - Material Mapper Interview (September 2020)',
+      'Wake-Up Call for Sustainable Innovators - Podcast (September 2021)',
+      'SIFTED - Interview and Publication on Sifted.com (April 2021)',
+      'SIFTED Panel Discussion Podcast - Panelist (October 2021)',
+      'FORBES Global - Interview (April 2021)',
+      'FORBES Latvia - Interview (July 2021)',
+      'Labs of Latvia - Interview (May 2021)',
+      'LabsOfLatvia and Grantmapper.com - Interview (August 2025)',
+      'LA.LV and Grantmapper.com - Interview (September 2025)',
+    ],
+  },
+  {
+    category: 'Un-Conferences & Community Events',
+    items: [
+      'KinnerNord - Un-conference (Estonia, March 2021)',
+      'KinnerNord - Un-conference In-Person Keynote (Estonia, 2022)',
+      'KinnerNet Online - Online Event (June 2021)',
+      'KinnerNet Portugal - Panel Discussion/Event Host (October 2023)',
+      "Startup Norway's Extreme Summer Fest - Speaker (June 2022)",
+    ],
+  },
+  {
+    category: 'Virtual Expos & Online Events',
+    items: [
+      'IFEX Virtual Expo - Pitching Material Mapper (January 2021)',
+      'IFX Virtual Expo - Online Pitch Event (February 2021)',
+      'MATTER Conference - Online Speaker (April 2021)',
+      'How To Create A Mindset For Success & Start An Online Business in 2025 - Keynote (July 2025)',
+      '#TechTalk2030 #14: AI / Future Climate - Online Keynote (July 2023)',
+      'SmartWins with Digital Twins - Online Keynote (May 2023)',
+    ],
+  },
+  {
+    category: 'Material Mapper Speaking Tour (2020–2022)',
+    items: [
+      'Antler Norway - "My Takeaways from Winning the Global Hack" (September 2020)',
+      'Ålesund Future Lab - Pitching Material Mapper (November 2020)',
+      'United Future Lab - Pitching Material Mapper (December 2020)',
+      'Wake-Up-Call for Sustainable Futures - Online Event (July 2021)',
+      'ShelterTech Masterclass: The Future of Affordable Housing - Online Keynote (April 2022)',
+    ],
+  },
+  {
+    category: 'Media Features',
+    items: [
+      'SIFTED - Interview and Publication on Sifted.com (April 2021)',
+      'SIFTED Panel Discussion Podcast (October 2021)',
+      'Labs of Latvia - Interview Feature (May 2021)',
+      'LabsOfLatvia - Grantmapper Interview (August 2025)',
+      'LA.LV - Grantmapper Interview (September 2025)',
+    ],
+  },
+];
+
+const AccordionItem: React.FC<{ category: string; items: string[]; isOpen: boolean; onToggle: () => void }> = ({ category, items, isOpen, onToggle }) => (
+  <div className="border-b border-white/10">
+    <button
+      onClick={onToggle}
+      className="w-full flex items-center justify-between py-4 text-left group"
+    >
+      <span className="text-sm font-semibold text-white/80 group-hover:text-brand-accent transition-colors pr-4">{category}</span>
+      <ChevronDown
+        size={16}
+        className={`flex-shrink-0 text-brand-accent transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+      />
+    </button>
+    <AnimatePresence initial={false}>
+      {isOpen && (
+        <motion.ul
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: 'auto', opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="overflow-hidden"
+        >
+          <div className="pb-4 space-y-2">
+            {items.map((item, i) => (
+              <li key={i} className="text-xs text-gray-400 font-light pl-3 border-l border-brand-accent/30 leading-relaxed">
+                {item}
+              </li>
+            ))}
+          </div>
+        </motion.ul>
+      )}
+    </AnimatePresence>
+  </div>
+);
+
+const EngagementsAccordion: React.FC = () => {
+  const [expanded, setExpanded] = useState(false);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  return (
+    <div className="mt-16 border-t border-white/10 pt-10">
+      <button
+        onClick={() => setExpanded(e => !e)}
+        className="flex items-center gap-3 mb-6 group"
+      >
+        <span className="text-lg font-serif text-white group-hover:text-brand-accent transition-colors">View Full Engagement History</span>
+        <ChevronDown
+          size={18}
+          className={`text-brand-accent transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}
+        />
+      </button>
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16">
+              {ENGAGEMENTS.map((group, i) => (
+                <AccordionItem
+                  key={i}
+                  category={group.category}
+                  items={group.items}
+                  isOpen={openIndex === i}
+                  onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+                />
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const SpeakingPage: React.FC = () => {
   return (
@@ -153,6 +448,7 @@ const SpeakingPage: React.FC = () => {
       {/* Track Record List */}
       <section className="bg-brand-dark text-white py-24">
         <div className="container mx-auto px-6">
+
           <div className="mb-16">
             <h2 className="text-4xl font-serif mb-6 inline-block relative">
               Past Engagements
@@ -221,6 +517,8 @@ const SpeakingPage: React.FC = () => {
 
           </div>
 
+          {/* Full Engagements Accordion */}
+          <EngagementsAccordion />
 
         </div>
       </section>

@@ -122,7 +122,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
       {popupVisible && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ background: 'rgba(30,20,20,0.55)', backdropFilter: 'blur(4px)' }}>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center px-4" style={{ background: 'rgba(30,20,20,0.55)', backdropFilter: 'blur(4px)' }}>
           <div className="relative bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden">
             {/* Header */}
             <div className="bg-brand-dark px-8 pt-10 pb-8 text-center">
@@ -130,7 +130,7 @@ const App: React.FC = () => {
                 Free · Limited Time
               </div>
               <h2 className="font-serif text-3xl font-bold text-white leading-tight mb-3">
-                Is Your Pitch<br /><span className="text-brand-accent italic">Investor-Ready?</span>
+                Is Your Pitch<br /><span className="text-brand-accent italic">Investor Ready?</span>
               </h2>
               <p className="text-white/70 text-sm font-light leading-relaxed">
                 Score your deck across 10 investor criteria in under 2 minutes. Find out exactly where you're losing them.

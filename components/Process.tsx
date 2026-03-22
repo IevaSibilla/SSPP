@@ -7,12 +7,12 @@ const Process: React.FC = () => {
     {
       id: '01',
       title: 'Identify',
-      description: 'We start with a discovery deep-dive to find where your message breaks down and why attention drops in the first 30 seconds. Is it a real problem? Is the market big enough? We strip away noise and get to the core of what actually matters.'
+      description: 'We start with a discovery deep dive to find where your message breaks down and why attention drops in the first 30 seconds. Is it a real problem? Is the market big enough? We strip away noise and get to the core of what actually matters.'
     },
     {
       id: '02',
       title: 'Structure',
-      description: 'This is where the magic happens. We build a clear pitch architecture — message, narrative, and flow — aligned with investor psychology. Investors don\'t buy facts; they buy the future. We create a hook that grabs attention and holds the room.'
+      description: 'This is where the magic happens. We build a clear pitch architecture — message, narrative, and flow — aligned with investor psychology. Investors don\'t buy facts, they buy the future. We create a hook that grabs attention and holds the room.'
     },
     {
       id: '03',
@@ -22,7 +22,7 @@ const Process: React.FC = () => {
     {
       id: '04',
       title: 'Refine',
-      description: 'Live feedback, repetition, and stress-testing until the pitch is sharp, reliable, and ready for high-stakes moments. You leave with an investment-ready pitch and the founder mindset needed to close the deal.'
+      description: 'Live feedback, repetition, and stress testing until the pitch is sharp, reliable, and ready for high stakes moments. You leave with an investment ready pitch and the founder mindset needed to close the deal.'
     }
   ];
 
@@ -37,7 +37,7 @@ const Process: React.FC = () => {
         <div className="text-center mb-20">
           <p className="text-brand-accent text-xs font-bold uppercase tracking-[0.2em] mb-4">Pitch like a Founder Methodology</p>
           <h2 className="text-5xl md:text-6xl font-serif font-thin text-brand-dark">The Process</h2>
-          <p className="text-lg text-brand-gray mt-4 font-light">Simple. Focused. Results-Driven.</p>
+          <p className="text-lg text-brand-gray mt-4 font-light">Simple. Focused. Results Driven.</p>
         </div>
 
         <div className="relative">

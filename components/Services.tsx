@@ -44,7 +44,7 @@ const services: ServiceItemExtended[] = [
   {
     id: '3',
     title: 'Executive Presence',
-    subtitle: '4-Module Corporate Program',
+    subtitle: '4 Module Corporate Program',
     bullets: [
       'Strategic Narratives — align teams around vision',
       'Boardroom Delivery — command attention instantly',
@@ -64,7 +64,7 @@ const Services: React.FC = () => {
         <div className="mb-10 text-center max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-serif mb-4 text-brand-dark">How We Can Work Together</h2>
           <div className="w-24 h-1 bg-brand-accent mx-auto mb-6 rounded-full"></div>
-          <p className="text-brand-gray">Lead high-stakes conversations with clarity and authority. Designed for leaders who present to boards, investors, and key stakeholders.</p>
+          <p className="text-brand-gray">Lead high stakes conversations with clarity and authority. Designed for leaders who present to boards, investors, and key stakeholders.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -94,7 +94,7 @@ const Services: React.FC = () => {
                 )}
               </div>
               {service.bestFor && (
-                <p className="text-xs text-brand-gray/70 mb-4 italic">Best for: {service.bestFor}</p>
+                <p className="text-xs text-brand-gray/70 mb-4 italic">Best for {service.bestFor}</p>
               )}
               <a href="https://calendly.com/hola-aekora/expert-investor-pitch-coaching" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest border-b-2 border-brand-accent/20 pb-1 text-brand-dark group-hover:border-brand-accent transition-colors mt-auto">
                 {service.cta}

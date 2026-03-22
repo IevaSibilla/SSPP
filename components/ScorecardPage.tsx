@@ -18,7 +18,7 @@ const CRITERIA = [
 ];
 
 const STATS = [
-  { number: '7M€+', label: 'Raised (Grants + VC)' },
+  { number: '70M€+', label: 'Raised (Grants + VC)' },
   { number: '500+', label: 'Founders Trained' },
   { number: '25k+', label: 'Competitors Outpitched' },
   { number: '20+',  label: 'Global Awards' },
@@ -104,7 +104,7 @@ const GateForm: React.FC<GateProps> = ({ onSubmit }) => {
 
             <h1 className="font-serif text-5xl md:text-6xl font-bold text-brand-dark leading-tight mb-6">
               Is Your Pitch<br />
-              <span className="text-brand-accent italic">Investor-Ready?</span>
+              <span className="text-brand-accent italic">Investor Ready?</span>
             </h1>
 
             <p className="text-brand-gray text-lg font-light leading-relaxed mb-8 max-w-md">
