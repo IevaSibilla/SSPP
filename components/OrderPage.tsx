@@ -120,7 +120,32 @@ const OrderPage: React.FC = () => {
   const [dragOver,  setDragOver]    = useState(false);
   const [error,     setError]       = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const SLIDES = [
+    { src: '/Pitch_1.jpg',        label: 'Revised Pitch Deck' },
+    { src: '/Pitch_review_1.jpg', label: 'Written Review' },
+    { src: '/Pitch_2.jpg',        label: 'Revised Pitch Deck' },
+    { src: '/Pitch_review_2.jpg', label: 'Written Review' },
+    { src: '/Pitch_review_3.jpg', label: 'Written Review' },
+  ];
+
+  const goPrev = () => setActiveIndex(i => (i === 0 ? SLIDES.length - 1 : i - 1));
+  const goNext = () => setActiveIndex(i => (i === SLIDES.length - 1 ? 0 : i + 1));
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft')  goPrev();
+      if (e.key === 'ArrowRight') goNext();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  const scrollToForm = () => {
+    document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const inputClass =
     'w-full bg-white border border-brand-lightgray rounded-xl px-5 py-4 text-brand-dark placeholder-brand-gray/50 text-sm font-sans focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/10 transition-all duration-200';
@@ -196,7 +221,7 @@ const OrderPage: React.FC = () => {
     <div className="min-h-screen bg-brand-beige overflow-x-hidden">
 
       {/* ── Hero + Form ── */}
-      <section className="pt-36 pb-16 relative overflow-hidden">
+      <section id="order-form" className="pt-36 pb-16 relative overflow-hidden">
         <div className="absolute top-10 right-0 w-96 h-96 rounded-full bg-brand-accent/5 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-10 w-72 h-72 rounded-full bg-brand-accent/5 blur-3xl pointer-events-none" />
 
@@ -463,6 +488,133 @@ const OrderPage: React.FC = () => {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ── Glassmorphic Card Carousel ── */}
+      <section className="py-24 bg-brand-dark relative overflow-hidden">
+
+        {/* Background radial glow */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-brand-accent/10 rounded-full blur-3xl" />
+        </div>
+
+        {/* Heading */}
+        <div className="container mx-auto px-6 mb-14 relative z-10">
+          <div className="flex items-center gap-4 mb-5">
+            <div className="h-px w-8 bg-brand-accent" />
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">See What You Receive</span>
+          </div>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-white leading-tight">
+            A glimpse of your<br />
+            <span className="text-white/30 italic">deliverables.</span>
+          </h2>
+        </div>
+
+        {/* Carousel */}
+        <div className="relative flex items-center justify-center" style={{ height: '420px' }}>
+          {SLIDES.map((slide, i) => {
+            const offset = i - activeIndex;
+            const absOffset = Math.abs(offset);
+            if (absOffset > 1) return null;
+            return (
+              <motion.div
+                key={slide.src}
+                className="absolute cursor-pointer select-none"
+                animate={{
+                  x: `${offset * 72}%`,
+                  scale: offset === 0 ? 1 : 0.88,
+                  opacity: offset === 0 ? 1 : 0.45,
+                  zIndex: offset === 0 ? 10 : 5,
+                }}
+                transition={{ type: 'spring', stiffness: 280, damping: 28 }}
+                drag={offset === 0 ? 'x' : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.1}
+                onDragEnd={(_, info) => {
+                  if (info.offset.x < -60) goNext();
+                  if (info.offset.x > 60)  goPrev();
+                }}
+                onClick={() => {
+                  if (offset === -1) goPrev();
+                  if (offset === 1)  goNext();
+                }}
+                style={{ width: '60vw', maxWidth: '680px' }}
+              >
+                {/* Glass card */}
+                <div
+                  className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl"
+                  style={{
+                    background: 'rgba(255,255,255,0.05)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    boxShadow: offset === 0
+                      ? '0 32px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.12)'
+                      : '0 16px 40px rgba(0,0,0,0.4)',
+                  }}
+                >
+                  {/* Top shimmer */}
+                  <div
+                    className="absolute inset-x-0 top-0 h-24 pointer-events-none z-10 rounded-t-3xl"
+                    style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.07), transparent)' }}
+                  />
+
+                  {/* Image */}
+                  <img
+                    src={slide.src}
+                    alt={slide.label}
+                    className="w-full object-cover"
+                    style={{ aspectRatio: '16/10', display: 'block' }}
+                    draggable={false}
+                  />
+
+                  {/* Caption badge */}
+                  {offset === 0 && (
+                    <div className="absolute bottom-4 left-4 z-20">
+                      <span
+                        className="text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-white/20"
+                        style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)' }}
+                      >
+                        {slide.label}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Slide counter */}
+                  {offset === 0 && (
+                    <div className="absolute top-4 right-4 z-20 font-mono text-xs text-white/40 tracking-widest">
+                      {String(activeIndex + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Dot strip */}
+        <div className="flex items-center justify-center gap-2 mt-10 relative z-10">
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveIndex(i)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === activeIndex ? 'w-6 bg-brand-accent' : 'w-1.5 bg-white/25 hover:bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="flex justify-center mt-10 relative z-10">
+          <button
+            onClick={scrollToForm}
+            className="flex items-center gap-2 bg-brand-accent text-white text-xs font-bold uppercase tracking-widest px-8 py-4 rounded-full hover:bg-white hover:text-brand-dark transition-all duration-300 group shadow-lg shadow-brand-accent/30"
+          >
+            Get Mine — €79
+            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+
       </section>
 
     </div>
