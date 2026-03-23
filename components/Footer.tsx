@@ -15,14 +15,13 @@ const Footer: React.FC = () => {
             <div className="flex gap-4">
                 <a href="https://www.linkedin.com/in/ievastrupule/?originalSubdomain=no" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors"><Linkedin size={20} /></a>
                 <a href="https://www.instagram.com/sibilla.strupule/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors"><Instagram size={20} /></a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors"><Twitter size={20} /></a>
             </div>
           </div>
           
           <div>
             <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-brand-accent">Explore</h4>
             <ul className="space-y-4 text-sm text-gray-400">
-                <li><a href="#about" className="hover:text-white transition-colors">About</a></li>
+                <li><a href="/about" className="hover:text-white transition-colors">About</a></li>
                 <li><a href="/speaking" className="hover:text-white transition-colors">Speaking</a></li>
                 <li><a href="#services" className="hover:text-white transition-colors">Services</a></li>
                 <li><a href="#process" className="hover:text-white transition-colors">Methodology</a></li>
@@ -32,7 +31,7 @@ const Footer: React.FC = () => {
 
           <div className="border border-white/10 rounded-2xl p-6">
             <span className="inline-block bg-brand-accent/20 text-brand-accent text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">Free · Limited Time</span>
-            <p className="font-serif text-white text-lg font-bold leading-snug mb-2">Is your pitch investor-ready?</p>
+            <p className="font-serif text-white text-lg font-bold leading-snug mb-2">Is your pitch investor ready?</p>
             <p className="text-gray-400 text-sm font-light mb-5">Score your deck in 2 minutes. Free, instant results.</p>
             <a href="/scorecard" className="inline-flex items-center gap-2 bg-brand-accent text-white text-xs font-bold uppercase tracking-widest px-5 py-3 rounded-full hover:bg-white hover:text-brand-dark transition-all duration-300">
               Try the Free Scorecard →

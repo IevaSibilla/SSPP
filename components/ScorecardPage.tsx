@@ -243,7 +243,7 @@ const GateForm: React.FC<GateProps> = ({ onSubmit }) => {
               </div>
               <h2 className="font-serif text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
                 Ready to get your pitch<br />
-                <span className="text-brand-accent italic">investor-ready?</span>
+                <span className="text-brand-accent italic">investor ready?</span>
               </h2>
               <p className="text-white/60 text-base font-light leading-relaxed mb-4">
                 Sibilla has coached founders who went on to raise millions — from VCs, grants, and global competitions.

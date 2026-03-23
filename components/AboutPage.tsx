@@ -5,7 +5,7 @@ import SocialProof from './SocialProof';
 
 const AboutPage: React.FC = () => {
   const achievements = [
-    { icon: <TrendingUp size={28} />, value: '€7M+', label: 'Funding Raised' },
+    { icon: <TrendingUp size={28} />, value: '€70M+', label: 'Funding Raised' },
     { icon: <Award size={28} />, value: '20+', label: 'Global Awards' },
     { icon: <Users size={28} />, value: '500+', label: 'Founders Trained' },
     { icon: <Mic size={28} />, value: '50+', label: 'Keynotes Delivered' },

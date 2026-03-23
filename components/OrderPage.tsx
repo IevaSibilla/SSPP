@@ -71,12 +71,6 @@ const WHAT_YOU_GET = [
   { icon: Shield,     title: 'Confidential & Secure',              desc: 'Your deck is handled with full confidentiality. No sharing, ever.' },
 ];
 
-const STEPS = [
-  { num: '01', label: 'Upload Your Deck',      desc: 'PDF or PowerPoint — any format works.' },
-  { num: '02', label: 'Secure Payment',         desc: 'Fast checkout. You\'re covered by our 24h delivery guarantee.' },
-  { num: '03', label: 'Get Your Review',        desc: 'Improved deck + written feedback land in your inbox within 24 hours.' },
-];
-
 /* ── Success Screen ─────────────────────────────────────────────── */
 const SuccessScreen: React.FC<{ email: string }> = ({ email }) => (
   <motion.div
@@ -156,17 +150,14 @@ const OrderPage: React.FC = () => {
     setSubmitting(true);
 
     try {
-      // 1. Generate a unique order ID for the file path
       const orderId = crypto.randomUUID();
       const filePath = `${orderId}/${file.name}`;
 
-      // 2. Upload file to Supabase Storage
       const { error: uploadError } = await supabase.storage
         .from('pitch-decks')
         .upload(filePath, file);
       if (uploadError) throw new Error(`File upload failed: ${uploadError.message}`);
 
-      // 3. Insert order row in database
       const { error: insertError } = await supabase
         .from('orders')
         .insert({
@@ -179,13 +170,11 @@ const OrderPage: React.FC = () => {
         });
       if (insertError) throw new Error(`Order creation failed: ${insertError.message}`);
 
-      // 4. Call Edge Function to create Stripe Checkout Session
       const { data, error: fnError } = await supabase.functions.invoke('create-checkout-session', {
         body: { order_id: orderId, email: email.trim() },
       });
       if (fnError) throw new Error(`Checkout creation failed: ${fnError.message}`);
 
-      // 5. Redirect to Stripe Checkout
       if (data?.url) {
         window.location.href = data.url;
       } else {
@@ -197,7 +186,6 @@ const OrderPage: React.FC = () => {
     }
   };
 
-  // Detect return from Stripe Checkout
   const urlParams = new URLSearchParams(window.location.search);
   const isSuccess = urlParams.get('success') === 'true';
   const returnEmail = urlParams.get('email') || '';
@@ -213,7 +201,6 @@ const OrderPage: React.FC = () => {
         <div className="absolute bottom-0 left-10 w-72 h-72 rounded-full bg-brand-accent/5 blur-3xl pointer-events-none" />
 
         <div className="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-start">
-          {/* Left: title + description */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -244,24 +231,20 @@ const OrderPage: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Right: form card */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
             className="bg-white rounded-3xl shadow-2xl shadow-brand-dark/10 p-8 md:p-10 border border-brand-lightgray/60"
           >
-            {/* Urgency timer */}
             <UrgencyTimer />
 
-            {/* Pricing badge */}
             <div className="flex items-center justify-between mb-8 p-5 bg-brand-beige rounded-2xl border border-brand-lightgray">
               <div>
                 <div className="text-xs font-bold uppercase tracking-widest text-brand-accent mb-1">Pitch Deck Review</div>
                 <div className="text-brand-dark text-sm font-light">Full review + revised deck delivered in 24h</div>
               </div>
               <div className="text-right">
-
                 <div className="flex items-center justify-end gap-3 leading-none">
                   <span className="font-serif text-2xl text-brand-gray line-through opacity-60">€299</span>
                   <div className="font-serif text-6xl font-bold text-white bg-brand-accent px-4 pt-1 pb-3 rounded-2xl shadow-lg shadow-brand-accent/30 flex items-center justify-center">€79</div>
@@ -294,7 +277,6 @@ const OrderPage: React.FC = () => {
                 className={inputClass}
               />
 
-              {/* File upload zone */}
               <div
                 onClick={() => fileInputRef.current?.click()}
                 onDragOver={e => { e.preventDefault(); setDragOver(true); }}
@@ -389,7 +371,6 @@ const OrderPage: React.FC = () => {
                 img: '/House award.jpeg',
                 imgAlt: 'European Housing Innovation Award winner',
                 badge: '🏆 European Housing Innovation Award',
-                /** Tailwind object-position; bias upper-center on lg+ for faces */
                 imgObjectPosition: 'object-center lg:object-[center_18%]',
               },
               {
@@ -419,7 +400,6 @@ const OrderPage: React.FC = () => {
                 transition={{ duration: 0.5, delay: i * 0.12 }}
                 className={`flex flex-col md:flex-row items-stretch border-b border-brand-lightgray last:border-0 ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
               >
-                {/* Step content */}
                 <div className="flex-1 flex items-center gap-6 py-10 md:px-8">
                   <div className="w-14 h-14 rounded-full bg-brand-accent/10 flex items-center justify-center flex-shrink-0">
                     <span className="font-mono text-base font-bold text-brand-accent">{step.num}</span>
@@ -430,7 +410,6 @@ const OrderPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Image — hidden on mobile */}
                 <div className="hidden md:flex flex-1 items-center justify-center py-8 px-6 min-h-0">
                   <motion.div
                     whileHover={{ y: -6, scale: 1.02 }}
