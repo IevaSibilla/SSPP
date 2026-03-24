@@ -460,36 +460,6 @@ const OrderPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ── What You Get ── */}
-      <section className="py-16 bg-brand-beige">
-        <div className="container mx-auto px-6">
-          <div className="flex items-center gap-4 mb-10">
-            <div className="h-1 w-8 bg-brand-accent rounded-full" />
-            <h2 className="font-serif text-2xl font-bold text-brand-dark">What's Included</h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {WHAT_YOU_GET.map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.08 }}
-                className="bg-white rounded-2xl border border-brand-lightgray p-6 flex gap-4 items-start"
-              >
-                <div className="w-12 h-12 rounded-full bg-brand-beige flex items-center justify-center flex-shrink-0">
-                  <item.icon size={20} className="text-brand-accent" />
-                </div>
-                <div>
-                  <div className="font-semibold text-brand-dark text-sm mb-1">{item.title}</div>
-                  <div className="text-brand-gray text-sm font-light leading-relaxed">{item.desc}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── Glassmorphic Card Carousel ── */}
       <section className="py-24 bg-brand-dark relative overflow-hidden">
 
@@ -613,6 +583,46 @@ const OrderPage: React.FC = () => {
             Get Mine — €79
             <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
           </button>
+        </div>
+
+        {/* ── What's Included boxes ── */}
+        <div className="container mx-auto px-6 mt-20 relative z-10">
+          <div className="flex items-center gap-4 mb-3">
+            <div className="h-px w-8 bg-brand-accent" />
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">What's Included</span>
+          </div>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-10 leading-tight">
+            Everything you receive<br />
+            <span className="text-white/30 italic">within 24 hours.</span>
+          </h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            {WHAT_YOU_GET.map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.08 }}
+                className="flex gap-4 items-start rounded-2xl border border-white/10 p-6"
+                style={{
+                  background: 'rgba(255,255,255,0.04)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                }}
+              >
+                <div
+                  className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{ background: 'rgba(255,255,255,0.08)' }}
+                >
+                  <item.icon size={20} className="text-brand-accent" />
+                </div>
+                <div>
+                  <div className="font-semibold text-white text-sm mb-1">{item.title}</div>
+                  <div className="text-white/50 text-sm font-light leading-relaxed">{item.desc}</div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
       </section>
