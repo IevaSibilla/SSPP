@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Upload, CheckCircle, Clock, Mail, FileText, Sparkles, Shield } from 'lucide-react';
+import { ArrowRight, Upload, CheckCircle, Clock, Mail, FileText, Sparkles, Shield, ChevronDown } from 'lucide-react';
 
 const DEADLINE = new Date('2026-04-01T00:00:00');
 
@@ -66,10 +66,24 @@ import { supabase } from '../lib/supabase';
 
 const WHAT_YOU_GET = [
   { icon: FileText,   title: 'Slide-by-Slide Written Feedback',   desc: 'Every slide scored and annotated with specific, actionable comments.' },
-  { icon: Sparkles,   title: 'Improved Pitch Deck Delivered',       desc: 'A revised version of your deck with tracked changes — ready to present.' },
+  { icon: Sparkles,   title: 'Full Pitch Deck Review', desc: 'Including a personalized strategy document with suggestions.' },
   { icon: Mail,       title: 'Delivered in 24 Hours',              desc: 'Straight to your inbox. No waiting weeks for a callback.' },
   { icon: Shield,     title: 'Confidential & Secure',              desc: 'Your deck is handled with full confidentiality. No sharing, ever.' },
 ];
+
+/** Eyebrow + title for “What’s Included” (used above carousel on wide screens, above grid on ≤700px) */
+const WhatsIncludedHeading: React.FC<{ className?: string }> = ({ className = '' }) => (
+  <div className={className}>
+    <div className="flex items-center gap-4 mb-3">
+      <div className="h-px w-8 bg-brand-accent" />
+      <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">What's Included</span>
+    </div>
+    <h2 className="font-serif text-3xl md:text-4xl font-bold text-white leading-tight">
+      Everything you receive<br />
+      <span className="text-white/30 italic">within 24 hours.</span>
+    </h2>
+  </div>
+);
 
 /* ── Success Screen ─────────────────────────────────────────────── */
 const SuccessScreen: React.FC<{ email: string }> = ({ email }) => (
@@ -123,13 +137,14 @@ const OrderPage: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  /** Each slide maps to WHAT_YOU_GET[benefitIndex] for the merged text block */
   const SLIDES = [
-    { src: '/Pitch_1.jpg',        label: 'Revised Pitch Deck' },
-    { src: '/Pitch_review_1.jpg', label: 'Written Review' },
-    { src: '/Pitch_2.jpg',        label: 'Revised Pitch Deck' },
-    { src: '/Pitch_review_2.jpg', label: 'Written Review' },
-    { src: '/Pitch_review_3.jpg', label: 'Written Review' },
-  ];
+    { src: '/Pitch_1.jpg',        label: 'Revised Pitch Deck', benefitIndex: 1 },
+    { src: '/Pitch_review_1.jpg', label: 'Written Review',    benefitIndex: 0 },
+    { src: '/Pitch_2.jpg',        label: 'Revised Pitch Deck', benefitIndex: 2 },
+    /** Image from former 5th slide; copy still WHAT_YOU_GET[3] (Confidential) */
+    { src: '/Pitch_review_3.jpg', label: 'Written Review',    benefitIndex: 3 },
+  ] as const;
 
   const goPrev = () => setActiveIndex(i => (i === 0 ? SLIDES.length - 1 : i - 1));
   const goNext = () => setActiveIndex(i => (i === SLIDES.length - 1 ? 0 : i + 1));
@@ -145,6 +160,11 @@ const OrderPage: React.FC = () => {
 
   const scrollToForm = () => {
     document.getElementById('order-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToWhatsIncluded = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    document.getElementById('order-whats-included')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const inputClass =
@@ -243,6 +263,15 @@ const OrderPage: React.FC = () => {
               Fix What Investors Reject<br />
               <span className="text-brand-accent italic">in Your Pitch Deck in 24h</span>
             </h1>
+            <a
+              href="#order-whats-included"
+              onClick={scrollToWhatsIncluded}
+              className="inline-flex items-center gap-1.5 text-brand-accent text-sm font-bold uppercase tracking-widest mb-6 hover:opacity-80 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/40 rounded"
+              aria-label="Scroll to What's included section"
+            >
+              What's included
+              <ChevronDown size={18} className="opacity-90" aria-hidden />
+            </a>
             <p className="text-brand-gray text-lg font-light leading-relaxed mb-10">
               Receive a full pitch deck review and strategy document revised personally by Sibilla — curated to specifically point out exactly what needs to be fixed in your current pitch deck to get the attention and investment of real investors.
             </p>
@@ -267,7 +296,7 @@ const OrderPage: React.FC = () => {
             <div className="flex items-center justify-between mb-8 p-5 bg-brand-beige rounded-2xl border border-brand-lightgray">
               <div>
                 <div className="text-xs font-bold uppercase tracking-widest text-brand-accent mb-1">Pitch Deck Review</div>
-                <div className="text-brand-dark text-sm font-light">Full review + revised deck delivered in 24h</div>
+                <div className="text-brand-dark text-sm font-light">Full review delivered in 24h</div>
               </div>
               <div className="text-right">
                 <div className="flex items-center justify-end gap-3 leading-none">
@@ -410,7 +439,7 @@ const OrderPage: React.FC = () => {
               {
                 num: '03',
                 label: 'Get Your Review',
-                desc: 'Improved deck + written feedback land in your inbox within 24 hours.',
+                desc: 'Written feedback and commentary land in your inbox within 24 hours.',
                 img: '/SEB Material mapper winning.jpeg',
                 imgAlt: 'SEB Material Mapper pitch winner',
                 badge: '🏆 Nordic Cleantech Open · SEB Award',
@@ -461,43 +490,42 @@ const OrderPage: React.FC = () => {
       </section>
 
       {/* ── Glassmorphic Card Carousel ── */}
-      <section className="py-24 bg-brand-dark relative overflow-hidden">
+      <section
+        id="order-whats-included"
+        className="py-24 bg-brand-dark relative overflow-hidden scroll-mt-24 md:scroll-mt-28"
+      >
 
         {/* Background radial glow */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-brand-accent/10 rounded-full blur-3xl" />
         </div>
 
-        {/* Heading */}
-        <div className="container mx-auto px-6 mb-14 relative z-10">
-          <div className="flex items-center gap-4 mb-5">
-            <div className="h-px w-8 bg-brand-accent" />
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">See What You Receive</span>
-          </div>
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-white leading-tight">
-            A glimpse of your<br />
-            <span className="text-white/30 italic">deliverables.</span>
-          </h2>
-        </div>
+        {/* Wide screens: heading above carousel (hidden ≤700px — shown again above grid on mobile) */}
+        <WhatsIncludedHeading className="container mx-auto px-6 mb-14 relative z-10 max-[700px]:hidden" />
 
+        {/* Carousel + dots — hidden on small screens (≤700px); grid below replaces on mobile */}
+        <div className="hidden min-[701px]:block">
         {/* Carousel */}
-        <div className="relative flex items-center justify-center" style={{ height: '420px' }}>
+        <div className="relative flex items-center justify-center min-h-[420px] md:min-h-[520px]">
           {SLIDES.map((slide, i) => {
             const offset = i - activeIndex;
             const absOffset = Math.abs(offset);
             if (absOffset > 1) return null;
+            const isCenter = offset === 0;
+            const mergedBenefit = WHAT_YOU_GET[slide.benefitIndex];
+            const MergedIcon = mergedBenefit.icon;
             return (
               <motion.div
                 key={slide.src}
                 className="absolute cursor-pointer select-none"
                 animate={{
                   x: `${offset * 72}%`,
-                  scale: offset === 0 ? 1 : 0.88,
-                  opacity: offset === 0 ? 1 : 0.45,
-                  zIndex: offset === 0 ? 10 : 5,
+                  scale: isCenter ? 1 : 0.88,
+                  opacity: isCenter ? 1 : 0.45,
+                  zIndex: isCenter ? 10 : 5,
                 }}
                 transition={{ type: 'spring', stiffness: 280, damping: 28 }}
-                drag={offset === 0 ? 'x' : false}
+                drag={isCenter ? 'x' : false}
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.1}
                 onDragEnd={(_, info) => {
@@ -512,49 +540,86 @@ const OrderPage: React.FC = () => {
               >
                 {/* Glass card */}
                 <div
-                  className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl"
+                  className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl flex flex-col"
                   style={{
                     background: 'rgba(255,255,255,0.05)',
                     backdropFilter: 'blur(16px)',
                     WebkitBackdropFilter: 'blur(16px)',
-                    boxShadow: offset === 0
+                    boxShadow: isCenter
                       ? '0 32px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.12)'
                       : '0 16px 40px rgba(0,0,0,0.4)',
                   }}
                 >
-                  {/* Top shimmer */}
+                  {/* Top shimmer (text + upper rim on center card; full top on side cards) */}
                   <div
-                    className="absolute inset-x-0 top-0 h-24 pointer-events-none z-10 rounded-t-3xl"
+                    className={`absolute inset-x-0 top-0 pointer-events-none z-10 rounded-t-3xl ${
+                      isCenter ? 'h-32' : 'h-28'
+                    }`}
                     style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.07), transparent)' }}
                   />
 
-                  {/* Image */}
-                  <img
-                    src={slide.src}
-                    alt={slide.label}
-                    className="w-full object-cover"
-                    style={{ aspectRatio: '16/10', display: 'block' }}
-                    draggable={false}
-                  />
-
-                  {/* Caption badge */}
-                  {offset === 0 && (
-                    <div className="absolute bottom-4 left-4 z-20">
-                      <span
-                        className="text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-white/20"
-                        style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)' }}
+                  <>
+                    {/* Merged “What’s included” copy — image in bottom cut-out (center + peek cards) */}
+                    <div
+                      className={`relative z-10 flex gap-3 sm:gap-4 items-start border-b border-white/10 ${
+                        isCenter ? 'px-6 pt-7 pb-5' : 'px-4 pt-5 pb-3 sm:px-5 sm:pb-4'
+                      }`}
+                    >
+                      <div
+                        className={`rounded-full flex items-center justify-center flex-shrink-0 ${
+                          isCenter ? 'w-12 h-12' : 'w-10 h-10 sm:w-11 sm:h-11'
+                        }`}
+                        style={{ background: 'rgba(255,255,255,0.08)' }}
                       >
-                        {slide.label}
-                      </span>
+                        <MergedIcon size={isCenter ? 20 : 18} className="text-brand-accent" />
+                      </div>
+                      <div className="min-w-0">
+                        <div
+                          className={`font-semibold text-white mb-1 ${
+                            isCenter ? 'text-sm' : 'text-xs sm:text-sm'
+                          }`}
+                        >
+                          {mergedBenefit.title}
+                        </div>
+                        <div
+                          className={`text-white/50 font-light leading-relaxed ${
+                            isCenter ? 'text-sm' : 'text-[11px] sm:text-xs'
+                          }`}
+                        >
+                          {mergedBenefit.desc}
+                        </div>
+                      </div>
                     </div>
-                  )}
-
-                  {/* Slide counter */}
-                  {offset === 0 && (
-                    <div className="absolute top-4 right-4 z-20 font-mono text-xs text-white/40 tracking-widest">
-                      {String(activeIndex + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
+                    <div className="relative w-full flex-shrink-0 bg-black/20">
+                      <img
+                        src={slide.src}
+                        alt={slide.label}
+                        className={`w-full object-cover object-top block ${
+                          isCenter
+                            ? 'h-[200px] sm:h-[220px] md:h-[240px]'
+                            : 'h-[120px] sm:h-[132px] md:h-[144px]'
+                        }`}
+                        draggable={false}
+                      />
+                      <div className={`absolute left-4 z-20 ${isCenter ? 'bottom-4' : 'bottom-2 sm:bottom-3'}`}>
+                        <span
+                          className={`text-white font-bold uppercase tracking-widest rounded-full border border-white/20 ${
+                            isCenter
+                              ? 'text-[10px] px-3 py-1.5'
+                              : 'text-[9px] px-2 py-1 sm:text-[10px] sm:px-2.5 sm:py-1.5'
+                          }`}
+                          style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)' }}
+                        >
+                          {slide.label}
+                        </span>
+                      </div>
                     </div>
-                  )}
+                    {isCenter && (
+                      <div className="absolute top-4 right-4 z-20 font-mono text-xs text-white/40 tracking-widest">
+                        {String(activeIndex + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
+                      </div>
+                    )}
+                  </>
                 </div>
               </motion.div>
             );
@@ -573,29 +638,12 @@ const OrderPage: React.FC = () => {
             />
           ))}
         </div>
-
-        {/* CTA */}
-        <div className="flex justify-center mt-10 relative z-10">
-          <button
-            onClick={scrollToForm}
-            className="flex items-center gap-2 bg-brand-accent text-white text-xs font-bold uppercase tracking-widest px-8 py-4 rounded-full hover:bg-white hover:text-brand-dark transition-all duration-300 group shadow-lg shadow-brand-accent/30"
-          >
-            Get Mine — €79
-            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-          </button>
         </div>
 
-        {/* ── What's Included boxes ── */}
-        <div className="container mx-auto px-6 mt-20 relative z-10">
-          <div className="flex items-center gap-4 mb-3">
-            <div className="h-px w-8 bg-brand-accent" />
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-accent">What's Included</span>
-          </div>
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-10 leading-tight">
-            Everything you receive<br />
-            <span className="text-white/30 italic">within 24 hours.</span>
-          </h2>
-          <div className="grid md:grid-cols-2 gap-4">
+        {/* ≤700px only: same heading as desktop + detail cards (carousel is hidden) */}
+        <div className="container mx-auto px-6 relative z-10 hidden max-[700px]:block pt-2 pb-2">
+          <WhatsIncludedHeading className="mb-8" />
+          <div className="grid grid-cols-1 gap-4">
             {WHAT_YOU_GET.map((item, i) => (
               <motion.div
                 key={item.title}
@@ -623,6 +671,17 @@ const OrderPage: React.FC = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+
+        {/* CTA — after carousel (desktop) or after benefit grid (mobile) */}
+        <div className="flex justify-center mt-10 max-[700px]:mt-8 relative z-10">
+          <button
+            onClick={scrollToForm}
+            className="flex items-center gap-2 bg-brand-accent text-white text-xs font-bold uppercase tracking-widest px-8 py-4 rounded-full hover:bg-white hover:text-brand-dark transition-all duration-300 group shadow-lg shadow-brand-accent/30"
+          >
+            Get Mine — €79
+            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+          </button>
         </div>
 
       </section>
