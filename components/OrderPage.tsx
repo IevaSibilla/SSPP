@@ -218,7 +218,11 @@ const OrderPage: React.FC = () => {
       const { data, error: fnError } = await supabase.functions.invoke('create-checkout-session', {
         body: { order_id: orderId, email: email.trim() },
       });
-      if (fnError) throw new Error(`Checkout creation failed: ${fnError.message}`);
+      if (fnError) {
+        let detail = fnError.message;
+        try { const body = await (fnError as any).context?.json?.(); detail = body?.error || detail; } catch {}
+        throw new Error(`Checkout failed: ${detail}`);
+      }
 
       if (data?.url) {
         window.location.href = data.url;

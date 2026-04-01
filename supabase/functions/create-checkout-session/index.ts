@@ -63,17 +63,21 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
     );
 
-    const { data: order } = await supabaseAdmin
+    const { data: order, error: updateError } = await supabaseAdmin
       .from('orders')
       .update({ stripe_session_id: session.id, document_submitted: true })
       .eq('id', order_id)
       .select('first_name, last_name, file_name')
       .single();
 
+    if (updateError) {
+      console.error('DB update error:', JSON.stringify(updateError));
+    }
+
     // Send email notification to Ieva
     const resendKey = Deno.env.get('RESEND_API_KEY');
     if (resendKey) {
-      await fetch('https://api.resend.com/emails', {
+      const emailRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${resendKey}`,
@@ -95,6 +99,10 @@ serve(async (req) => {
           `,
         }),
       });
+      if (!emailRes.ok) {
+        const emailErr = await emailRes.text();
+        console.error('Resend error:', emailErr);
+      }
     }
 
     return new Response(
