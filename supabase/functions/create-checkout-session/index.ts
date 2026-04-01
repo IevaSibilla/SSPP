@@ -84,7 +84,7 @@ serve(async (req) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'notifications@aekora.com',
+          from: 'noreply@notifications.aekora.com',
           to: 'ieva@aekora.com',
           subject: 'New pitch deck submission',
           html: `
