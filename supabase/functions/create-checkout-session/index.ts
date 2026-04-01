@@ -85,7 +85,7 @@ serve(async (req) => {
         },
         body: JSON.stringify({
           from: 'noreply@notifications.aekora.com',
-          to: 'ieva@aekora.com',
+          to: 'IevaStrupule@gmail.com',
           subject: 'New pitch deck submission',
           html: `
             <p>A new pitch deck has been submitted and is ready for review in Supabase.</p>
