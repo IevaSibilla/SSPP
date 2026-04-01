@@ -1,0 +1,11 @@
+# Supabase local + deploy settings
+# https://supabase.com/docs/guides/cli/config
+# https://supabase.com/docs/guides/functions/function-configuration
+
+[functions.create-checkout-session]
+# Browser calls with anon key only (no logged-in user). JWT verification must be off or you get 401.
+verify_jwt = false
+
+[functions.stripe-webhook]
+# Stripe sends POSTs with stripe-signature, not a Supabase JWT.
+verify_jwt = false
