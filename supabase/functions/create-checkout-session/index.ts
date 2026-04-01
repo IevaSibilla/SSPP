@@ -88,14 +88,13 @@ serve(async (req) => {
           to: 'ieva@aekora.com',
           subject: 'New pitch deck submission',
           html: `
-            <p>A new pitch deck has been submitted and is ready for review.</p>
-            <ul>
-              <li><strong>Name:</strong> ${order?.first_name ?? ''} ${order?.last_name ?? ''}</li>
-              <li><strong>Email:</strong> ${email}</li>
-              <li><strong>File:</strong> ${order?.file_name ?? ''}</li>
-              <li><strong>Order ID:</strong> ${order_id}</li>
-            </ul>
-            <p>Download it from the Supabase Storage dashboard under the <strong>pitch-decks</strong> bucket.</p>
+            <p>A new pitch deck has been submitted and is ready for review in Supabase.</p>
+            <table cellpadding="8" style="border-collapse:collapse;font-family:sans-serif;font-size:14px;">
+              <tr><td style="color:#888">First name</td><td><strong>${order?.first_name ?? ''}</strong></td></tr>
+              <tr><td style="color:#888">Last name</td><td><strong>${order?.last_name ?? ''}</strong></td></tr>
+              <tr><td style="color:#888">Email</td><td><strong>${email}</strong></td></tr>
+              <tr><td style="color:#888">Order ID</td><td><strong>${order_id}</strong></td></tr>
+            </table>
           `,
         }),
       });
