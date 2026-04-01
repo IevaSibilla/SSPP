@@ -32,7 +32,7 @@ serve(async (req) => {
     params.append('line_items[0][price_data][currency]', 'eur');
     params.append('line_items[0][price_data][product_data][name]', 'Pitch Deck Review');
     params.append('line_items[0][price_data][product_data][description]', 'Full review delivered in 24h');
-    params.append('line_items[0][price_data][unit_amount]', '7900'); // €79.00 in cents
+    params.append('line_items[0][price_data][unit_amount]', '29900'); // €299.00 in cents
     params.append('line_items[0][quantity]', '1');
     params.append('metadata[order_id]', order_id);
     params.append('success_url', `${siteUrl}/order?success=true&email=${encodeURIComponent(email)}`);

@@ -291,7 +291,7 @@ const OrderPage: React.FC = () => {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="bg-white rounded-3xl shadow-2xl shadow-brand-dark/10 p-8 md:p-10 border border-brand-lightgray/60"
           >
-            <UrgencyTimer />
+            <div className="hidden"><UrgencyTimer /></div>
 
             <div className="flex items-center justify-between mb-8 p-5 bg-brand-beige rounded-2xl border border-brand-lightgray">
               <div>
@@ -300,8 +300,7 @@ const OrderPage: React.FC = () => {
               </div>
               <div className="text-right">
                 <div className="flex items-center justify-end gap-3 leading-none">
-                  <span className="font-serif text-2xl text-brand-gray line-through opacity-60">€299</span>
-                  <div className="font-serif text-6xl font-bold text-white bg-brand-accent px-4 pt-1 pb-3 rounded-2xl shadow-lg shadow-brand-accent/30 flex items-center justify-center">€79</div>
+                  <div className="font-serif text-6xl font-bold text-white bg-brand-accent px-4 pt-1 pb-3 rounded-2xl shadow-lg shadow-brand-accent/30 flex items-center justify-center">€299</div>
                 </div>
               </div>
             </div>
@@ -379,14 +378,12 @@ const OrderPage: React.FC = () => {
                 )}
               </AnimatePresence>
 
-              <p className="text-center text-sm font-bold text-brand-accent">You save €221 today</p>
-
               <button
                 type="submit"
                 disabled={submitting}
                 className="mt-2 w-full bg-brand-accent text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-brand-dark transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg shadow-brand-accent/30 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {submitting ? 'Processing…' : 'Lock in €79'}
+                {submitting ? 'Processing…' : 'Get My Review — €299'}
                 {!submitting && <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />}
               </button>
 
@@ -679,7 +676,7 @@ const OrderPage: React.FC = () => {
             onClick={scrollToForm}
             className="flex items-center gap-2 bg-brand-accent text-white text-xs font-bold uppercase tracking-widest px-8 py-4 rounded-full hover:bg-white hover:text-brand-dark transition-all duration-300 group shadow-lg shadow-brand-accent/30"
           >
-            Get Mine — €79
+            Get Mine — €299
             <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
