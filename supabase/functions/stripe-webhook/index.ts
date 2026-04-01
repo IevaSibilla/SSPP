@@ -29,22 +29,7 @@ serve(async (req) => {
     const orderId = session.metadata?.order_id;
 
     if (orderId) {
-      const supabaseAdmin = createClient(
-        Deno.env.get('SUPABASE_URL')!,
-        Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
-      );
-
-      const { error } = await supabaseAdmin
-        .from('orders')
-        .update({ payment_status: true })
-        .eq('id', orderId);
-
-      if (error) {
-        console.error('Failed to update order:', error.message);
-        return new Response('Database update failed', { status: 500 });
-      }
-
-      console.log(`Order ${orderId} marked as paid`);
+      console.log(`Payment completed for order ${orderId}`);
     }
   }
 

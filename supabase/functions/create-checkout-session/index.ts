@@ -57,16 +57,45 @@ serve(async (req) => {
       );
     }
 
-    // Update the order row with the Stripe session ID
+    // Update the order row with the Stripe session ID and mark document as submitted
     const supabaseAdmin = createClient(
       Deno.env.get('SUPABASE_URL')!,
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
     );
 
-    await supabaseAdmin
+    const { data: order } = await supabaseAdmin
       .from('orders')
-      .update({ stripe_session_id: session.id })
-      .eq('id', order_id);
+      .update({ stripe_session_id: session.id, document_submitted: true })
+      .eq('id', order_id)
+      .select('first_name, last_name, file_name')
+      .single();
+
+    // Send email notification to Ieva
+    const resendKey = Deno.env.get('RESEND_API_KEY');
+    if (resendKey) {
+      await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${resendKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: 'notifications@aekora.com',
+          to: 'ieva@aekora.com',
+          subject: 'New pitch deck submission',
+          html: `
+            <p>A new pitch deck has been submitted and is ready for review.</p>
+            <ul>
+              <li><strong>Name:</strong> ${order?.first_name ?? ''} ${order?.last_name ?? ''}</li>
+              <li><strong>Email:</strong> ${email}</li>
+              <li><strong>File:</strong> ${order?.file_name ?? ''}</li>
+              <li><strong>Order ID:</strong> ${order_id}</li>
+            </ul>
+            <p>Download it from the Supabase Storage dashboard under the <strong>pitch-decks</strong> bucket.</p>
+          `,
+        }),
+      });
+    }
 
     return new Response(
       JSON.stringify({ url: session.url }),
