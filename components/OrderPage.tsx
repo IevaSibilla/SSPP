@@ -220,7 +220,15 @@ const OrderPage: React.FC = () => {
       });
       if (fnError) {
         let detail = fnError.message;
-        try { const body = await (fnError as any).context?.json?.(); detail = body?.error || detail; } catch {}
+        try {
+          const ctx = (fnError as { context?: Response }).context;
+          if (ctx?.json) {
+            const body = (await ctx.clone().json()) as { error?: string; message?: string };
+            detail = body.error ?? body.message ?? detail;
+          }
+        } catch {
+          /* keep generic message */
+        }
         throw new Error(`Checkout failed: ${detail}`);
       }
 
