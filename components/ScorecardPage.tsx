@@ -260,7 +260,7 @@ const GateForm: React.FC<GateProps> = ({ onSubmit }) => {
                 href="/order"
                 className="self-start inline-flex items-center gap-3 bg-brand-accent text-white px-10 py-4 rounded-full text-sm tracking-wider uppercase font-bold hover:bg-white hover:text-brand-dark transition-all duration-300 hover:scale-105 shadow-lg shadow-brand-accent/30"
               >
-                Order for €79
+                Order for €299
                 <ArrowRight size={16} />
               </a>
             </motion.div>

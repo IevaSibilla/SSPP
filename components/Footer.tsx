@@ -23,8 +23,6 @@ const Footer: React.FC = () => {
             <ul className="space-y-4 text-sm text-gray-400">
                 <li><a href="/about" className="hover:text-white transition-colors">About</a></li>
                 <li><a href="/speaking" className="hover:text-white transition-colors">Speaking</a></li>
-                <li><a href="#services" className="hover:text-white transition-colors">Services</a></li>
-                <li><a href="#process" className="hover:text-white transition-colors">Methodology</a></li>
                 <li><a href="https://calendly.com/hola-aekora/expert-investor-pitch-coaching" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Contact</a></li>
             </ul>
           </div>
