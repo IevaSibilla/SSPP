@@ -67,7 +67,7 @@ import { supabase } from '../lib/supabase';
 const WHAT_YOU_GET = [
   { icon: FileText,   title: 'Slide-by-Slide Written Feedback',   desc: 'Every slide scored and annotated with specific, actionable comments.' },
   { icon: Sparkles,   title: 'Full Pitch Deck Review', desc: 'Including a personalized strategy document with suggestions.' },
-  { icon: Mail,       title: 'Delivered in 24 Hours',              desc: 'Straight to your inbox. No waiting weeks for a callback.' },
+  { icon: Mail,       title: 'Delivered to Your Inbox',              desc: 'Straight to your inbox. No waiting weeks for a callback.' },
   { icon: Shield,     title: 'Confidential & Secure',              desc: 'Your deck is handled with full confidentiality. No sharing, ever.' },
 ];
 
@@ -80,7 +80,7 @@ const WhatsIncludedHeading: React.FC<{ className?: string }> = ({ className = ''
     </div>
     <h2 className="font-serif text-3xl md:text-4xl font-bold text-white leading-tight">
       Everything you receive<br />
-      <span className="text-white/30 italic">within 24 hours.</span>
+      <span className="text-white/30 italic">when you need it most.</span>
     </h2>
   </div>
 );
@@ -113,7 +113,7 @@ const SuccessScreen: React.FC<{ email: string }> = ({ email }) => (
       </div>
       <div className="flex items-center justify-center gap-2 text-brand-gray text-sm mb-10">
         <Clock size={15} className="text-brand-accent" />
-        <span>Within <strong className="text-brand-dark font-semibold">24 hours</strong> — guaranteed.</span>
+        <span>Your review is on its way.</span>
       </div>
       <a
         href="/"
@@ -273,7 +273,7 @@ const OrderPage: React.FC = () => {
             </motion.div>
             <h1 className="font-serif text-5xl md:text-6xl font-bold text-brand-dark leading-tight mb-6">
               Fix What Investors Reject<br />
-              <span className="text-brand-accent italic">in Your Pitch Deck in 24h</span>
+              <span className="text-brand-accent italic">in Your Pitch Deck</span>
             </h1>
             <a
               href="#order-whats-included"
@@ -288,7 +288,7 @@ const OrderPage: React.FC = () => {
               Receive a full pitch deck review and strategy document revised personally by Sibilla — curated to specifically point out exactly what needs to be fixed in your current pitch deck to get the attention and investment of real investors.
             </p>
             <div className="flex flex-wrap gap-8 pt-6 border-t border-brand-lightgray">
-              {[['70M€+', 'Raised by clients'], ['500+', 'Founders trained'], ['24h', 'Turnaround time']].map(([num, label]) => (
+              {[['70M€+', 'Raised by clients'], ['500+', 'Founders trained']].map(([num, label]) => (
                 <div key={label}>
                   <div className="font-serif text-3xl font-bold text-brand-dark">{num}</div>
                   <div className="text-xs uppercase tracking-wider text-brand-gray font-semibold mt-1">{label}</div>
@@ -308,7 +308,7 @@ const OrderPage: React.FC = () => {
             <div className="flex items-center justify-between mb-8 p-5 bg-brand-beige rounded-2xl border border-brand-lightgray">
               <div>
                 <div className="text-xs font-bold uppercase tracking-widest text-brand-accent mb-1">Pitch Deck Review</div>
-                <div className="text-brand-dark text-sm font-light">Full review delivered in 24h</div>
+                <div className="text-brand-dark text-sm font-light">Full pitch deck review</div>
               </div>
               <div className="text-right">
                 <div className="flex items-center justify-end gap-3 leading-none">
@@ -406,7 +406,7 @@ const OrderPage: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-1.5 text-xs text-brand-gray">
                   <Clock size={12} className="text-brand-accent" />
-                  24h delivery guaranteed
+                  Fast delivery
                 </div>
                 <div className="flex items-center gap-1.5 text-xs text-brand-gray">
                   <Shield size={12} className="text-brand-accent" />
@@ -439,7 +439,7 @@ const OrderPage: React.FC = () => {
               {
                 num: '02',
                 label: 'Secure Payment',
-                desc: "Fast checkout. You're covered by our 24h delivery guarantee.",
+                desc: "Fast checkout. Secure and straightforward.",
                 img: '/DNBnxtPitchWinner.jpeg',
                 imgAlt: 'DNB NXT Pitch Winner',
                 badge: '🏆 DNB NXT Pitch Winner · NOK 200,000',
@@ -448,7 +448,7 @@ const OrderPage: React.FC = () => {
               {
                 num: '03',
                 label: 'Get Your Review',
-                desc: 'Written feedback and commentary land in your inbox within 24 hours.',
+                desc: 'Written feedback and commentary delivered straight to your inbox.',
                 img: '/SEB Material mapper winning.jpeg',
                 imgAlt: 'SEB Material Mapper pitch winner',
                 badge: '🏆 Nordic Cleantech Open · SEB Award',
