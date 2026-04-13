@@ -365,16 +365,16 @@ const SpeakingPage: React.FC = () => {
             <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
-                  date: "April 13, 2026",
-                  location: "Riga",
-                  title: "Investment and Technology: How to Raise Funding from European Grant Systems and VCs",
-                  event: "European Innovation Council (EIC) & Embassy of Estonia"
+                  date: "April 29, 2026",
+                  location: "Zoom",
+                  title: "How to Raise from VCs in 2026 (Without Wasting 6 Months Pitching Wrong)",
+                  event: "For tech founders"
                 },
                 {
-                  date: "April 9, 2026",
-                  location: "Workshop for Government Officials",
-                  title: "Pitching and Public Speaking: How to Present Yourself and Your Idea with Conviction",
-                  event: "VAS DigiTilts"
+                  date: "June 06, 2026",
+                  location: "Riga",
+                  title: "Investors Festival 2026",
+                  event: "VEF PRMENADE"
                 }
               ].map((event, idx) => (
                 <motion.div
@@ -383,14 +383,14 @@ const SpeakingPage: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-brand-beige p-8 rounded-2xl border border-brand-lightgray hover:border-brand-accent/30 transition-colors"
+                  className="bg-brand-beige p-8 rounded-2xl border border-brand-lightgray hover:border-brand-accent/30 transition-colors flex flex-col"
                 >
                   <div className="flex items-center gap-4 mb-4 text-sm font-bold text-brand-accent uppercase tracking-wider">
                     <span className="flex items-center gap-1"><Calendar size={16} /> {event.date}</span>
                   </div>
                   <h3 className="text-xl font-bold text-brand-dark mb-2 leading-snug">{event.title}</h3>
                   <div className="mb-4 text-brand-gray font-serif italic">{event.event}</div>
-                  <div className="text-sm text-brand-gray flex items-center gap-1">
+                  <div className="mt-auto text-sm text-brand-gray flex items-center gap-1">
                     <MapPin size={14} /> {event.location}
                   </div>
                 </motion.div>
