@@ -498,6 +498,48 @@ const OrderPage: React.FC = () => {
         </div>
       </section>
 
+      {/* ── Client Reviews ── */}
+      <section className="py-24 bg-brand-beige">
+        <div className="container mx-auto px-6">
+          <div className="flex items-center gap-4 mb-12">
+            <div className="h-1 w-8 bg-brand-accent rounded-full" />
+            <h2 className="font-serif text-2xl font-bold text-brand-dark">What Founders Say</h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              {
+                name: 'Charlotte Bakke',
+                role: 'Beauty Biotech Founder',
+                quote: 'The review you did on our pitch was such an eye-opener, and it really helped us narrow it down to what\'s important and what\'s not. Thank you Ieva.',
+              },
+              {
+                name: 'Santa Praet',
+                role: 'Founder, dodo',
+                quote: 'There is so much contradictory information online when it comes to what to include and what not to include in your pitch deck. Having someone with experience like Ieva Sibilla look at it and provide feedback that applies to your specific case is extremely valuable. Not to mention the speed — it was done within the same day which is much appreciated!',
+              },
+            ].map((review, i) => (
+              <motion.div
+                key={review.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                className="bg-white rounded-3xl border border-brand-lightgray p-8 flex flex-col gap-6 shadow-sm"
+              >
+                <span className="font-serif text-5xl leading-none text-brand-accent select-none">"</span>
+                <p className="text-brand-gray text-base font-light leading-relaxed -mt-4 flex-1">
+                  {review.quote}
+                </p>
+                <div className="pt-4 border-t border-brand-lightgray">
+                  <div className="font-serif text-lg font-bold text-brand-dark">{review.name}</div>
+                  <div className="text-xs uppercase tracking-widest text-brand-gray font-semibold mt-1">{review.role}</div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Glassmorphic Card Carousel ── */}
       <section
         id="order-whats-included"
