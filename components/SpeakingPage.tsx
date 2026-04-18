@@ -371,10 +371,10 @@ const SpeakingPage: React.FC = () => {
                   event: "For tech founders"
                 },
                 {
-                  date: "June 06, 2026",
-                  location: "Riga",
-                  title: "Investors Festival 2026",
-                  event: "VEF PRMENADE"
+                  date: "May 04, 2026",
+                  location: "Online",
+                  title: "10 Facts You Must Know to Fundraise in 2026",
+                  event: "Startup Investor Accelerator"
                 }
               ].map((event, idx) => (
                 <motion.div
