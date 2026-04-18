@@ -505,7 +505,7 @@ const OrderPage: React.FC = () => {
             <div className="h-1 w-8 bg-brand-accent rounded-full" />
             <h2 className="font-serif text-2xl font-bold text-brand-dark">What Founders Say</h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
             {[
               {
                 name: 'Charlotte Bakke',
@@ -537,6 +537,32 @@ const OrderPage: React.FC = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Featured review */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.24 }}
+            className="bg-white rounded-3xl border border-brand-accent/20 p-8 md:p-10 flex flex-col md:flex-row gap-8 shadow-sm relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-brand-accent/5 blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/2" />
+            <div className="flex-shrink-0 flex flex-col items-start gap-3">
+              <div className="w-12 h-12 rounded-full bg-brand-accent/10 flex items-center justify-center">
+                <span className="font-serif text-xl font-bold text-brand-accent">M</span>
+              </div>
+              <div>
+                <div className="font-serif text-lg font-bold text-brand-dark">Munir Bahar</div>
+                <div className="text-xs uppercase tracking-widest text-brand-gray font-semibold mt-1">Founder, EntreBuild AI</div>
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 flex-1 min-w-0">
+              <span className="font-serif text-5xl leading-none text-brand-accent select-none">"</span>
+              <p className="text-brand-gray text-base font-light leading-relaxed -mt-4">
+                I hired Sibilla to help me understand that truth. And for the small investment of time and resources that I spent to have her review my pitch deck, I received an invaluable measure of guidance and straight forward critique. I know she is qualified and serious about teaching people the practical ways of building a venture funded startup. Sibilla is the truth.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
