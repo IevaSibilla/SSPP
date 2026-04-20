@@ -457,6 +457,96 @@ const SpeakingPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <p className="text-brand-accent uppercase tracking-widest text-sm font-semibold mb-4">What People Say</p>
+            <h2 className="text-4xl font-serif text-brand-dark">Voices from the Room</h2>
+            <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full mt-6"></div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            {[
+              {
+                name: 'Katerina Ohra',
+                role: 'CBDO @ Engine I Data-driven IT services',
+                context: 'Worked together on the same team',
+                quote: 'Working on ProductTank community building and events with Ieva Sibilla is effortless, because she handles her part completely. No chasing, no gaps. Proactive approach and ownership in everything she is doing! Her speaker curation is exceptional. She finds people who actually move the room. And when she facilitates, the energy in the space is undeniable. Reliable, sharp, and absolutely magnetic on stage.',
+              },
+              {
+                name: 'Andris Breske',
+                role: 'RIGA COMM',
+                context: 'Client · January 2026',
+                quote: 'Ieva was engaged at RIGA COMM as one of the thematic conference moderators and made a valuable contribution to the overall quality and professional delivery of the conference programme. She demonstrated thorough preparation, ensuring well-structured and engaging discussions on stage, and establishing confident, professional communication with international speakers and a highly knowledgeable audience.',
+              },
+              {
+                name: 'Jevgenija Kirillova',
+                role: '#solarpunk',
+                context: 'Client · January 2026',
+                quote: 'Ieva was a pleasure to work with from start to finish. Seeing her on stage several times made it clear that this is where she truly feels at home — confident and authentic. That\'s why inviting her to Crucible events (Bold Horizons, Expo) felt natural. Our collaboration was easy and meaningful. I recommend Ieva to anyone who is looking for an engaging and inspiring speaker and consultant.',
+              },
+            ].map((review, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="bg-brand-beige p-8 rounded-2xl flex flex-col gap-4 border border-brand-lightgray hover:shadow-lg transition-shadow"
+              >
+                <Quote className="w-8 h-8 text-brand-accent/30 flex-shrink-0" />
+                <p className="text-brand-gray font-light leading-relaxed flex-1">"{review.quote}"</p>
+                <div className="pt-4 border-t border-brand-lightgray">
+                  <p className="font-serif text-brand-dark font-semibold">{review.name}</p>
+                  <p className="text-sm text-brand-gray">{review.role}</p>
+                  <p className="text-xs text-brand-accent mt-1 uppercase tracking-wider">{review.context}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {[
+              {
+                name: 'Tobias Burkhardt',
+                role: 'CEO SHIFTSCHOOL · Transformative Leadership & Digital Transformation',
+                context: 'Client · March 2025',
+                quote: 'I\'ve had the pleasure of working closely with Ieva at SHIFTSCHOOL and have come to deeply appreciate her as an inspiring colleague and true startup catalyst. Ieva combines entrepreneurial spirit, endless creativity, and genuine passion to ignite innovation in others. Her ability to motivate teams, foster bold ideas, and think outside the box makes her an outstanding person to collaborate with. I wholeheartedly recommend Ieva!',
+              },
+              {
+                name: 'Lauren Schmitt',
+                role: 'Digital Marketing @ Nike Sports Camps',
+                context: 'Client · December 2024',
+                quote: 'I had the privilege of working with Ieva Sibilla Strupule, an exceptional leader, visionary tech founder, and inspiring mentor. Her engaging keynote speeches, filled with compelling stories of her entrepreneurial journey, captivate and inspire audiences. Ieva is a generous mentor, always willing to share her insights and offer thoughtful guidance. She is a dynamic and inspiring force in the tech and entrepreneurial world.',
+              },
+            ].map((review, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="bg-brand-beige p-8 rounded-2xl flex flex-col gap-4 border border-brand-lightgray hover:shadow-lg transition-shadow"
+              >
+                <Quote className="w-8 h-8 text-brand-accent/30 flex-shrink-0" />
+                <p className="text-brand-gray font-light leading-relaxed flex-1">"{review.quote}"</p>
+                <div className="pt-4 border-t border-brand-lightgray">
+                  <p className="font-serif text-brand-dark font-semibold">{review.name}</p>
+                  <p className="text-sm text-brand-gray">{review.role}</p>
+                  <p className="text-xs text-brand-accent mt-1 uppercase tracking-wider">{review.context}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Track Record List */}
       <section className="bg-brand-dark text-white py-24">
         <div className="container mx-auto px-6">
