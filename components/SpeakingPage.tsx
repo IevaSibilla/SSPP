@@ -368,13 +368,15 @@ const SpeakingPage: React.FC = () => {
                   date: "April 29, 2026",
                   location: "Zoom",
                   title: "How to Raise from VCs in 2026 (Without Wasting 6 Months Pitching Wrong)",
-                  event: "For tech founders"
+                  event: "For tech founders",
+                  signUpUrl: "https://luma.com/g4xk62ia"
                 },
                 {
                   date: "May 04, 2026",
                   location: "Online",
                   title: "10 Facts You Must Know to Fundraise in 2026",
-                  event: "Startup Investor Accelerator"
+                  event: "Startup Investor Accelerator",
+                  signUpUrl: "https://www.eventbrite.com/e/online-10-facts-you-must-know-to-fundraise-in-2026-tickets-1987684671359?aff=oddtdtcreator"
                 }
               ].map((event, idx) => (
                 <motion.div
@@ -390,9 +392,19 @@ const SpeakingPage: React.FC = () => {
                   </div>
                   <h3 className="text-xl font-bold text-brand-dark mb-2 leading-snug">{event.title}</h3>
                   <div className="mb-4 text-brand-gray font-serif italic">{event.event}</div>
-                  <div className="mt-auto text-sm text-brand-gray flex items-center gap-1">
+                  <div className="text-sm text-brand-gray flex items-center gap-1 mb-4">
                     <MapPin size={14} /> {event.location}
                   </div>
+                  {event.signUpUrl && (
+                    <a
+                      href={event.signUpUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-auto inline-block text-center bg-brand-accent text-white px-6 py-2.5 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-brand-dark transition-colors duration-300"
+                    >
+                      Sign Up
+                    </a>
+                  )}
                 </motion.div>
               ))}
             </div>
