@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, MapPin, Mic, Users, Trophy, BookOpen, Quote, ChevronDown } from 'lucide-react';
+import { Calendar, MapPin, Mic, Users, Trophy, BookOpen, Quote, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const ENGAGEMENTS = [
   {
@@ -297,6 +297,152 @@ const EngagementsAccordion: React.FC = () => {
   );
 };
 
+const TESTIMONIALS = [
+  {
+    name: 'Katerina Ohra',
+    role: 'CBDO @ Engine | Data-driven IT services',
+    context: 'Worked together on the same team',
+    quote: 'Working on ProductTank community building and events with Ieva Sibilla is effortless, because she handles her part completely. No chasing, no gaps. Proactive approach and ownership in everything she is doing! Her speaker curation is exceptional. She finds people who actually move the room. And when she facilitates, the energy in the space is undeniable. Reliable, sharp, and absolutely magnetic on stage.',
+  },
+  {
+    name: 'Andris Breske',
+    role: 'RIGA COMM',
+    context: 'Client · January 2026',
+    quote: 'Ieva was engaged at RIGA COMM as one of the thematic conference moderators and made a valuable contribution to the overall quality and professional delivery of the conference programme. She demonstrated thorough preparation, ensuring well-structured and engaging discussions on stage, and establishing confident, professional communication with international speakers and a highly knowledgeable audience.',
+  },
+  {
+    name: 'Jevgenija Kirillova',
+    role: '#solarpunk',
+    context: 'Client · January 2026',
+    quote: "Ieva was a pleasure to work with from start to finish. Seeing her on stage several times made it clear that this is where she truly feels at home — confident and authentic. That's why inviting her to Crucible events (Bold Horizons, Expo) felt natural. Our collaboration was easy and meaningful. I recommend Ieva to anyone who is looking for an engaging and inspiring speaker and consultant.",
+  },
+  {
+    name: 'Tobias Burkhardt',
+    role: 'CEO SHIFTSCHOOL · Transformative Leadership & Digital Transformation',
+    context: 'Client · March 2025',
+    quote: "I've had the pleasure of working closely with Ieva at SHIFTSCHOOL and have come to deeply appreciate her as an inspiring colleague and true startup catalyst. Ieva combines entrepreneurial spirit, endless creativity, and genuine passion to ignite innovation in others. Her ability to motivate teams, foster bold ideas, and think outside the box makes her an outstanding person to collaborate with. I wholeheartedly recommend Ieva!",
+  },
+  {
+    name: 'Lauren Schmitt',
+    role: 'Digital Marketing @ Nike Sports Camps',
+    context: 'Client · December 2024',
+    quote: 'I had the privilege of working with Ieva Sibilla Strupule, an exceptional leader, visionary tech founder, and inspiring mentor. Her engaging keynote speeches, filled with compelling stories of her entrepreneurial journey, captivate and inspire audiences. Ieva is a generous mentor, always willing to share her insights and offer thoughtful guidance. She is a dynamic and inspiring force in the tech and entrepreneurial world.',
+  },
+  {
+    name: 'Diāna Butina',
+    role: 'Empowerment Through Mentorship | Women in Tech Advocate | Community Builder',
+    context: 'Client · April 2026',
+    quote: "I had the pleasure of collaborating with Ieva Sibilla during the VAS DigiTilts mentorship program, where I led the initiative and saw her in action as a mentor. She stood out for her openness and her genuine willingness to support someone beyond her usual circle. Ieva Sibilla brings a thoughtful and practical approach, creating an environment where it feels natural to ask questions, learn, and grow. The feedback from her mentee was exceptional, including the highest possible rating. I'd confidently recommend her as both a mentor and an expert in business and IT product management, innovation, and digital leadership.",
+  },
+  {
+    name: 'Elvīra Zaltāne',
+    role: 'Co-founder @Affire, @Legally · BDM @Riga TechGirls | Forbes 30U30 (2019, 2022)',
+    context: 'Worked together · April 2026',
+    quote: 'Ieva was one of the lecturers and mentors for teams in Riga TechGirls project "DigiTilts" where professionals and representatives from the public sector were developing their own innovative solutions to automate processes and learn digital skills. Apart from mentorship, Ieva led 2 workshops on Public speaking and storytelling for the teams to prepare them for final demo day. Ieva\'s prepared insights were practical, insightful, workshops themselves were immersive and interactive. Teams enjoyed working with Ieva, were engaged, asked questions, willingly participated and highly valued the knowledge Ieva shared, making teams more confident on how to present their ideas in a comprehensive manner to the right audience. Would recommend Ieva as someone to work with any day, as she has high work ethic, precision, confidence and care to deliver the best result.',
+  },
+];
+
+const swipeVariants = {
+  enter: (dir: number) => ({ x: dir > 0 ? 80 : -80, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (dir: number) => ({ x: dir > 0 ? -80 : 80, opacity: 0 }),
+};
+
+const SLIDES = Array.from(
+  { length: Math.ceil(TESTIMONIALS.length / 2) },
+  (_, i) => TESTIMONIALS.slice(i * 2, i * 2 + 2)
+);
+
+const ReviewCard: React.FC<{ review: typeof TESTIMONIALS[0] }> = ({ review }) => (
+  <div className="bg-brand-beige p-8 rounded-2xl flex flex-col gap-4 border border-brand-lightgray shadow-sm h-full">
+    <Quote className="w-8 h-8 text-brand-accent/25 flex-shrink-0" />
+    <p className="text-brand-gray font-light leading-relaxed flex-1">"{review.quote}"</p>
+    <div className="pt-4 border-t border-brand-lightgray">
+      <p className="font-serif text-brand-dark font-semibold">{review.name}</p>
+      <p className="text-sm text-brand-gray mt-0.5">{review.role}</p>
+      <p className="text-xs text-brand-accent mt-1 uppercase tracking-wider">{review.context}</p>
+    </div>
+  </div>
+);
+
+const TestimonialCarousel: React.FC = () => {
+  const [[slideIndex, dir], setPage] = useState([0, 0]);
+  const [paused, setPaused] = useState(false);
+  const numSlides = SLIDES.length;
+
+  const paginate = useCallback((newDir: number) => {
+    setPage(([prev]) => [(prev + newDir + numSlides) % numSlides, newDir]);
+  }, [numSlides]);
+
+  useEffect(() => {
+    if (paused) return;
+    const t = setInterval(() => paginate(1), 5000);
+    return () => clearInterval(t);
+  }, [paused, paginate, slideIndex]);
+
+  const slide = SLIDES[slideIndex];
+
+  return (
+    <div
+      className="relative max-w-5xl mx-auto"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* Slides */}
+      <div className="overflow-hidden">
+        <AnimatePresence mode="wait" custom={dir}>
+          <motion.div
+            key={slideIndex}
+            custom={dir}
+            variants={swipeVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
+            className={`grid gap-6 ${slide.length === 2 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 max-w-2xl mx-auto'}`}
+          >
+            {slide.map((review, i) => (
+              <ReviewCard key={i} review={review} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Arrows */}
+      <button
+        onClick={() => paginate(-1)}
+        aria-label="Previous"
+        className="absolute -left-5 md:-left-7 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-brand-lightgray shadow-sm flex items-center justify-center text-brand-dark hover:bg-brand-beige hover:border-brand-accent transition-colors"
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+      <button
+        onClick={() => paginate(1)}
+        aria-label="Next"
+        className="absolute -right-5 md:-right-7 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-brand-lightgray shadow-sm flex items-center justify-center text-brand-dark hover:bg-brand-beige hover:border-brand-accent transition-colors"
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button>
+
+      {/* Dots */}
+      <div className="flex justify-center gap-2 mt-8">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setPage([i, i > slideIndex ? 1 : -1])}
+            aria-label={`Go to slide ${i + 1}`}
+            className={`rounded-full transition-all duration-300 ${
+              i === slideIndex
+                ? 'w-6 h-2 bg-brand-accent'
+                : 'w-2 h-2 bg-brand-lightgray hover:bg-brand-accent/40'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const SpeakingPage: React.FC = () => {
   return (
     <div className="pt-32 pb-20">
@@ -471,79 +617,7 @@ const SpeakingPage: React.FC = () => {
             <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full mt-6"></div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            {[
-              {
-                name: 'Katerina Ohra',
-                role: 'CBDO @ Engine I Data-driven IT services',
-                context: 'Worked together on the same team',
-                quote: 'Working on ProductTank community building and events with Ieva Sibilla is effortless, because she handles her part completely. No chasing, no gaps. Proactive approach and ownership in everything she is doing! Her speaker curation is exceptional. She finds people who actually move the room. And when she facilitates, the energy in the space is undeniable. Reliable, sharp, and absolutely magnetic on stage.',
-              },
-              {
-                name: 'Andris Breske',
-                role: 'RIGA COMM',
-                context: 'Client · January 2026',
-                quote: 'Ieva was engaged at RIGA COMM as one of the thematic conference moderators and made a valuable contribution to the overall quality and professional delivery of the conference programme. She demonstrated thorough preparation, ensuring well-structured and engaging discussions on stage, and establishing confident, professional communication with international speakers and a highly knowledgeable audience.',
-              },
-              {
-                name: 'Jevgenija Kirillova',
-                role: '#solarpunk',
-                context: 'Client · January 2026',
-                quote: 'Ieva was a pleasure to work with from start to finish. Seeing her on stage several times made it clear that this is where she truly feels at home — confident and authentic. That\'s why inviting her to Crucible events (Bold Horizons, Expo) felt natural. Our collaboration was easy and meaningful. I recommend Ieva to anyone who is looking for an engaging and inspiring speaker and consultant.',
-              },
-            ].map((review, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="bg-brand-beige p-8 rounded-2xl flex flex-col gap-4 border border-brand-lightgray hover:shadow-lg transition-shadow"
-              >
-                <Quote className="w-8 h-8 text-brand-accent/30 flex-shrink-0" />
-                <p className="text-brand-gray font-light leading-relaxed flex-1">"{review.quote}"</p>
-                <div className="pt-4 border-t border-brand-lightgray">
-                  <p className="font-serif text-brand-dark font-semibold">{review.name}</p>
-                  <p className="text-sm text-brand-gray">{review.role}</p>
-                  <p className="text-xs text-brand-accent mt-1 uppercase tracking-wider">{review.context}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {[
-              {
-                name: 'Tobias Burkhardt',
-                role: 'CEO SHIFTSCHOOL · Transformative Leadership & Digital Transformation',
-                context: 'Client · March 2025',
-                quote: 'I\'ve had the pleasure of working closely with Ieva at SHIFTSCHOOL and have come to deeply appreciate her as an inspiring colleague and true startup catalyst. Ieva combines entrepreneurial spirit, endless creativity, and genuine passion to ignite innovation in others. Her ability to motivate teams, foster bold ideas, and think outside the box makes her an outstanding person to collaborate with. I wholeheartedly recommend Ieva!',
-              },
-              {
-                name: 'Lauren Schmitt',
-                role: 'Digital Marketing @ Nike Sports Camps',
-                context: 'Client · December 2024',
-                quote: 'I had the privilege of working with Ieva Sibilla Strupule, an exceptional leader, visionary tech founder, and inspiring mentor. Her engaging keynote speeches, filled with compelling stories of her entrepreneurial journey, captivate and inspire audiences. Ieva is a generous mentor, always willing to share her insights and offer thoughtful guidance. She is a dynamic and inspiring force in the tech and entrepreneurial world.',
-              },
-            ].map((review, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="bg-brand-beige p-8 rounded-2xl flex flex-col gap-4 border border-brand-lightgray hover:shadow-lg transition-shadow"
-              >
-                <Quote className="w-8 h-8 text-brand-accent/30 flex-shrink-0" />
-                <p className="text-brand-gray font-light leading-relaxed flex-1">"{review.quote}"</p>
-                <div className="pt-4 border-t border-brand-lightgray">
-                  <p className="font-serif text-brand-dark font-semibold">{review.name}</p>
-                  <p className="text-sm text-brand-gray">{review.role}</p>
-                  <p className="text-xs text-brand-accent mt-1 uppercase tracking-wider">{review.context}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <TestimonialCarousel />
         </div>
       </section>
 
