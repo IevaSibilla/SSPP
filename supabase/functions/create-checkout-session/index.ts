@@ -35,6 +35,7 @@ serve(async (req) => {
     params.append('line_items[0][price_data][unit_amount]', '29900'); // €299.00 in cents
     params.append('line_items[0][quantity]', '1');
     params.append('metadata[order_id]', order_id);
+    params.append('allow_promotion_codes', 'true');
     params.append('success_url', `${siteUrl}/order?success=true&email=${encodeURIComponent(email)}`);
     params.append('cancel_url', `${siteUrl}/order`);
 
