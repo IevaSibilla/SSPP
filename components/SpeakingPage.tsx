@@ -312,7 +312,7 @@ const TESTIMONIALS = [
   },
   {
     name: 'Jevgenija Kirillova',
-    role: '#solarpunk',
+    role: 'Community Manager at Crucible',
     context: 'Client · January 2026',
     quote: "Ieva was a pleasure to work with from start to finish. Seeing her on stage several times made it clear that this is where she truly feels at home — confident and authentic. That's why inviting her to Crucible events (Bold Horizons, Expo) felt natural. Our collaboration was easy and meaningful. I recommend Ieva to anyone who is looking for an engaging and inspiring speaker and consultant.",
   },
@@ -612,8 +612,7 @@ const SpeakingPage: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <p className="text-brand-accent uppercase tracking-widest text-sm font-semibold mb-4">What People Say</p>
-            <h2 className="text-4xl font-serif text-brand-dark">Voices from the Room</h2>
+            <h2 className="text-4xl font-serif text-brand-dark">What clients say</h2>
             <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full mt-6"></div>
           </motion.div>
 
