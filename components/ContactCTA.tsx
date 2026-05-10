@@ -20,7 +20,7 @@ const ContactCTA: React.FC = () => {
                     </h2>
                     
                     <div className="flex flex-col gap-6 items-start mt-12">
-                        <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="group flex items-center gap-4 text-xl font-light text-brand-dark hover:text-brand-accent transition-colors">
+                        <a href="https://www.linkedin.com/in/ievastrupule/?originalSubdomain=no" target="_blank" rel="noreferrer" className="group flex items-center gap-4 text-xl font-light text-brand-dark hover:text-brand-accent transition-colors">
                             <span className="w-12 h-12 rounded-full border border-brand-lightgray bg-white flex items-center justify-center group-hover:border-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all shadow-sm">
                                 <Linkedin size={20} />
                             </span>

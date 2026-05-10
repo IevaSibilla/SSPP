@@ -340,6 +340,24 @@ const TESTIMONIALS = [
     context: 'Worked together · April 2026',
     quote: 'Ieva was one of the lecturers and mentors for teams in Riga TechGirls project "DigiTilts" where professionals and representatives from the public sector were developing their own innovative solutions to automate processes and learn digital skills. Apart from mentorship, Ieva led 2 workshops on Public speaking and storytelling for the teams to prepare them for final demo day. Ieva\'s prepared insights were practical, insightful, workshops themselves were immersive and interactive. Teams enjoyed working with Ieva, were engaged, asked questions, willingly participated and highly valued the knowledge Ieva shared, making teams more confident on how to present their ideas in a comprehensive manner to the right audience. Would recommend Ieva as someone to work with any day, as she has high work ethic, precision, confidence and care to deliver the best result.',
   },
+  {
+    name: 'Mariss Krasnikovs',
+    role: 'Building products, growth systems and decision frameworks across digital advertising, apps and platforms | 15+ years across publisher, agency and ad network leadership',
+    context: 'Client · May 2026',
+    quote: 'Ieva evaluated our PropTech startup\'s pitch deck quickly and delivered valuable recommendations. Comprehensive, detailed feedback. Every suggestion was well-justified and insightful. She clearly knows investor dynamics and pitching inside out. Professional, efficient, outstanding value. Highly recommend.',
+  },
+  {
+    name: 'Charlotte Bakke',
+    role: 'Beauty Biotech Founder | Replacing microplastics with science-backed alternatives | Eco Lovers',
+    context: 'Client · May 2026',
+    quote: 'Sibilla did me the huge favor of going thru our Investor Pitch for Eco Lovers, and gave us so much valuable feedback for how to improve it. She obviously is very skillful and knowledgeable in this space, and her knowledge is based on actual learning by doing during her time as a founder in the startup world. That is gold in a world full of "experts".',
+  },
+  {
+    name: 'Pauls Siliņš',
+    role: 'Project Director and Board Member at Riga TechGirls. Startups, events, digital literacy',
+    context: 'Client · May 2026',
+    quote: 'At Riga TechGirls, we built a program for anyone working in the Latvian public sector, where they could develop new digital skills through innovative product development. As a part of the program, the participants had to pitch their final prototypes in front of a jury and audience. In order to get them ready for pitching, we invited Ieva to lead several workshops on the topic. Not only were the workshops professionally led and precisely what we wanted, but after the program finished, nearly all participants made an effort to point out how amazing Ieva was as the workshop lead! Needless to say, whenever we will need other pitching or public speaking workshops, Ieva is going to be the person we\'ll reach out to.',
+  },
 ];
 
 const swipeVariants = {
@@ -353,11 +371,15 @@ const SLIDES = Array.from(
   (_, i) => TESTIMONIALS.slice(i * 2, i * 2 + 2)
 );
 
-const ReviewCard: React.FC<{ review: typeof TESTIMONIALS[0] }> = ({ review }) => (
-  <div className="bg-brand-beige p-8 rounded-2xl flex flex-col gap-4 border border-brand-lightgray shadow-sm h-full">
+const ReviewCard: React.FC<{ review: typeof TESTIMONIALS[0]; cardHeight?: number }> = ({ review, cardHeight }) => (
+  <div
+    data-measure-card
+    className="bg-white p-8 rounded-2xl flex flex-col gap-4 border border-brand-lightgray shadow-sm"
+    style={{ height: cardHeight ? `${cardHeight}px` : undefined, minHeight: !cardHeight ? '400px' : undefined }}
+  >
     <Quote className="w-8 h-8 text-brand-accent/25 flex-shrink-0" />
-    <p className="text-brand-gray font-light leading-relaxed flex-1">"{review.quote}"</p>
-    <div className="pt-4 border-t border-brand-lightgray">
+    <p className="text-brand-gray font-light leading-relaxed">"{review.quote}"</p>
+    <div className="pt-4 border-t border-brand-lightgray mt-auto">
       <p className="font-serif text-brand-dark font-semibold">{review.name}</p>
       <p className="text-sm text-brand-gray mt-0.5">{review.role}</p>
       <p className="text-xs text-brand-accent mt-1 uppercase tracking-wider">{review.context}</p>
@@ -368,7 +390,17 @@ const ReviewCard: React.FC<{ review: typeof TESTIMONIALS[0] }> = ({ review }) =>
 const TestimonialCarousel: React.FC = () => {
   const [[slideIndex, dir], setPage] = useState([0, 0]);
   const [paused, setPaused] = useState(false);
+  const [cardHeight, setCardHeight] = useState<number | undefined>(undefined);
+  const measureRef = useRef<HTMLDivElement>(null);
   const numSlides = SLIDES.length;
+
+  useEffect(() => {
+    if (!measureRef.current) return;
+    const cards = measureRef.current.querySelectorAll('[data-measure-card]');
+    let max = 0;
+    cards.forEach(card => { max = Math.max(max, (card as HTMLElement).offsetHeight); });
+    if (max > 0) setCardHeight(max);
+  }, []);
 
   const paginate = useCallback((newDir: number) => {
     setPage(([prev]) => [(prev + newDir + numSlides) % numSlides, newDir]);
@@ -388,6 +420,20 @@ const TestimonialCarousel: React.FC = () => {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
+      {/* Off-screen measurement: all cards rendered at real width to find tallest */}
+      <div
+        ref={measureRef}
+        className="absolute opacity-0 pointer-events-none"
+        style={{ top: -9999, left: 0, right: 0 }}
+        aria-hidden="true"
+      >
+        {SLIDES.map((s, si) => (
+          <div key={si} className={`grid gap-6 ${s.length === 2 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
+            {s.map((review, i) => <ReviewCard key={i} review={review} />)}
+          </div>
+        ))}
+      </div>
+
       {/* Slides */}
       <div className="overflow-hidden">
         <AnimatePresence mode="wait" custom={dir}>
@@ -402,7 +448,7 @@ const TestimonialCarousel: React.FC = () => {
             className={`grid gap-6 ${slide.length === 2 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 max-w-2xl mx-auto'}`}
           >
             {slide.map((review, i) => (
-              <ReviewCard key={i} review={review} />
+              <ReviewCard key={i} review={review} cardHeight={cardHeight} />
             ))}
           </motion.div>
         </AnimatePresence>
@@ -511,18 +557,18 @@ const SpeakingPage: React.FC = () => {
             <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
-                  date: "April 29, 2026",
-                  location: "Zoom",
-                  title: "How to Raise from VCs in 2026 (Without Wasting 6 Months Pitching Wrong)",
-                  event: "For tech founders",
-                  signUpUrl: "https://luma.com/g4xk62ia"
+                  date: "May 13, 2026",
+                  location: "Riga Business School",
+                  title: "From Self-Made Scientist to Product Builder.",
+                  event: "ProductTank Riga",
+                  signUpUrl: "https://www.meetup.com/producttank-latvia/events/314394623/?eventOrigin=group_upcoming_events"
                 },
                 {
-                  date: "May 04, 2026",
-                  location: "Online",
-                  title: "10 Facts You Must Know to Fundraise in 2026",
-                  event: "Startup Investor Accelerator",
-                  signUpUrl: "https://www.eventbrite.com/e/online-10-facts-you-must-know-to-fundraise-in-2026-tickets-1987684671359?aff=oddtdtcreator"
+                  date: "June 06, 2026",
+                  location: "VEF, Riga",
+                  title: "Investoru Festivāls 2026",
+                  event: "Investoru Klubs",
+                  signUpUrl: "https://kampana.investoruklubs.lv/investorufestivals2026/"
                 }
               ].map((event, idx) => (
                 <motion.div
@@ -536,7 +582,7 @@ const SpeakingPage: React.FC = () => {
                   <div className="flex items-center gap-4 mb-4 text-sm font-bold text-brand-accent uppercase tracking-wider">
                     <span className="flex items-center gap-1"><Calendar size={16} /> {event.date}</span>
                   </div>
-                  <h3 className="text-xl font-bold text-brand-dark mb-2 leading-snug">{event.title}</h3>
+                  <h3 className="text-xl font-bold text-brand-dark mb-2 leading-snug min-h-[5rem]">{event.title}</h3>
                   <div className="mb-4 text-brand-gray font-serif italic">{event.event}</div>
                   <div className="text-sm text-brand-gray flex items-center gap-1 mb-4">
                     <MapPin size={14} /> {event.location}
@@ -603,8 +649,41 @@ const SpeakingPage: React.FC = () => {
         </div>
       </section>
 
+      {/* YouTube Video Section */}
+      <section className="bg-brand-dark py-24">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-serif text-white">See Me in Action</h2>
+            <div className="w-24 h-1 bg-brand-accent mx-auto rounded-full mt-6"></div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+          >
+            <div className="aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/Cz2SINrdcVA"
+                title="Sibilla Strupule — Keynote"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+                className="w-full h-full"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-brand-beige">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
