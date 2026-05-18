@@ -83,8 +83,10 @@ const Hero: React.FC = () => {
             }}
           >
             <img
-              src="/ievaJumpSuit.png"
+              src="/ieva-jumpsuit.jpg"
               alt="Ieva Sibilla Strupule"
+              width={872}
+              height={1500}
               className="w-full h-full object-cover"
               style={{ willChange: "transform", objectPosition: "50% 15%" }}
             />

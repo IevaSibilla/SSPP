@@ -538,6 +538,8 @@ const SpeakingPage: React.FC = () => {
             <img
               src="/material-mapper-presentation.jpg"
               alt="Keynote Presentation on Material Mapper"
+              width={1024}
+              height={768}
               className="rounded-[2rem] shadow-2xl relative z-10 w-full object-cover aspect-[4/3] border border-brand-lightgray/50"
             />
           </motion.div>

@@ -12,8 +12,113 @@ import AboutPage from './components/AboutPage';
 import SpeakingPage from './components/SpeakingPage';
 import ScorecardPage from './components/ScorecardPage';
 import OrderPage from './components/OrderPage';
+import VettedStartupsPage from './components/VettedStartupsPage';
+import VettedStartupsApplyPage from './components/VettedStartupsApplyPage';
 import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 import TermsAndConditionsPage from './components/TermsAndConditionsPage';
+
+const SITE_URL = 'https://sibillastrupule.com';
+
+interface RouteMeta {
+  title: string;
+  description: string;
+  path: string;
+}
+
+const ROUTE_META: Record<string, RouteMeta> = {
+  '/': {
+    title: 'Ieva Sibilla Strupule | Pitch Coach & Leadership Trainer',
+    description:
+      'Pitch coach and leadership trainer Ieva Sibilla Strupule helps founders and executives secure funding, sharpen their story, and win the room in high-stakes pitches.',
+    path: '/',
+  },
+  '/about': {
+    title: 'About Ieva Sibilla Strupule | Pitch Coach & Speaker',
+    description:
+      'Exited founder, global pitch champion, and associate professor — Ieva Sibilla Strupule has raised millions and trained 500+ founders to pitch and win.',
+    path: '/about',
+  },
+  '/work': {
+    title: 'Pitch Coaching Work & Case Studies | Ieva Sibilla Strupule',
+    description:
+      'See pitch coaching work and founder case studies from Ieva Sibilla Strupule — real decks, real funding rounds, and the results behind €70M+ raised by clients.',
+    path: '/work',
+  },
+  '/speaking': {
+    title: 'Keynote Speaker on Pitching & Investor Communication',
+    description:
+      'Book Ieva Sibilla Strupule as a keynote speaker — from the UN World Urban Forum to Women in Tech, she delivers high-impact talks on pitching and fundraising.',
+    path: '/speaking',
+  },
+  '/scorecard': {
+    title: 'Free Investor Pitch Scorecard — Score Your Deck in 2 Minutes',
+    description:
+      'Score your pitch deck across 10 investor criteria in under 2 minutes. Find exactly where investors lose interest and what to fix before your next meeting.',
+    path: '/scorecard',
+  },
+  '/order': {
+    title: 'Professional Pitch Deck Review — 24-Hour Turnaround',
+    description:
+      'Get a professional pitch deck review from Ieva Sibilla Strupule — slide-by-slide written feedback and a revised deck delivered to your inbox within 24 hours.',
+    path: '/order',
+  },
+  '/vetted-startups': {
+    title: 'Vetted Startups — Investor Deal Flow & Startup Vetting | Ieva Sibilla Strupule',
+    description:
+      'Curated deal flow for investors and a premium vetting service for startups — Ieva Sibilla Strupule vets startups so VCs get qualified opportunities.',
+    path: '/vetted-startups',
+  },
+  '/vetted-startups/apply': {
+    title: 'Apply for Startup Vetting — €1,500 | Ieva Sibilla Strupule',
+    description:
+      'Apply for Ieva Sibilla Strupule’s €1,500 startup vetting — pitch deck, business plan, and idea review. Approved startups join her vetted startup list.',
+    path: '/vetted-startups/apply',
+  },
+  '/privacy-policy': {
+    title: 'Privacy Policy | Ieva Sibilla Strupule',
+    description:
+      'Read the privacy policy for sibillastrupule.com — how Aekora SIA collects, uses, and protects your personal data under GDPR when you use our services.',
+    path: '/privacy-policy',
+  },
+  '/terms-and-conditions': {
+    title: 'Terms & Conditions | Ieva Sibilla Strupule',
+    description:
+      'Review the terms and conditions for Sibilla Strupule services — payment terms, the no-refund policy, intellectual property, and governing law under Aekora SIA.',
+    path: '/terms-and-conditions',
+  },
+};
+
+const setMetaTag = (selector: string, attr: 'name' | 'property', key: string, content: string) => {
+  let tag = document.head.querySelector<HTMLMetaElement>(selector);
+  if (!tag) {
+    tag = document.createElement('meta');
+    tag.setAttribute(attr, key);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute('content', content);
+};
+
+const applyRouteMeta = (path: string) => {
+  const meta = ROUTE_META[path] ?? ROUTE_META['/'];
+  const url = SITE_URL + meta.path;
+
+  document.title = meta.title;
+  setMetaTag('meta[name="description"]', 'name', 'description', meta.description);
+
+  let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.setAttribute('rel', 'canonical');
+    document.head.appendChild(canonical);
+  }
+  canonical.setAttribute('href', url);
+
+  setMetaTag('meta[property="og:title"]', 'property', 'og:title', meta.title);
+  setMetaTag('meta[property="og:description"]', 'property', 'og:description', meta.description);
+  setMetaTag('meta[property="og:url"]', 'property', 'og:url', url);
+  setMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', meta.title);
+  setMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', meta.description);
+};
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -41,12 +146,38 @@ const App: React.FC = () => {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  useEffect(() => {
+    applyRouteMeta(currentPath);
+  }, [currentPath]);
+
   // Order Page
   if (currentPath === '/order') {
     return (
       <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
         <Navbar scrolled={scrolled} />
         <OrderPage />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Vetted Startups Landing Page
+  if (currentPath === '/vetted-startups') {
+    return (
+      <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
+        <Navbar scrolled={scrolled} />
+        <VettedStartupsPage />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Vetted Startups Apply Page
+  if (currentPath === '/vetted-startups/apply') {
+    return (
+      <div className="min-h-screen bg-brand-beige text-brand-dark font-sans overflow-x-hidden">
+        <Navbar scrolled={scrolled} />
+        <VettedStartupsApplyPage />
         <Footer />
       </div>
     );
