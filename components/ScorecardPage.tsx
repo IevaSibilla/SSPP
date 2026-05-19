@@ -133,8 +133,10 @@ const GateForm: React.FC<GateProps> = ({ onSubmit }) => {
             <div className="relative mb-8">
               <div className="w-36 h-36 rounded-full border-4 border-brand-accent p-1 bg-white shadow-xl shadow-brand-accent/20">
                 <img
-                  src="/ievaJumpSuit.png"
+                  src="/ieva-jumpsuit.jpg"
                   alt="Sibilla Strupule"
+                  width={872}
+                  height={1500}
                   className="w-full h-full rounded-full object-cover object-top"
                 />
               </div>
@@ -220,6 +222,8 @@ const GateForm: React.FC<GateProps> = ({ onSubmit }) => {
               <img
                 src="/DNBnxtPitchWinner.jpeg"
                 alt="Ieva Sibilla winning DNB NXT pitch competition"
+                width={960}
+                height={587}
                 className="w-full h-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-transparent to-brand-dark/60" />
@@ -388,8 +392,10 @@ const Scorecard: React.FC<ScorecardProps> = ({ firstName, scores, onScore }) => 
             <div className="flex flex-col items-center gap-3">
               <div className="w-28 h-28 rounded-full border-4 border-brand-accent p-1 bg-white shadow-xl shadow-brand-accent/20">
                 <img
-                  src="/ievaJumpSuit.png"
+                  src="/ieva-jumpsuit.jpg"
                   alt="Sibilla Strupule"
+                  width={872}
+                  height={1500}
                   className="w-full h-full rounded-full object-cover object-top"
                 />
               </div>

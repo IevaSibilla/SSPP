@@ -216,7 +216,7 @@ const OrderPage: React.FC = () => {
       if (insertError) throw new Error(`Order creation failed: ${insertError.message}`);
 
       const { data, error: fnError } = await supabase.functions.invoke('create-checkout-session', {
-        body: { order_id: orderId, email: email.trim() },
+        body: { order_id: orderId, email: email.trim(), tier: 'deck-review' },
       });
       if (fnError) {
         let detail = fnError.message;
@@ -431,7 +431,7 @@ const OrderPage: React.FC = () => {
                 num: '01',
                 label: 'Upload Your Deck',
                 desc: 'PDF or PowerPoint — any format works.',
-                img: '/House award.jpeg',
+                img: '/house-award.jpeg',
                 imgAlt: 'European Housing Innovation Award winner',
                 badge: '🏆 European Housing Innovation Award',
                 imgObjectPosition: 'object-center lg:object-[center_18%]',
@@ -449,7 +449,7 @@ const OrderPage: React.FC = () => {
                 num: '03',
                 label: 'Get Your Review',
                 desc: 'Written feedback and commentary delivered straight to your inbox.',
-                img: '/SEB Material mapper winning.jpeg',
+                img: '/seb-material-mapper-winning.jpg',
                 imgAlt: 'SEB Material Mapper pitch winner',
                 badge: '🏆 Nordic Cleantech Open · SEB Award',
                 imgObjectPosition: 'object-center lg:object-[center_22%]',

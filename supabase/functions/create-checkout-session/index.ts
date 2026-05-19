@@ -12,8 +12,27 @@ serve(async (req) => {
     return new Response('ok', { headers: corsHeaders });
   }
 
+  // Server-side tier pricing. The client may only pick a tier keyword,
+  // never an arbitrary price.
+  const TIERS: Record<string, { name: string; description: string; amount: number; returnPath: string; emailSubject: string }> = {
+    'deck-review': {
+      name: 'Pitch Deck Review',
+      description: 'Full review delivered in 24h',
+      amount: 29900,
+      returnPath: '/order',
+      emailSubject: 'New pitch deck submission',
+    },
+    'startup-vetting': {
+      name: 'Startup Vetting',
+      description: 'Full pitch, business & plan vetting + vetted-list review',
+      amount: 150000,
+      returnPath: '/vetted-startups/apply',
+      emailSubject: 'New startup vetting application',
+    },
+  };
+
   try {
-    const { order_id, email } = await req.json();
+    const { order_id, email, tier } = await req.json();
 
     if (!order_id || !email) {
       return new Response(
@@ -21,6 +40,8 @@ serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
+
+    const selected = TIERS[tier] ?? TIERS['deck-review'];
 
     const stripeSecretKey = Deno.env.get('STRIPE_SECRET_KEY')!;
     const siteUrl = Deno.env.get('SITE_URL') || 'http://localhost:5173';
@@ -30,14 +51,14 @@ serve(async (req) => {
     params.append('mode', 'payment');
     params.append('customer_email', email);
     params.append('line_items[0][price_data][currency]', 'eur');
-    params.append('line_items[0][price_data][product_data][name]', 'Pitch Deck Review');
-    params.append('line_items[0][price_data][product_data][description]', 'Full review delivered in 24h');
-    params.append('line_items[0][price_data][unit_amount]', '29900'); // €299.00 in cents
+    params.append('line_items[0][price_data][product_data][name]', selected.name);
+    params.append('line_items[0][price_data][product_data][description]', selected.description);
+    params.append('line_items[0][price_data][unit_amount]', String(selected.amount));
     params.append('line_items[0][quantity]', '1');
     params.append('metadata[order_id]', order_id);
     params.append('allow_promotion_codes', 'true');
-    params.append('success_url', `${siteUrl}/order?success=true&email=${encodeURIComponent(email)}`);
-    params.append('cancel_url', `${siteUrl}/order`);
+    params.append('success_url', `${siteUrl}${selected.returnPath}?success=true&email=${encodeURIComponent(email)}`);
+    params.append('cancel_url', `${siteUrl}${selected.returnPath}`);
 
     const stripeRes = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
@@ -87,7 +108,7 @@ serve(async (req) => {
         body: JSON.stringify({
           from: 'noreply@notifications.aekora.com',
           to: 'IevaStrupule@gmail.com',
-          subject: 'New pitch deck submission',
+          subject: selected.emailSubject,
           html: `
             <p>A new pitch deck has been submitted and is ready for review in Supabase.</p>
             <table cellpadding="8" style="border-collapse:collapse;font-family:sans-serif;font-size:14px;">

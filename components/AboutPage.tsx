@@ -46,6 +46,8 @@ const AboutPage: React.FC = () => {
                   <img
                     src="/OIWHost.jpeg"
                     alt="Ieva Sibilla Strupule"
+                    width={560}
+                    height={860}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -199,6 +201,8 @@ const AboutPage: React.FC = () => {
                 <img
                   src="/DNBnxtPitchWinner.jpeg"
                   alt="Pitch event"
+                  width={960}
+                  height={587}
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
