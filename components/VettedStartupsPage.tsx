@@ -23,11 +23,11 @@ const INVESTOR_POINTS = [
   {
     icon: <Handshake size={26} />,
     title: 'Co-Investment Access',
-    body: 'Join funding rounds alongside Ieva. Get a seat at the table for opportunities reserved for her vetted network.',
+    body: 'Join funding rounds alongside Sibilla. Get a seat at the table for opportunities reserved for her vetted network.',
   },
   {
     icon: <Target size={26} />,
-    title: 'Investor-Grade Signal',
+    title: 'Investor-Grade Context',
     body: 'Each deal arrives with context on why it cleared vetting — so your due diligence starts a step ahead.',
   },
 ];
@@ -152,7 +152,7 @@ const VettedStartupsPage: React.FC = () => {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="text-lg md:text-xl text-brand-gray font-light leading-relaxed mb-10 max-w-2xl mx-auto"
           >
-            Ieva personally vets startups — their pitch, business, and idea — so
+            Sibilla personally vets startups — their pitch, business, and idea — so
             investors get curated deal flow they can trust, and startups earn a
             credibility stamp that opens the right doors.
           </motion.p>
@@ -191,13 +191,13 @@ const VettedStartupsPage: React.FC = () => {
               },
               {
                 step: '02',
-                title: 'Ieva vets the opportunity',
+                title: 'Sibilla vets the opportunity',
                 body: 'Pitch, business, plan, and idea are assessed against what investors expect.',
               },
               {
                 step: '03',
                 title: 'Approved startups meet investors',
-                body: 'Vetted startups join the list shared with Ieva’s investor network.',
+                body: 'Vetted startups join the list shared with Sibilla’s investor network.',
               },
             ].map((item, i) => (
               <motion.div
@@ -238,7 +238,7 @@ const VettedStartupsPage: React.FC = () => {
               <span className="text-brand-accent italic">deals worth your time.</span>
             </h2>
             <p className="text-white/60 text-lg font-light leading-relaxed">
-              Stop sifting through cold decks. Tap into a stream of startups already vetted
+              Stop sifting through cold decks. Tap into a curated pipeline of startups already vetted
               for pitch quality, business strength, and idea investability — plus
               co-investment opportunities for funding rounds.
             </p>
@@ -305,7 +305,7 @@ const VettedStartupsPage: React.FC = () => {
               </h2>
               <p className="text-brand-gray text-lg font-light leading-relaxed mb-6">
                 The startup vetting service is a deep, honest assessment of whether your
-                company is ready to raise. Ieva reviews your pitch deck and vets your
+                company is ready to raise. Sibilla reviews your pitch deck and vets your
                 business, business plan, and idea — the same lens an investor will use.
               </p>
               <p className="text-brand-gray text-lg font-light leading-relaxed mb-8">
@@ -364,7 +364,7 @@ const VettedStartupsPage: React.FC = () => {
                 <Briefcase size={20} className="text-brand-accent flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-brand-gray font-light leading-relaxed">
                   <strong className="text-brand-dark font-semibold">The outcome:</strong> if
-                  Ieva approves your startup, you join her vetted startup list. If not, you
+                  Sibilla approves your startup, you join her vetted startup list. If not, you
                   still get the full vetting feedback as your roadmap to raise.
                 </p>
               </div>
@@ -390,7 +390,7 @@ const VettedStartupsPage: React.FC = () => {
             </h2>
             <div className="w-24 h-1 bg-brand-accent mx-auto mb-6 rounded-full" />
             <p className="text-brand-gray font-light">
-              Ieva Sibilla Strupule is an exited entrepreneur and global pitch award winner
+              Sibilla Strupule is an exited entrepreneur and global pitch award winner
               who has been on both sides of the investor table.
             </p>
           </div>

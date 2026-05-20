@@ -23,6 +23,7 @@ interface RouteMeta {
   title: string;
   description: string;
   path: string;
+  siteName?: string;
 }
 
 const ROUTE_META: Record<string, RouteMeta> = {
@@ -63,10 +64,11 @@ const ROUTE_META: Record<string, RouteMeta> = {
     path: '/order',
   },
   '/vetted-startups': {
-    title: 'Vetted Startups — Investor Deal Flow & Startup Vetting | Ieva Sibilla Strupule',
+    title: 'Sibilla Strupule | Pitch Authority',
     description:
-      'Curated deal flow for investors and a premium vetting service for startups — Ieva Sibilla Strupule vets startups so VCs get qualified opportunities.',
+      'Sibilla Strupule — curated deal flow for investors and a premium vetting service for startups. VCs get qualified opportunities, founders get a warm introduction.',
     path: '/vetted-startups',
+    siteName: 'Sibilla Strupule',
   },
   '/vetted-startups/apply': {
     title: 'Apply for Startup Vetting — €1,500 | Ieva Sibilla Strupule',
@@ -116,6 +118,12 @@ const applyRouteMeta = (path: string) => {
   setMetaTag('meta[property="og:title"]', 'property', 'og:title', meta.title);
   setMetaTag('meta[property="og:description"]', 'property', 'og:description', meta.description);
   setMetaTag('meta[property="og:url"]', 'property', 'og:url', url);
+  setMetaTag(
+    'meta[property="og:site_name"]',
+    'property',
+    'og:site_name',
+    meta.siteName ?? 'Ieva Sibilla Strupule'
+  );
   setMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', meta.title);
   setMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', meta.description);
 };

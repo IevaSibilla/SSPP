@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-xs text-gray-600">
-            <p>&copy; {new Date().getFullYear()} Ieva Sibilla Strupule. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Sibilla Strupule. All rights reserved.</p>
             <div className="flex gap-6 mt-4 md:mt-0">
                 <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
                 <a href="/terms-and-conditions" className="hover:text-white transition-colors">Terms & Conditions</a>
